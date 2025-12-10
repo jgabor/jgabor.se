@@ -4,16 +4,16 @@
 	"private": true,
 	"scripts": {
 		"build": "bun run src/build.ts",
-		"build:watch": "bun --watch run src/build.ts",
+		"build:watch": "bun run src/build.ts --watch",
 		"deploy": "bun run build && wrangler deploy && bun run kv-put",
-		"dev": "bun run build:watch & bun run web",
+		"dev": "concurrently -k -n build,serve -c blue,green \"bun run build:watch\" \"wrangler dev\"",
 		"dev:remote": "wrangler dev --remote",
-		"web": "wrangler dev",
 		"kv-put": "wrangler kv bulk put --namespace-id 1a1a35272f0642c5b364ee7d0f377a03 --remote dist/kv-entries.json"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20251209.0",
+		"@cloudflare/workers-types": "^4.20251210.0",
 		"bun-types": "latest",
+		"concurrently": "^9.2.1",
 		"wrangler": "^4.53.0"
 	}
 }

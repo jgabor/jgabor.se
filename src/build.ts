@@ -1,5 +1,6 @@
 import { Glob } from "bun";
 import { mkdir, rm } from "node:fs/promises";
+import { watch } from "node:fs";
 import { basename, join } from "node:path";
 import { compressAll, type Encoding } from "./lib/compress";
 import { minifyHTML } from "./lib/minify";
@@ -104,4 +105,19 @@ function generateDevContent(pages: PageContent[]): string {
   return `export const pages: Record<string, string> = {\n${entries.join(",\n")}\n};\n`;
 }
 
-build().catch(console.error);
+const isWatch = process.argv.includes("--watch");
+
+if (isWatch) {
+  await build();
+  console.log("\nWatching for changes...");
+  let debounce: ReturnType<typeof setTimeout> | null = null;
+  watch(PAGES_DIR, (event, filename) => {
+    if (debounce) clearTimeout(debounce);
+    debounce = setTimeout(async () => {
+      console.log(`\n${filename} changed`);
+      await build();
+    }, 100);
+  });
+} else {
+  build().catch(console.error);
+}

@@ -223,6 +223,19 @@ export default {
       return handleContact(request, env);
     }
 
+    if (url.pathname.startsWith("/__hash/")) {
+      const pagePath = url.pathname.slice(8);
+      const hashPageName = parsePath(new URL(pagePath, url.origin));
+      const hashContent = hashPageName ? devPages[hashPageName] : null;
+      if (hashContent) {
+        const hash = Array.from(new TextEncoder().encode(hashContent))
+          .reduce((h, b) => ((h << 5) - h + b) | 0, 0)
+          .toString(36);
+        return new Response(hash, { headers: { "Cache-Control": "no-cache" } });
+      }
+      return new Response("", { status: 404 });
+    }
+
     const pageName = parsePath(url);
 
     if (!pageName) {
@@ -254,7 +267,12 @@ export default {
 
     const content = devPages[pageName];
     if (content) {
-      return new Response(content, {
+      const hash = Array.from(new TextEncoder().encode(content))
+        .reduce((h, b) => ((h << 5) - h + b) | 0, 0)
+        .toString(36);
+      const liveReloadScript = `<script>(()=>{const h=${JSON.stringify(hash)};setInterval(async()=>{const r=await fetch("/__hash/"+location.pathname);if(r.ok&&await r.text()!==h)location.reload()},1000)})()</script>`;
+      const withLiveReload = content.replace("</body>", liveReloadScript + "</body>");
+      return new Response(withLiveReload, {
         headers: {
           "Content-Type": "text/html; charset=utf-8",
           "Cache-Control": "no-cache",
