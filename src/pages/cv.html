@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="CV of Jonathan Gabor, Product Owner at IKEA with technical roots and product mindset. Based in Malmö, Sweden."
+		/>
+		<title>Jonathan Gabor — Product Owner</title>
+		<style>
+			:root {
+				--color-ink: #0a0a0a;
+				--color-ink-soft: #2a2a2a;
+				--color-ink-muted: #666666;
+				--color-paper: #ffffff;
+				--color-paper-off: #f5f5f5;
+				--color-accent: #e63312;
+				--color-rule: #0a0a0a;
+				--font-main: 'Noto IKEA', 'Noto Sans', -apple-system, sans-serif;
+				--space-unit: 8px;
+			}
+
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			html {
+				font-size: calc(var(--space-unit) * 2);
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+			}
+
+			body {
+				font-family: var(--font-main);
+				background: var(--color-paper-off);
+				color: var(--color-ink);
+				line-height: 1.6;
+				min-height: 100vh;
+			}
+
+			.page {
+				max-width: calc(var(--space-unit) * 120);
+				margin: 0 auto;
+				background: var(--color-paper);
+				min-height: 100vh;
+				position: relative;
+			}
+
+			/* Header Section - Brutalist */
+			.header {
+				background: var(--color-ink);
+				color: var(--color-paper);
+				padding: calc(var(--space-unit) * 5) calc(var(--space-unit) * 5);
+				position: relative;
+			}
+
+			.header-content {
+				display: grid;
+				grid-template-columns: 1fr auto auto;
+				gap: calc(var(--space-unit) * 4);
+				align-items: center;
+			}
+
+			/* Profile Photo */
+			.profile-photo {
+				width: calc(var(--space-unit) * 14);
+				height: auto;
+				object-fit: cover;
+				border: 1px solid var(--color-ink-muted);
+			}
+
+			.name-block {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			.name {
+				font-size: 3rem;
+				font-weight: 700;
+				letter-spacing: -0.04em;
+				line-height: 1;
+				margin-bottom: calc(var(--space-unit) * 1.5);
+				text-transform: uppercase;
+			}
+
+			.title {
+				font-size: 1rem;
+				font-weight: 500;
+				color: var(--color-accent);
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.location {
+				font-size: 0.85rem;
+				font-weight: 400;
+				color: rgba(255, 255, 255, 0.5);
+				margin-top: calc(var(--space-unit) * 0.5);
+				letter-spacing: 0.02em;
+			}
+
+			.contact-block {
+				text-align: right;
+				font-size: 0.85rem;
+				border-left: 1px solid rgba(255, 255, 255, 0.2);
+				padding-left: calc(var(--space-unit) * 3);
+			}
+
+			.contact-block a {
+				color: var(--color-paper);
+				text-decoration: none;
+				display: block;
+				padding: calc(var(--space-unit) * 0.5) 0;
+				transition: color 0.15s ease;
+				font-weight: 400;
+			}
+
+			.contact-block a:hover {
+				color: var(--color-accent);
+			}
+
+			/* Main Content */
+			.main {
+				padding: calc(var(--space-unit) * 5);
+			}
+
+			/* Summary Section */
+			.summary {
+				padding-bottom: calc(var(--space-unit) * 5);
+				margin-bottom: calc(var(--space-unit) * 5);
+				border-bottom: 2px solid var(--color-ink);
+				/* max-width: 680px; */
+			}
+
+			.summary p {
+				font-size: 1.05rem;
+				line-height: 1.7;
+				color: var(--color-ink-soft);
+				margin-bottom: calc(var(--space-unit) * 2);
+			}
+
+			.summary p:last-child {
+				margin-bottom: 0;
+				font-weight: 500;
+				color: var(--color-ink);
+			}
+
+			/* Section Styling */
+			.section {
+				margin-bottom: calc(var(--space-unit) * 5);
+			}
+
+			.section-title {
+				font-size: 0.7rem;
+				font-weight: 700;
+				letter-spacing: 0.2em;
+				text-transform: uppercase;
+				color: var(--color-ink);
+				margin-bottom: calc(var(--space-unit) * 3);
+				padding-bottom: calc(var(--space-unit) * 1);
+				border-bottom: 1px solid var(--color-ink);
+				display: inline-block;
+			}
+
+			.section-title::after {
+				display: none;
+			}
+
+			/* Strengths Section */
+			.strengths-section {
+				margin-bottom: calc(var(--space-unit) * 5);
+			}
+
+			.strengths-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 0;
+				border: 1px solid var(--color-ink);
+			}
+
+			.strength-card {
+				background: var(--color-paper);
+				padding: calc(var(--space-unit) * 2.5);
+				border-right: 1px solid var(--color-ink);
+			}
+
+			.strength-card:last-child {
+				border-right: none;
+			}
+
+			.strength-title {
+				font-size: 0.8rem;
+				font-weight: 700;
+				color: var(--color-ink);
+				margin-bottom: calc(var(--space-unit) * 1);
+				letter-spacing: 0.02em;
+				text-transform: uppercase;
+			}
+
+			.strength-desc {
+				font-size: 0.85rem;
+				line-height: 1.6;
+				color: var(--color-ink-soft);
+			}
+
+			/* Experience Entries */
+			.company-block {
+				margin-bottom: calc(var(--space-unit) * 5);
+				padding-bottom: calc(var(--space-unit) * 4);
+				border-bottom: 1px solid #e0e0e0;
+			}
+
+			.company-block:last-child {
+				border-bottom: none;
+				padding-bottom: 0;
+			}
+
+			.company-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				margin-bottom: calc(var(--space-unit) * 2);
+				flex-wrap: wrap;
+				gap: calc(var(--space-unit) * 1);
+			}
+
+			.company-name {
+				font-size: 1.3rem;
+				font-weight: 700;
+				color: var(--color-ink);
+				letter-spacing: -0.02em;
+				text-transform: uppercase;
+			}
+
+			.company-tenure {
+				font-size: 0.75rem;
+				color: var(--color-ink-muted);
+				font-weight: 500;
+				letter-spacing: 0.05em;
+			}
+
+			.role {
+				margin-bottom: calc(var(--space-unit) * 4);
+				padding-left: calc(var(--space-unit) * 2);
+				border-left: 3px solid var(--color-accent);
+			}
+
+			.role:last-child {
+				margin-bottom: 0;
+			}
+
+			.role-header {
+				margin-bottom: calc(var(--space-unit) * 1.5);
+			}
+
+			.role-title {
+				font-size: 1rem;
+				font-weight: 600;
+				color: var(--color-ink);
+			}
+
+			.role-meta {
+				font-size: 0.8rem;
+				color: var(--color-ink-muted);
+				font-weight: 400;
+			}
+
+			.role-description {
+				font-size: 0.9rem;
+				line-height: 1.7;
+				color: var(--color-ink-soft);
+			}
+
+			.role-description p {
+				margin-bottom: calc(var(--space-unit) * 1.5);
+			}
+
+			.role-description p:last-child {
+				margin-bottom: 0;
+			}
+
+			/* Skills & Languages */
+			.meta-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: calc(var(--space-unit) * 4);
+			}
+
+			.meta-section h3 {
+				font-size: 0.7rem;
+				font-weight: 700;
+				letter-spacing: 0.15em;
+				text-transform: uppercase;
+				color: var(--color-ink);
+				margin-bottom: calc(var(--space-unit) * 1.5);
+			}
+
+			.tag-list {
+				display: flex;
+				flex-wrap: wrap;
+				gap: calc(var(--space-unit) * 1);
+			}
+
+			.tag {
+				background: transparent;
+				color: var(--color-ink-soft);
+				padding: calc(var(--space-unit) * 0.5) calc(var(--space-unit) * 1.5);
+				font-size: 0.825rem;
+				font-weight: 500;
+				border: 1px solid var(--color-ink);
+			}
+
+			/* Footer accent */
+			.footer-accent {
+				height: 6px;
+				background: var(--color-ink);
+				margin-top: calc(var(--space-unit) * 4);
+			}
+
+			/* Page break */
+			.page-break {
+				border: none;
+				border-top: 1px solid #e0e0e0;
+				margin: calc(var(--space-unit) * 4) 0;
+			}
+
+			/* Meta section when at top */
+			.meta-section-top {
+				margin-bottom: calc(var(--space-unit) * 4);
+			}
+
+			/* Print Styles */
+			@media print {
+				@page {
+					size: A4;
+					margin: 10mm 10mm 10mm 10mm;
+				}
+
+				html,
+				body {
+					font-size: 10pt;
+					background: white;
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.page {
+					max-width: none;
+					box-shadow: none;
+				}
+
+				/* Force desktop layout in print - override mobile styles */
+				.header {
+					padding: 8mm 6mm;
+					background: var(--color-ink) !important;
+					-webkit-print-color-adjust: exact;
+					print-color-adjust: exact;
+				}
+
+				.header-content {
+					display: grid !important;
+					grid-template-columns: 1fr auto auto !important;
+					gap: 4mm !important;
+					align-items: center !important;
+					text-align: left !important;
+				}
+
+				.profile-photo {
+					width: 18mm !important;
+					height: auto !important;
+					margin: 0 !important;
+				}
+
+				.name-block {
+					align-items: flex-start !important;
+				}
+
+				.name {
+					font-size: 20pt;
+					text-align: left !important;
+				}
+
+				.title {
+					font-size: 9pt;
+				}
+
+				.location {
+					font-size: 8pt;
+				}
+
+				.contact-block {
+					text-align: right !important;
+					border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+					border-top: none !important;
+					padding-left: 3mm !important;
+					padding-top: 0 !important;
+					font-size: 8pt;
+				}
+
+				.contact-block a {
+					color: var(--color-paper) !important;
+					padding: 0.5mm 0;
+				}
+
+				/* Main content adjustments */
+				.main {
+					padding: 5mm 0 0 0;
+				}
+
+				.summary {
+					padding-bottom: 4mm;
+					margin-bottom: 4mm;
+				}
+
+				.summary p {
+					font-size: 9.5pt;
+					margin-bottom: 2mm;
+				}
+
+				/* Force desktop strengths grid */
+				.strengths-section {
+					break-inside: avoid;
+					page-break-inside: avoid;
+					margin-bottom: 4mm;
+				}
+
+				.strengths-grid {
+					display: grid !important;
+					grid-template-columns: repeat(3, 1fr) !important;
+					break-inside: avoid;
+					page-break-inside: avoid;
+				}
+
+				.strength-card {
+					padding: 3mm;
+					border-right: 1px solid var(--color-ink) !important;
+					border-bottom: none !important;
+				}
+
+				.strength-card:last-child {
+					border-right: none !important;
+				}
+
+				.strength-title {
+					font-size: 7.5pt;
+				}
+
+				.strength-desc {
+					font-size: 8pt;
+				}
+
+				/* Force desktop meta grid */
+				.meta-section-top {
+					break-inside: avoid;
+					page-break-inside: avoid;
+					margin-bottom: 4mm;
+				}
+
+				.meta-grid {
+					display: grid !important;
+					grid-template-columns: 1fr 1fr !important;
+					gap: 4mm;
+				}
+
+				.meta-section h3 {
+					font-size: 6.5pt;
+				}
+
+				.tag {
+					font-size: 7.5pt;
+					padding: 0.5mm 1.5mm;
+				}
+
+				/* Force desktop company header */
+				.company-header {
+					display: flex !important;
+					flex-direction: row !important;
+					justify-content: space-between !important;
+					align-items: baseline !important;
+				}
+
+				/* Experience adjustments */
+				.section-title {
+					font-size: 6.5pt;
+					margin-bottom: 3mm;
+				}
+
+				.company-block {
+					margin-bottom: 4mm;
+					padding-bottom: 4mm;
+					break-inside: avoid;
+					page-break-inside: avoid;
+				}
+
+				.company-name {
+					font-size: 11pt;
+				}
+
+				.company-tenure {
+					font-size: 7.5pt;
+				}
+
+				.role {
+					margin-bottom: 3mm;
+					padding-left: 2.5mm;
+					border-left-width: 2px;
+					break-inside: avoid;
+					page-break-inside: avoid;
+				}
+
+				.role-title {
+					font-size: 9pt;
+				}
+
+				.role-meta {
+					font-size: 7.5pt;
+				}
+
+				.role-description {
+					font-size: 8.5pt;
+				}
+
+				.role-description p {
+					margin-bottom: 1.5mm;
+				}
+
+				/* Page break marker */
+				.page-break {
+					margin: 3mm 0;
+					break-before: page;
+				}
+
+				/* Hide footer accent in print */
+				.footer-accent {
+					display: none;
+				}
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.header {
+					padding: calc(var(--space-unit) * 4);
+				}
+
+				.header-content {
+					grid-template-columns: 1fr;
+					gap: calc(var(--space-unit) * 3);
+					text-align: center;
+				}
+
+				.profile-photo {
+					width: 90px;
+					height: 90px;
+					margin: 0 auto;
+				}
+
+				.name-block {
+					align-items: center;
+				}
+
+				.name {
+					font-size: 2rem;
+				}
+
+				.contact-block {
+					text-align: center;
+					border-left: none;
+					padding-left: 0;
+					border-top: 1px solid rgba(255, 255, 255, 0.2);
+					padding-top: calc(var(--space-unit) * 2);
+				}
+
+				.main {
+					padding: calc(var(--space-unit) * 3);
+				}
+
+				.strengths-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.strength-card {
+					border-right: none;
+					border-bottom: 1px solid var(--color-ink);
+				}
+
+				.strength-card:last-child {
+					border-bottom: none;
+				}
+
+				.meta-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.company-header {
+					flex-direction: column;
+					align-items: flex-start;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="page">
+			<header class="header">
+				<div class="header-content">
+					<div class="name-block">
+						<h1 class="name">Jonathan Gabor</h1>
+						<p class="title">Reads Code, Ships Product</p>
+						<p class="location">Malmö, Sweden</p>
+					</div>
+					<img src="/jgabor.jpg" alt="Jonathan Gabor" class="profile-photo" />
+					<div class="contact-block">
+						<a href="mailto:jonathan@jgabor.se">jonathan@jgabor.se</a>
+						<a href="https://linkedin.com/in/jgabor">linkedin.com/in/jgabor</a>
+						<a href="https://jgabor.se">jgabor.se</a>
+					</div>
+				</div>
+			</header>
+
+			<main class="main">
+				<section class="summary">
+					<p>I am relentless about creating intuitive and simple products in a complex and technological environment.</p>
+					<p>
+						With equal parts engineering and product, I use my experiences from both worlds to create solutions that are delightful for
+						customers to use, with incremental improvements driven by their feedback. My goal is to make everyone and everything 0.1% better
+						every day.
+					</p>
+					<p>My opinion changes with new information.</p>
+				</section>
+
+				<section class="section strengths-section">
+					<h2 class="section-title">Strengths</h2>
+					<div class="strengths-grid">
+						<div class="strength-card">
+							<h3 class="strength-title">Systems Thinking</h3>
+							<p class="strength-desc">
+								Connects immediate decisions to long-term outcomes. Sees several steps ahead without losing sight of today.
+							</p>
+						</div>
+						<div class="strength-card">
+							<h3 class="strength-title">Team Enabler</h3>
+							<p class="strength-desc">
+								Leads by enabling others—aligning teams toward a shared north star without needing formal authority.
+							</p>
+						</div>
+						<div class="strength-card">
+							<h3 class="strength-title">Quick Study</h3>
+							<p class="strength-desc">Active listener with high-bandwidth information intake. New concepts stick quickly.</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="section meta-section-top">
+					<div class="meta-grid">
+						<div class="meta-section">
+							<h3>Skills</h3>
+							<div class="tag-list">
+								<span class="tag">Product Strategy</span>
+								<span class="tag">Product Vision</span>
+								<span class="tag">Product Roadmap</span>
+								<span class="tag">OKRs</span>
+								<span class="tag">Backlog Management</span>
+								<span class="tag">User Research</span>
+								<span class="tag">Cross-functional Leadership</span>
+								<span class="tag">Agile Methodologies</span>
+							</div>
+						</div>
+						<div class="meta-section">
+							<h3>Languages</h3>
+							<div class="tag-list">
+								<span class="tag">Swedish</span>
+								<span class="tag">English</span>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<hr class="page-break" />
+
+				<section class="section">
+					<h2 class="section-title">Experience</h2>
+
+					<div class="company-block">
+						<div class="company-header">
+							<span class="company-name">IKEA</span>
+							<span class="company-tenure">3 years 11 months</span>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Product Owner, Operational Intelligence</h3>
+								<p class="role-meta">May 2024 – Present · Malmö</p>
+							</div>
+							<div class="role-description">
+								<p>
+									Product Owner for 2 of 4 teams, responsible for synthetic monitoring and software observability capabilities that underpin
+									critical customer flows across IKEA.com and in-store experiences. Active participant in all leadership meetings across the
+									Operational Intelligence area.
+								</p>
+								<p>
+									Collaborated closely with software engineers during IKEA's migration from Akamai to Cloudflare, developing new
+									observability capabilities and ensuring continuity across critical systems. Took a hands-on approach to understand
+									technical constraints while maintaining focus on customer outcomes.
+								</p>
+								<p>
+									Established ways of working aligned with Ingka's product management strategy, including the setup of Jira projects and
+									cross-team agile practices. Conducted user research across multiple business areas to develop deep customer empathy and
+									translate insights into product and platform strategy. Defined OKRs and product taxonomy, communicating vision to key
+									stakeholders to gain buy-in for capability investments.
+								</p>
+							</div>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Product Owner, Data Enablement Technology</h3>
+								<p class="role-meta">February 2022 – April 2024 · Malmö</p>
+							</div>
+							<div class="role-description">
+								<p>
+									Initiated the Ingka Data Platform from scratch by recruiting the founding engineering team and building core capabilities
+									including the Enterprise Metadata Backbone and Ingka Data Marketplace. Participated in all leadership meetings, serving as
+									a bridge between Enterprise Architecture, Data Architecture, and Data Leadership within a complex organisation.
+								</p>
+								<p>
+									Drove collaboration and established agile methodologies across multiple teams, creating shared practices, tooling, and
+									documentation that enabled the platform to scale. Guided and supported team members to perform to the best of their
+									ability while fostering a continuous improvement mindset. What started as one team has since grown into multiple teams
+									covering data governance, data quality, and data product development, forming the foundation of IKEA's modernized data
+									infrastructure.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="company-block">
+						<div class="company-header">
+							<span class="company-name">UpCloud</span>
+							<span class="company-tenure">6 years</span>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Head of Data & Product Owner, Internal Tools</h3>
+								<p class="role-meta">December 2018 – December 2021 · Finland</p>
+							</div>
+							<div class="role-description">
+								<p>
+									Built and led the Data team responsible for UpCloud's data warehousing, business intelligence, and internal tooling.
+									Created an in-house CRM and BI platform that enabled data-informed decision making across teams regardless of technical
+									background.
+								</p>
+								<p>
+									Developed data models, APIs, and automated workflows integrating with services including Google Analytics, HubSpot,
+									Intercom, Segment, and Tableau. Stack centered on PostgreSQL, TimescaleDB, Kafka, Python, and Golang.
+								</p>
+							</div>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Head of Marketing</h3>
+								<p class="role-meta">January 2016 – December 2018 · Finland</p>
+							</div>
+							<div class="role-description">
+								<p>
+									Led a complete brand overhaul in collaboration with Kallan & Co, defining UpCloud's mission, vision, and visual identity
+									from logo to tone of voice.
+								</p>
+								<p>
+									Directed the redesign of UpCloud.com with GrandWorks.co, centering the community's tutorials, open-source contributions,
+									and user stories. This became the primary driver of organic traffic and revenue growth.
+								</p>
+								<p>
+									Developed a data-informed advertising strategy executed entirely in-house after external consultants failed to deliver.
+									Achieved positive ROI with a small team through continuous improvement of data quality and processes.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="company-block">
+						<div class="company-header">
+							<span class="company-name">Cloud Royale</span>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Founder & Product Manager</h3>
+								<p class="role-meta">May 2012 – December 2015</p>
+							</div>
+							<div class="role-description">
+								<p>
+									Took Cloud Royale from idea to launched product with a small team. Owned brand strategy, led engineering projects, and
+									drove sales and marketing. Used A/B testing and customer feedback to iterate toward a simple, flexible cloud platform.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="company-block">
+						<div class="company-header">
+							<span class="company-name">FS Data</span>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Head of Shared Hosting</h3>
+								<p class="role-meta">October 2011 – April 2013</p>
+							</div>
+							<div class="role-description">
+								<p>
+									Responsible for customer service, development, marketing, and reselling. Launched a reseller program that achieved
+									sustained growth beyond my tenure.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="company-block">
+						<div class="company-header">
+							<span class="company-name">Surftown A/S</span>
+							<span class="company-tenure">4 years 7 months</span>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Product Coordinator</h3>
+								<p class="role-meta">April 2009 – September 2011</p>
+							</div>
+							<div class="role-description">
+								<p>
+									Managed product development (packaging, pricing, research) and marketing execution against roadmap. Part of the team that
+									relaunched the company website.
+								</p>
+							</div>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Communications Advisor</h3>
+								<p class="role-meta">May 2007 – March 2009</p>
+							</div>
+							<div class="role-description">
+								<p>
+									Handled marketing communications: copywriting, corporate blogging, digital advertising, press interviews, and customer
+									service.
+								</p>
+							</div>
+						</div>
+
+						<div class="role">
+							<div class="role-header">
+								<h3 class="role-title">Support Coordinator</h3>
+								<p class="role-meta">March 2007 – May 2007</p>
+							</div>
+							<div class="role-description">
+								<p>First and second line customer support.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</main>
+			<div class="footer-accent"></div>
+		</div>
+	</body>
+</html>

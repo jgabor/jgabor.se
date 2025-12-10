@@ -1,0 +1,18 @@
+{
+  "name": "jgaborse",
+  "main": "src/worker.ts",
+  "assets": {
+    "directory": "./assets"
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  "compatibility_date": "2024-12-01",
+  "routes": [
+    {
+      "pattern": "jgabor.se",
+      "zone_name": "jgabor.se",
+      "custom_domain": true
+    }
+  ],
+  "kv_namespaces": []
+}
