@@ -1,4 +1,4 @@
-import { css, html } from '../lib/template';
+import { css, html } from "../lib/template";
 
 const styles = css`
 	* {
