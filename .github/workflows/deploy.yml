@@ -19,11 +19,9 @@ jobs:
 
       - name: Create wrangler.toml
         run: |
-          cat > wrangler.toml << EOF
-          [[kv_namespaces]]
-          binding = "SITE"
-          id = "${{ secrets.KV_NAMESPACE_ID }}"
-          EOF
+          printf '[[kv_namespaces]]\nbinding = "SITE"\nid = "%s"\n' "$KV_NAMESPACE_ID" > wrangler.toml
+        env:
+          KV_NAMESPACE_ID: ${{ secrets.KV_NAMESPACE_ID }}
 
       - uses: cloudflare/wrangler-action@v3
         with:
