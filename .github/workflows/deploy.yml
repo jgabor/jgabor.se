@@ -17,12 +17,6 @@ jobs:
 
       - run: bun run build
 
-      - name: Create wrangler.toml
-        run: |
-          printf '[[kv_namespaces]]\nbinding = "SITE"\nid = "%s"\n' "$KV_NAMESPACE_ID" > wrangler.toml
-        env:
-          KV_NAMESPACE_ID: ${{ secrets.KV_NAMESPACE_ID }}
-
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -33,4 +27,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: kv bulk put --namespace-id ${{ secrets.KV_NAMESPACE_ID }} --remote dist/kv-entries.json
+          command: kv bulk put --namespace-id 1a1a35272f0642c5b364ee7d0f377a03 --remote dist/kv-entries.json

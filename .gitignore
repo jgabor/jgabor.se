@@ -165,5 +165,4 @@ dist
 .env*
 !.env.example
 .wrangler/
-wrangler.toml
 .claude/data/
