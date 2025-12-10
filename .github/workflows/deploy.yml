@@ -17,6 +17,14 @@ jobs:
 
       - run: bun run build
 
+      - name: Create wrangler.toml
+        run: |
+          cat > wrangler.toml << EOF
+          [[kv_namespaces]]
+          binding = "SITE"
+          id = "${{ secrets.KV_NAMESPACE_ID }}"
+          EOF
+
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
