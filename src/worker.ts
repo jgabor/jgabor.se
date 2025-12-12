@@ -50,7 +50,9 @@ async function getDraftsMailboxId(
   const data = (await response.json()) as {
     methodResponses: [[string, { ids: string[] }, string]];
   };
-  return data.methodResponses[0][1].ids[0];
+  const ids = data.methodResponses?.[0]?.[1]?.ids;
+  if (!ids?.[0]) throw new Error("Drafts folder not found");
+  return ids[0];
 }
 
 async function getIdentityId(
@@ -76,7 +78,9 @@ async function getIdentityId(
   const data = (await response.json()) as {
     methodResponses: [[string, { list: Array<{ id: string; email: string }> }, string]];
   };
-  const identity = data.methodResponses[0][1].list.find(
+  const list = data.methodResponses?.[0]?.[1]?.list;
+  if (!list) throw new Error("Identity list not found");
+  const identity = list.find(
     (i) => i.email === FASTMAIL_USERNAME
   );
   if (!identity) throw new Error("Identity not found");
@@ -142,7 +146,12 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     return new Response("Method not allowed", { status: 405 });
   }
 
-  const body = (await request.json()) as ContactRequest;
+  let body: ContactRequest;
+  try {
+    body = (await request.json()) as ContactRequest;
+  } catch {
+    return new Response("Invalid JSON", { status: 400 });
+  }
   const { from, message } = body;
 
   if (!from || !message) {

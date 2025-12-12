@@ -317,7 +317,7 @@ export default html`<!DOCTYPE html>
 						}
 					} catch (err) {
 						status.className = 'status error';
-						status.textContent = err.message || 'failed to send';
+						status.textContent = err instanceof Error ? err.message : 'failed to send';
 					} finally {
 						sendBtn.disabled = false;
 					}
