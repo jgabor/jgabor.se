@@ -13,6 +13,8 @@ interface ContactRequest {
 
 const FASTMAIL_USERNAME = "jonathan@jgabor.se";
 const JMAP_HOSTNAME = "api.fastmail.com";
+const RATE_LIMIT_WINDOW_SECONDS = 60;
+const RATE_LIMIT_MAX_REQUESTS = 3;
 
 interface JmapSession {
   apiUrl: string;
@@ -146,6 +148,19 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     return new Response("Method not allowed", { status: 405 });
   }
 
+  const clientIp = request.headers.get("CF-Connecting-IP") ?? "unknown";
+  const rateLimitKey = `rate:${clientIp}`;
+  const currentCount = await env.SITE.get(rateLimitKey);
+  const count = currentCount ? parseInt(currentCount, 10) : 0;
+
+  if (count >= RATE_LIMIT_MAX_REQUESTS) {
+    return new Response("Too many requests", { status: 429 });
+  }
+
+  await env.SITE.put(rateLimitKey, String(count + 1), {
+    expirationTtl: RATE_LIMIT_WINDOW_SECONDS,
+  });
+
   let body: ContactRequest;
   try {
     body = (await request.json()) as ContactRequest;
@@ -158,7 +173,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     return new Response("Missing required fields", { status: 400 });
   }
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from)) {
+  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(from)) {
     return new Response("Invalid email address", { status: 400 });
   }
 
