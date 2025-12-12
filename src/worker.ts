@@ -1,4 +1,5 @@
 import { pages as devPages } from "./dev-content";
+import { getContentEncoding, type Encoding } from "./lib/compress";
 
 interface Env {
   SITE: KVNamespace;
@@ -179,8 +180,6 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
   }
 }
 
-type Encoding = "zstd" | "br" | "gzip" | "raw";
-
 function parseAcceptEncoding(header: string | null): Encoding {
   if (!header) return "raw";
 
@@ -189,19 +188,6 @@ function parseAcceptEncoding(header: string | null): Encoding {
   if (header.includes("gzip")) return "gzip";
 
   return "raw";
-}
-
-function getContentEncoding(encoding: Encoding): string | null {
-  switch (encoding) {
-    case "zstd":
-      return "zstd";
-    case "br":
-      return "br";
-    case "gzip":
-      return "gzip";
-    case "raw":
-      return null;
-  }
 }
 
 function parsePath(url: URL): string | null {
