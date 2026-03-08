@@ -1,23 +1,32 @@
 {
-	"name": "jgaborse",
-	"version": "0.0.0",
-	"private": true,
-	"engines": {
-		"bun": ">=1.3.0"
-	},
-	"scripts": {
-		"build": "bun run src/build.ts",
-		"build:watch": "bun run src/build.ts --watch",
-		"deploy": "bun run build && wrangler deploy && bun run kv-put",
-		"dev": "concurrently -k -n build,serve -c blue,green \"bun run build:watch\" \"wrangler dev\"",
-		"dev:remote": "wrangler dev --remote",
-		"kv-put": "wrangler kv bulk put --namespace-id 1a1a35272f0642c5b364ee7d0f377a03 --remote dist/kv-entries.json",
-		"type-check": "tsc --noEmit"
-	},
-	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20251210.0",
-		"bun-types": "^1.3.4",
-		"concurrently": "^9.2.1",
-		"wrangler": "^4.54.0"
-	}
+  "name": "jgaborse",
+  "version": "0.2.0",
+  "private": true,
+  "packageManager": "pnpm@10.30.3",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "astro build && wrangler deploy",
+    "type-check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^6.0.0-beta.9",
+    "@astrojs/cloudflare": "^12.6.12"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.25.6",
+    "@tailwindcss/vite": "^4.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "wrangler": "^4.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "^8.0.0-beta.16",
+      "wrangler": "^4.59.1",
+      "undici": ">=7.18.2"
+    }
+  }
 }

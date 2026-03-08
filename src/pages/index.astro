@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import ProjectGrid from "../components/ProjectGrid.astro";
+import ExperienceItem from "../components/ExperienceItem.astro";
+import ContactForm from "../components/ContactForm.astro";
+import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
+
+const projectEntries = await getCollection("projects");
+const experienceEntries = await getCollection("experiences");
+
+const projects = projectEntries.map((p) => p.data).sort((a, b) => a.order - b.order);
+const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
+
+const skills = [
+  "Product Strategy",
+  "Product Vision",
+  "Product Roadmap",
+  "Platform Engineering",
+  "Artificial Intelligence",
+  "Developer Experience",
+  "Software Development Lifecycle",
+  "Infrastructure-as-Code",
+  "Backlog Management",
+  "User Research",
+  "Agile Methodologies",
+];
+
+const strengths = [
+  {
+    title: "Systems thinking",
+    description:
+      "Connects immediate decisions to long-term outcomes. Sees several steps ahead without losing sight of today.",
+  },
+  {
+    title: "Team enabler",
+    description:
+      "Leads by enabling others \u2014 aligning teams toward a shared north star without needing formal authority.",
+  },
+  {
+    title: "Quick study",
+    description:
+      "Active listener with high-bandwidth information intake. New concepts stick quickly.",
+  },
+];
+---
+
+<BaseLayout title="Jonathan Gabor">
+  <Nav />
+  <main>
+    <Hero />
+
+    <ProjectGrid projects={projects} />
+
+    <section class="experience relative py-24 md:py-36" id="experience">
+      <div class="pointer-events-none absolute left-4 top-8 select-none font-mono text-[clamp(6rem,20vw,18rem)] font-bold leading-none opacity-[0.03] md:left-8">02</div>
+      <div class="relative mx-auto max-w-[1100px] px-6 md:px-8">
+        <div class="mb-16">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-gray-500">Experience</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-white md:text-4xl">15+ years building products</h2>
+          <p class="mt-3 max-w-lg text-lg text-gray-500">
+            I am relentless about creating intuitive and simple products in a complex and
+            technological environment, with user's needs at the forefront.
+          </p>
+        </div>
+
+        <div class="mb-20 grid gap-4 md:grid-cols-3">
+          {strengths.map((s) => (
+            <div class="fade-in border border-white/[0.12] bg-[hsl(0_0%_3%)] p-6">
+              <h3 class="font-mono text-sm uppercase tracking-[0.15em] text-[hsl(187,72%,55%)]">{s.title}</h3>
+              <p class="mt-3 text-base leading-relaxed text-gray-500">{s.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="mb-20 fade-in">
+          <p class="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-gray-500">Skills</p>
+          <div class="flex flex-wrap gap-2">
+            {skills.map((skill) => (
+              <span class="border border-white/[0.12] px-3 py-1.5 font-mono text-xs uppercase tracking-[0.05em] text-gray-400">{skill}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-16">
+          {experiences.map((exp) => (
+            <ExperienceItem
+              company={exp.company}
+              tenure={exp.tenure}
+              roles={exp.roles}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <ContactForm />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 },
+  );
+
+  document.querySelectorAll(".fade-in").forEach((el) => {
+    observer.observe(el);
+  });
+</script>
+
+<style is:global>
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

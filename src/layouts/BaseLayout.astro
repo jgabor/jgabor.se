@@ -1,0 +1,30 @@
+---
+import { Font } from "astro:assets";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Jonathan Gabor — Speaks code, ships product.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.ico" />
+    <Font cssVariable="--font-inter" preload />
+    <Font cssVariable="--font-space-mono" preload />
+  </head>
+  <body class="bg-black text-white font-sans">
+    <slot />
+  </body>
+</html>

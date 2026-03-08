@@ -1,12 +1,3 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "strict": true,
-    "noEmit": true,
-    "skipLibCheck": true,
-    "types": ["bun-types", "@cloudflare/workers-types"]
-  },
-  "include": ["src/**/*.ts"]
+  "extends": "astro/tsconfigs/strict"
 }

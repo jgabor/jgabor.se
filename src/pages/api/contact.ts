@@ -1,20 +1,16 @@
-import { pages as devPages } from "./dev-content";
-import { getContentEncoding, type Encoding } from "./lib/compress";
+import type { APIContext } from "astro";
 
-interface Env {
-  SITE: KVNamespace;
-  FASTMAIL_TOKEN: string;
-}
-
-interface ContactRequest {
-  from: string;
-  message: string;
-}
+export const prerender = false;
 
 const FASTMAIL_USERNAME = "jonathan@jgabor.se";
 const JMAP_HOSTNAME = "api.fastmail.com";
 const RATE_LIMIT_WINDOW_SECONDS = 60;
 const RATE_LIMIT_MAX_REQUESTS = 3;
+
+interface ContactRequest {
+  from: string;
+  message: string;
+}
 
 interface JmapSession {
   apiUrl: string;
@@ -34,7 +30,7 @@ async function getJmapSession(token: string): Promise<JmapSession> {
 async function getDraftsMailboxId(
   apiUrl: string,
   accountId: string,
-  token: string
+  token: string,
 ): Promise<string> {
   const response = await fetch(apiUrl, {
     method: "POST",
@@ -60,7 +56,7 @@ async function getDraftsMailboxId(
 async function getIdentityId(
   apiUrl: string,
   accountId: string,
-  token: string
+  token: string,
 ): Promise<string> {
   const response = await fetch(apiUrl, {
     method: "POST",
@@ -78,13 +74,13 @@ async function getIdentityId(
     }),
   });
   const data = (await response.json()) as {
-    methodResponses: [[string, { list: Array<{ id: string; email: string }> }, string]];
+    methodResponses: [
+      [string, { list: Array<{ id: string; email: string }> }, string],
+    ];
   };
   const list = data.methodResponses?.[0]?.[1]?.list;
   if (!list) throw new Error("Identity list not found");
-  const identity = list.find(
-    (i) => i.email === FASTMAIL_USERNAME
-  );
+  const identity = list.find((i) => i.email === FASTMAIL_USERNAME);
   if (!identity) throw new Error("Identity not found");
   return identity.id;
 }
@@ -96,7 +92,7 @@ async function sendEmail(
   identityId: string,
   token: string,
   senderEmail: string,
-  messageBody: string
+  messageBody: string,
 ): Promise<void> {
   const draftObject = {
     from: [{ email: FASTMAIL_USERNAME }],
@@ -106,7 +102,10 @@ async function sendEmail(
     keywords: { $draft: true },
     mailboxIds: { [draftsId]: true },
     bodyValues: {
-      body: { value: `From: ${senderEmail}\n\n${messageBody}`, charset: "utf-8" },
+      body: {
+        value: `From: ${senderEmail}\n\n${messageBody}`,
+        charset: "utf-8",
+      },
     },
     textBody: [{ partId: "body", type: "text/plain" }],
   };
@@ -143,12 +142,11 @@ async function sendEmail(
   }
 }
 
-async function handleContact(request: Request, env: Env): Promise<Response> {
-  if (request.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
-  }
+export async function POST(context: APIContext): Promise<Response> {
+  const env = context.locals.runtime.env;
 
-  const clientIp = request.headers.get("CF-Connecting-IP") ?? "unknown";
+  const clientIp =
+    context.request.headers.get("CF-Connecting-IP") ?? "unknown";
   const rateLimitKey = `rate:${clientIp}`;
   const currentCount = await env.SITE.get(rateLimitKey);
   const count = currentCount ? parseInt(currentCount, 10) : 0;
@@ -163,7 +161,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
 
   let body: ContactRequest;
   try {
-    body = (await request.json()) as ContactRequest;
+    body = (await context.request.json()) as ContactRequest;
   } catch {
     return new Response("Invalid JSON", { status: 400 });
   }
@@ -194,7 +192,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
       identityId,
       env.FASTMAIL_TOKEN,
       from,
-      message
+      message,
     );
 
     return new Response("OK", { status: 200 });
@@ -203,93 +201,3 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     return new Response("Failed to send email", { status: 500 });
   }
 }
-
-function parseAcceptEncoding(header: string | null): Encoding {
-  if (!header) return "raw";
-
-  if (header.includes("zstd")) return "zstd";
-  if (header.includes("br")) return "br";
-  if (header.includes("gzip")) return "gzip";
-
-  return "raw";
-}
-
-function parsePath(url: URL): string | null {
-  const path = url.pathname.replace(/\/+$/, "") || "/";
-
-  if (path === "/") return "index";
-
-  const segment = path.slice(1);
-  if (/^[a-z0-9-]+$/i.test(segment)) return segment;
-
-  return null;
-}
-
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    const url = new URL(request.url);
-
-    if (url.pathname === "/contact") {
-      return handleContact(request, env);
-    }
-
-    if (url.pathname.startsWith("/__hash/")) {
-      const pagePath = url.pathname.slice(8);
-      const hashPageName = parsePath(new URL(pagePath, url.origin));
-      const hashContent = hashPageName ? devPages[hashPageName] : null;
-      if (hashContent) {
-        const hash = Array.from(new TextEncoder().encode(hashContent))
-          .reduce((h, b) => ((h << 5) - h + b) | 0, 0)
-          .toString(36);
-        return new Response(hash, { headers: { "Cache-Control": "no-cache" } });
-      }
-      return new Response("", { status: 404 });
-    }
-
-    const pageName = parsePath(url);
-
-    if (!pageName) {
-      return new Response("Not found", { status: 404 });
-    }
-
-    const acceptEncoding = request.headers.get("Accept-Encoding");
-    const encoding = parseAcceptEncoding(acceptEncoding);
-    const kvKey = `${pageName}:${encoding}`;
-
-    const data = await env.SITE.get(kvKey, "arrayBuffer");
-
-    if (data) {
-      const contentEncoding = getContentEncoding(encoding);
-      const headers = new Headers({
-        "Content-Type": "text/html; charset=utf-8",
-        "Cache-Control": "public, max-age=31536000, immutable",
-      });
-
-      if (contentEncoding) {
-        headers.set("Content-Encoding", contentEncoding);
-      }
-
-      return new Response(data, {
-        headers,
-        encodeBody: "manual",
-      } as ResponseInit);
-    }
-
-    const content = devPages[pageName];
-    if (content) {
-      const hash = Array.from(new TextEncoder().encode(content))
-        .reduce((h, b) => ((h << 5) - h + b) | 0, 0)
-        .toString(36);
-      const liveReloadScript = `<script>(()=>{const h=${JSON.stringify(hash)};setInterval(async()=>{const r=await fetch("/__hash/"+location.pathname);if(r.ok&&await r.text()!==h)location.reload()},1000)})()</script>`;
-      const withLiveReload = content.replace("</body>", liveReloadScript + "</body>");
-      return new Response(withLiveReload, {
-        headers: {
-          "Content-Type": "text/html; charset=utf-8",
-          "Cache-Control": "no-cache",
-        },
-      });
-    }
-
-    return new Response("Not found", { status: 404 });
-  },
-};

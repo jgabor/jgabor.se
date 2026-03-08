@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+---
+import { getCollection } from "astro:content";
+
+const experienceEntries = await getCollection("experiences");
+const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
+---
+
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -636,7 +642,7 @@
 					<div class="name-block">
 						<h1 class="name">Jonathan Gabor</h1>
 						<p class="title">Speaks Code, Ships Product</p>
-						<p class="location">Malmö, Sweden</p>
+						<p class="location">Malm&ouml;, Sweden</p>
 					</div>
 					<img src="/jgabor.jpg" alt="Jonathan Gabor" class="profile-photo" />
 					<div class="contact-block">
@@ -679,7 +685,7 @@
 						<div class="strength-card">
 							<h3 class="strength-title">Team Enabler</h3>
 							<p class="strength-desc">
-								Leads by enabling others—aligning teams toward a shared north star without needing formal authority.
+								Leads by enabling others---aligning teams toward a shared north star without needing formal authority.
 							</p>
 						</div>
 						<div class="strength-card">
@@ -728,189 +734,27 @@
 				<section class="section">
 					<h2 class="section-title">Experience</h2>
 
-					<div class="company-block">
-						<div class="company-header">
-							<span class="company-name">IKEA</span>
-							<span class="company-tenure">3 years 11 months</span>
+					{experiences.map((exp) => (
+						<div class="company-block">
+							<div class="company-header">
+								<span class="company-name">{exp.company}</span>
+								{exp.tenure && <span class="company-tenure">{exp.tenure}</span>}
+							</div>
+							{exp.roles.map((role) => (
+								<div class="role">
+									<div class="role-header">
+										<h3 class="role-title">{role.title}</h3>
+										<p class="role-meta">{role.period}{role.location ? ` \u00B7 ${role.location}` : ""}</p>
+									</div>
+									<div class="role-description">
+										{(role.cvDescription ?? role.description).map((paragraph) => (
+											<p>{paragraph}</p>
+										))}
+									</div>
+								</div>
+							))}
 						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Product Owner, Operational Intelligence</h3>
-								<p class="role-meta">May 2024 – Present · Malmö</p>
-							</div>
-							<div class="role-description">
-								<p>
-									Product Owner for two teams, responsible for synthetic monitoring and software observability capabilities that underpin
-									critical customer flows across IKEA.com and in-store experiences. Active participant in all leadership meetings across the
-									Operational Intelligence area.
-								</p>
-								<p>
-									Collaborated closely with software engineers during IKEA's migration from Akamai to Cloudflare, developing new
-									observability capabilities and ensuring continuity across critical systems. Took a hands-on approach to understand
-									technical constraints while maintaining focus on customer outcomes.
-								</p>
-								<p>
-									Established ways of working aligned with Ingka's product management strategy, including the setup of Jira projects and
-									cross-team agile practices. Conducted user research across multiple business areas to develop deep customer empathy and
-									translate insights into product and platform strategy. Defined OKRs and product taxonomy, communicating vision to key
-									stakeholders to gain buy-in for capability investments.
-								</p>
-							</div>
-						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Product Owner, Data Enablement Technology</h3>
-								<p class="role-meta">February 2022 – April 2024 · Malmö</p>
-							</div>
-							<div class="role-description">
-								<p>
-									Defined the product vision and initiated a centralized data platform from the ground up, recruiting the founding
-									engineering team and establishing the roadmap for capabilities spanning metadata management, data discovery, and
-									self-service data access.
-								</p>
-								<p>
-									Served as the product counterpart to engineers and architects, partnering closely with Enterprise Architecture and Data
-									Architecture leadership to make informed trade-offs between technical constraints and user needs.
-								</p>
-								<p>
-									Drove collaboration and established agile methodologies across multiple teams, creating shared practices, tooling, and
-									documentation that enabled the platform to scale. Guided and supported team members to perform to the best of their
-									ability while fostering a continuous improvement mindset. What started as one team has since grown into multiple teams
-									covering data governance, data quality, and data product development, forming the foundation of IKEA's modernized data
-									infrastructure.
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="company-block">
-						<div class="company-header">
-							<span class="company-name">UpCloud</span>
-							<span class="company-tenure">6 years</span>
-						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Head of Data & Product Owner, Internal Tools</h3>
-								<p class="role-meta">December 2018 – December 2021 · Finland</p>
-							</div>
-							<div class="role-description">
-								<p>
-									Built and led the Data team responsible for UpCloud's data warehousing, business intelligence, and internal tooling.
-									Created an in-house CRM and BI platform that enabled data-informed decision making across teams regardless of technical
-									background.
-								</p>
-								<p>
-									Developed data models, APIs, and automated workflows integrating with services including Google Analytics, HubSpot,
-									Intercom, Segment, and Tableau. Stack centered on PostgreSQL, TimescaleDB, Kafka, Python, and Golang.
-								</p>
-							</div>
-						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Head of Marketing</h3>
-								<p class="role-meta">January 2016 – December 2018 · Finland</p>
-							</div>
-							<div class="role-description">
-								<p>
-									Led a complete brand overhaul in collaboration with Kallan & Co, defining UpCloud's mission, vision, and visual identity
-									from logo to tone of voice.
-								</p>
-								<p>
-									Directed the redesign of UpCloud.com with GrandWorks.co, centering the community's tutorials, open-source contributions,
-									and user stories. This became the primary driver of organic traffic and revenue growth.
-								</p>
-								<p>
-									Developed a data-informed advertising strategy executed entirely in-house after external consultants failed to deliver.
-									Achieved positive ROI with a small team through continuous improvement of data quality and processes.
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="company-block">
-						<div class="company-header">
-							<span class="company-name">Cloud Royale</span>
-						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Founder & Product Manager</h3>
-								<p class="role-meta">May 2012 – December 2015</p>
-							</div>
-							<div class="role-description">
-								<p>
-									Took Cloud Royale from idea to launched product with a small team. Owned brand strategy, led engineering projects, and
-									drove sales and marketing. Used A/B testing and customer feedback to iterate toward a simple, flexible cloud platform.
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="company-block">
-						<div class="company-header">
-							<span class="company-name">FS Data</span>
-						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Head of Shared Hosting</h3>
-								<p class="role-meta">October 2011 – April 2013</p>
-							</div>
-							<div class="role-description">
-								<p>
-									Responsible for customer service, development, marketing, and reselling. Launched a reseller program that achieved
-									sustained growth beyond my tenure.
-								</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="company-block">
-						<div class="company-header">
-							<span class="company-name">Surftown A/S</span>
-							<span class="company-tenure">4 years 7 months</span>
-						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Product Coordinator</h3>
-								<p class="role-meta">April 2009 – September 2011</p>
-							</div>
-							<div class="role-description">
-								<p>
-									Managed product development (packaging, pricing, research) and marketing execution against roadmap. Part of the team that
-									relaunched the company website.
-								</p>
-							</div>
-						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Communications Advisor</h3>
-								<p class="role-meta">May 2007 – March 2009</p>
-							</div>
-							<div class="role-description">
-								<p>
-									Handled marketing communications: copywriting, corporate blogging, digital advertising, press interviews, and customer
-									service.
-								</p>
-							</div>
-						</div>
-
-						<div class="role">
-							<div class="role-header">
-								<h3 class="role-title">Support Coordinator</h3>
-								<p class="role-meta">March 2007 – May 2007</p>
-							</div>
-							<div class="role-description">
-								<p>First and second line customer support.</p>
-							</div>
-						</div>
-					</div>
+					))}
 				</section>
 			</main>
 			<div class="footer-accent"></div>
