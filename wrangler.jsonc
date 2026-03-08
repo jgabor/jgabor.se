@@ -1,9 +1,5 @@
 {
   "name": "jgaborse",
-  "main": "./dist/_worker.js",
-  "assets": {
-    "directory": "./dist"
-  },
   "compatibility_date": "2026-03-01",
   "compatibility_flags": ["nodejs_compat"],
   "routes": [
