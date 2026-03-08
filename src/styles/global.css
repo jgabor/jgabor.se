@@ -3,16 +3,41 @@
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-space-mono), ui-monospace, monospace;
-  --color-card: hsl(0 0% 3%);
-  --color-border: hsl(0 0% 12%);
-  --color-muted: hsl(0 0% 50%);
+  --color-surface: var(--t-surface);
+  --color-card: var(--t-card);
+  --color-secondary: var(--t-secondary);
+  --color-foreground: var(--t-foreground);
+  --color-fg-soft: var(--t-fg-soft);
+  --color-muted: var(--t-muted);
+  --color-secondary-fg: var(--t-secondary-fg);
+  --color-overlay: var(--t-overlay);
   --color-accent: hsl(187 72% 55%);
   --color-accent-teal: hsl(168 65% 45%);
   --color-accent-violet: hsl(263 70% 58%);
   --color-accent-emerald: hsl(155 60% 45%);
   --color-accent-sky: hsl(199 89% 55%);
-  --color-secondary: hsl(0 0% 8%);
-  --color-secondary-fg: hsl(0 0% 70%);
+}
+
+:root {
+  --t-surface: #ffffff;
+  --t-card: hsl(0 0% 97%);
+  --t-secondary: hsl(0 0% 93%);
+  --t-foreground: hsl(0 0% 9%);
+  --t-fg-soft: hsl(0 0% 25%);
+  --t-muted: hsl(0 0% 45%);
+  --t-secondary-fg: hsl(0 0% 35%);
+  --t-overlay: #000000;
+}
+
+.dark {
+  --t-surface: #000000;
+  --t-card: hsl(0 0% 3%);
+  --t-secondary: hsl(0 0% 8%);
+  --t-foreground: #ffffff;
+  --t-fg-soft: hsl(0 0% 80%);
+  --t-muted: hsl(0 0% 50%);
+  --t-secondary-fg: hsl(0 0% 70%);
+  --t-overlay: #ffffff;
 }
 
 html {

@@ -58,9 +58,9 @@ const strengths = [
       <div class="pointer-events-none absolute left-4 top-8 select-none font-mono text-[clamp(6rem,20vw,18rem)] font-bold leading-none opacity-[0.03] md:left-8">02</div>
       <div class="relative mx-auto max-w-[1100px] px-6 md:px-8">
         <div class="mb-16">
-          <p class="font-mono text-xs uppercase tracking-[0.2em] text-gray-500">Experience</p>
-          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-white md:text-4xl">15+ years building products</h2>
-          <p class="mt-3 max-w-lg text-lg text-gray-500">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted">Experience</p>
+          <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">15+ years building products</h2>
+          <p class="mt-3 max-w-lg text-lg text-muted">
             I am relentless about creating intuitive and simple products in a complex and
             technological environment, with user's needs at the forefront.
           </p>
@@ -68,18 +68,18 @@ const strengths = [
 
         <div class="mb-20 grid gap-4 md:grid-cols-3">
           {strengths.map((s) => (
-            <div class="fade-in border border-white/[0.12] bg-[hsl(0_0%_3%)] p-6">
-              <h3 class="font-mono text-sm uppercase tracking-[0.15em] text-[hsl(187,72%,55%)]">{s.title}</h3>
-              <p class="mt-3 text-base leading-relaxed text-gray-500">{s.description}</p>
+            <div class="fade-in border border-overlay/12 bg-card p-6">
+              <h3 class="font-mono text-sm uppercase tracking-[0.15em] text-accent">{s.title}</h3>
+              <p class="mt-3 text-base leading-relaxed text-muted">{s.description}</p>
             </div>
           ))}
         </div>
 
         <div class="mb-20 fade-in">
-          <p class="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-gray-500">Skills</p>
+          <p class="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-muted">Skills</p>
           <div class="flex flex-wrap gap-2">
             {skills.map((skill) => (
-              <span class="border border-white/[0.12] px-3 py-1.5 font-mono text-xs uppercase tracking-[0.05em] text-gray-400">{skill}</span>
+              <span class="border border-overlay/12 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.05em] text-muted">{skill}</span>
             ))}
           </div>
         </div>
