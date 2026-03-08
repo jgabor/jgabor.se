@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import heroPhoto from '../assets/jgabor.jpg';
 import { getCollection } from "astro:content";
 
 const experienceEntries = await getCollection("experiences");
@@ -644,7 +646,7 @@ const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order 
 						<p class="title">Speaks Code, Ships Product</p>
 						<p class="location">Malm&ouml;, Sweden</p>
 					</div>
-					<img src="/jgabor.jpg" alt="Jonathan Gabor" class="profile-photo" />
+					<Image src={heroPhoto} alt="Jonathan Gabor" class="profile-photo" />
 					<div class="contact-block">
 						<a href="mailto:jonathan@jgabor.se">jonathan@jgabor.se</a>
 						<a href="https://linkedin.com/in/jgabor">linkedin.com/in/jgabor</a>

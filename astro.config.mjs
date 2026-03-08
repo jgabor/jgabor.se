@@ -1,12 +1,9 @@
-import { defineConfig, fontProviders, passthroughImageService } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  adapter: cloudflare({ imageService: "passthrough" }),
-  image: {
-    service: passthroughImageService(),
-  },
+  adapter: cloudflare({ imageService: "compile" }),
   vite: {
     plugins: [tailwindcss()],
   },

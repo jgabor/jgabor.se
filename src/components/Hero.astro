@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import heroPhoto from '../assets/jgabor.jpg';
 ---
 
 <section class="relative min-h-screen overflow-hidden pt-20">
@@ -59,10 +61,10 @@
     </div>
     <div class="relative z-10 mt-10 md:mt-0">
       <div class="relative">
-        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent md:from-black/40"></div>
-        <img
-          src="/jgabor.jpg"
+        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent md:from-black/10"></div>
+        <Image
+          src={heroPhoto}
           alt="Jonathan Gabor"
           loading="eager"
           class="block h-80 w-[260px] object-cover object-top md:h-[420px] md:w-80"
