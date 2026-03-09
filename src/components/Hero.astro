@@ -3,71 +3,101 @@ import { Image } from 'astro:assets';
 import heroPhoto from '../assets/jgabor.jpg';
 ---
 
-<section class="relative min-h-screen overflow-hidden pt-20">
-  <div class="pointer-events-none absolute left-0 top-[14vh] select-none px-4 md:top-[12vh] md:px-8">
-    <h1 class="font-sans text-[15vw] font-black uppercase leading-[0.85] tracking-tighter text-foreground md:text-[13vw]">
-      Jonathan<br />Gabor
-    </h1>
-  </div>
-  <div class="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-[1100px] flex-col justify-end px-6 pt-[22vh] pb-8 sm:pb-16 md:flex-row md:items-end md:justify-between md:pt-0 md:px-8 md:pb-24">
-    <div class="relative z-10 max-w-md">
-      <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+<section class="relative min-h-screen flex flex-col justify-center overflow-hidden py-24 md:py-32 px-6 md:px-8">
+  <div class="mx-auto w-full max-w-[1200px] flex flex-col items-start text-left">
+    
+    <!-- Hero Composition -->
+    <div class="relative w-full flex flex-col md:flex-row items-start lg:items-center justify-start gap-6 md:gap-10 overflow-visible z-10 w-full">
+      
+      <!-- Portrait -->
+      <div class="relative z-20 w-[60vw] max-w-[240px] md:w-[280px] lg:w-[320px] aspect-[4/5] shrink-0 overflow-hidden rounded-3xl border border-white/5 shadow-2xl bg-card self-start lg:self-auto">
+        <Image
+          src={heroPhoto}
+          alt="Jonathan Gabor"
+          loading="eager"
+          class="block w-full h-full object-cover object-top opacity-90 transition-transform duration-700 hover:scale-105 hover:opacity-100"
+        />
+        <div class="absolute inset-0 rounded-3xl ring-1 ring-inset ring-foreground/20 pointer-events-none mix-blend-overlay"></div>
+      </div>
+
+      <div class="flex flex-col justify-center max-w-full overflow-hidden">
+        <h1 class="font-sans text-[clamp(4rem,14vw,12rem)] md:text-[clamp(4rem,10vw,12rem)] font-black uppercase leading-[0.85] tracking-tighter text-foreground whitespace-nowrap z-20">
+          Jonathan
+        </h1>
+        <h1 class="font-sans text-[clamp(4rem,14vw,12rem)] md:text-[clamp(4rem,10vw,12rem)] font-black uppercase leading-[0.85] tracking-tighter text-foreground whitespace-nowrap z-20">
+          Gabor
+        </h1>
+      </div>
+
+    </div>
+
+    <!-- Unified Info Block -->
+    <div class="mt-16 md:mt-24 flex flex-col items-start text-left max-w-2xl relative z-20">
+      
+      <!-- Location Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 border border-accent/20 bg-accent/5 mb-8">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+        </span>
+        <span class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-accent">Malmö, Sweden</span>
+      </div>
+
+      <h2 class="font-mono text-sm md:text-base uppercase tracking-[0.2em] text-foreground mb-4">
         Speaks code, ships product.
+      </h2>
+      
+      <p class="text-base sm:text-lg md:text-xl leading-relaxed text-foreground/70">
+        I bridge the gap between product vision and engineering execution. My opinion changes with new information.
       </p>
-      <p class="mt-3 text-lg leading-relaxed text-foreground/80 md:text-xl">
-        I bridge the gap between product vision and engineering execution. My opinion changes
-        with new information.
-      </p>
-      <p class="mt-6 font-mono text-sm text-muted">Malm&ouml;, Sweden</p>
-      <div class="mt-7 flex flex-wrap items-center gap-4">
+
+      <!-- Social Links -->
+      <div class="mt-12 flex flex-wrap items-center justify-start gap-8">
         <a
           href="https://github.com/jgabor"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.05em] text-muted no-underline transition-colors hover:text-foreground"
+          class="group flex items-center gap-3 font-mono text-xs sm:text-sm uppercase tracking-[0.1em] text-muted hover:text-foreground transition-colors"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-            <path d="M9 18c-4.51 2-5-2-7-2" />
-          </svg>
+          <div class="p-2 border border-white/10 bg-white/5 group-hover:border-white/20 group-hover:bg-white/10 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+              <path d="M9 18c-4.51 2-5-2-7-2" />
+            </svg>
+          </div>
           GitHub
         </a>
         <a
           href="https://linkedin.com/in/jgabor"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.05em] text-muted no-underline transition-colors hover:text-foreground"
+          class="group flex items-center gap-3 font-mono text-xs sm:text-sm uppercase tracking-[0.1em] text-muted hover:text-foreground transition-colors"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-            <rect width="4" height="12" x="2" y="9" />
-            <circle cx="4" cy="4" r="2" />
-          </svg>
+          <div class="p-2 border border-white/10 bg-white/5 group-hover:border-white/20 group-hover:bg-white/10 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect width="4" height="12" x="2" y="9" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+          </div>
           LinkedIn
         </a>
         <a
           href="/CV-Jonathan_Gabor.pdf"
-          class="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.05em] text-muted no-underline transition-colors hover:text-foreground"
+          class="group flex items-center gap-3 font-mono text-xs sm:text-sm uppercase tracking-[0.1em] text-muted hover:text-foreground transition-colors"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-            <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-            <path d="M12 18v-6" />
-            <path d="m9 15 3 3 3-3" />
-          </svg>
+          <div class="p-2 border border-white/10 bg-white/5 group-hover:border-white/20 group-hover:bg-white/10 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+              <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+              <path d="M12 18v-6" />
+              <path d="m9 15 3 3 3-3" />
+            </svg>
+          </div>
           CV
         </a>
       </div>
-    </div>
-    <div class="relative z-10 mt-10 md:mt-0">
-      <div class="relative">
-        <Image
-          src={heroPhoto}
-          alt="Jonathan Gabor"
-          loading="eager"
-          class="block h-[260px] w-[200px] sm:h-80 sm:w-[260px] object-cover object-top md:h-[420px] md:w-80"
-        />
-      </div>
+
     </div>
   </div>
 </section>
