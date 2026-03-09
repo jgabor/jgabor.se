@@ -3,8 +3,8 @@ import { Image } from 'astro:assets';
 import heroPhoto from '../assets/jgabor.jpg';
 ---
 
-<section class="relative min-h-screen flex flex-col justify-center overflow-hidden py-24 md:py-32 px-6 md:px-8">
-  <div class="mx-auto w-full max-w-[1200px] flex flex-col items-start text-left">
+<section class="relative min-h-screen flex flex-col justify-center overflow-hidden py-24 md:py-32">
+  <div class="mx-auto w-full max-w-[1100px] px-6 md:px-8 flex flex-col items-start text-left">
     
     <!-- Hero Composition -->
     <div class="relative w-full flex flex-col md:flex-row items-start lg:items-center justify-start gap-6 md:gap-10 overflow-visible z-10 w-full">
@@ -15,7 +15,7 @@ import heroPhoto from '../assets/jgabor.jpg';
           src={heroPhoto}
           alt="Jonathan Gabor"
           loading="eager"
-          class="block w-full h-full object-cover object-top opacity-90 transition-transform duration-700 hover:scale-105 hover:opacity-100"
+          class="block w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
         />
         <div class="absolute inset-0 rounded-3xl ring-1 ring-inset ring-foreground/20 pointer-events-none mix-blend-overlay"></div>
       </div>
