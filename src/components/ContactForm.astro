@@ -2,7 +2,7 @@
 ---
 
 <section class="relative py-24 md:py-36" id="contact">
-  <div class="pointer-events-none absolute left-4 top-8 select-none font-mono text-[clamp(6rem,20vw,18rem)] font-bold leading-none opacity-[0.03] md:left-8">
+  <div aria-hidden="true" class="pointer-events-none absolute left-4 top-8 select-none font-mono text-[clamp(6rem,20vw,18rem)] font-bold leading-none opacity-[0.03] md:left-8">
     03
   </div>
   <div class="relative mx-auto max-w-[1100px] px-6 md:px-8">
@@ -25,7 +25,7 @@
             name="from"
             required
             placeholder="you@company.com"
-            class="w-full border border-overlay/12 bg-surface px-4 py-3 font-sans text-base text-foreground placeholder-muted/40 transition-colors focus:border-overlay/30 focus:outline-none"
+            class="w-full border border-overlay/12 bg-surface px-4 py-3 font-sans text-base text-foreground placeholder-muted/40 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40"
           />
         </div>
         <div>
@@ -41,15 +41,15 @@
             rows="5"
             required
             placeholder="What's on your mind?"
-            class="min-h-[140px] w-full resize-none border border-overlay/12 bg-surface px-4 py-3 font-sans text-base text-foreground placeholder-muted/40 transition-colors focus:border-overlay/30 focus:outline-none"
+            class="min-h-[140px] w-full resize-none border border-overlay/12 bg-surface px-4 py-3 font-sans text-base text-foreground placeholder-muted/40 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40"
           ></textarea>
         </div>
         <button
           type="submit"
           id="submit-btn"
-          class="self-start border border-foreground bg-foreground px-8 py-3 font-mono text-sm uppercase tracking-[0.15em] text-surface transition-all hover:bg-transparent hover:text-foreground disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+          class="self-start border border-foreground bg-foreground px-8 py-3 font-mono text-sm uppercase tracking-[0.15em] text-surface transition-all hover:bg-transparent hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
         >
-          Send
+          Send message
         </button>
       </form>
     </div>
@@ -80,17 +80,17 @@
     })
       .then((res) => {
         if (!res.ok) throw new Error("Failed");
-        submitBtn.textContent = "Sent";
+        submitBtn.textContent = "Sent!";
         contactForm.reset();
         setTimeout(() => {
-          submitBtn.textContent = "Send";
+          submitBtn.textContent = "Send message";
           submitBtn.disabled = false;
         }, 3000);
       })
       .catch(() => {
-        submitBtn.textContent = "Error";
+        submitBtn.textContent = "Failed — try again";
         setTimeout(() => {
-          submitBtn.textContent = "Send";
+          submitBtn.textContent = "Send message";
           submitBtn.disabled = false;
         }, 3000);
       });
