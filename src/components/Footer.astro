@@ -1,45 +1,449 @@
 ---
 ---
 
-<footer class="relative mx-auto max-w-[1100px] px-6 md:px-8">
-  <div class="mt-24 flex flex-wrap items-center gap-6 border-t border-overlay/12 pt-8">
-    <a
-      href="https://github.com/jgabor"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex items-center gap-2 font-mono text-sm text-muted no-underline transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+<footer class="relative mt-24 md:mt-36" role="contentinfo">
+  <!-- Rift edge — the tear in spacetime -->
+  <div class="relative z-10 -mb-px" aria-hidden="true">
+    <svg
+      class="block w-full"
+      viewBox="0 0 1440 120"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style="height: clamp(60px, 8vw, 120px);"
     >
-      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-        <path d="M9 18c-4.51 2-5-2-7-2" />
-      </svg>
-      GitHub
-    </a>
-    <a
-      href="https://linkedin.com/in/jgabor"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="flex items-center gap-2 font-mono text-sm text-muted no-underline transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-    >
-      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-        <rect width="4" height="12" x="2" y="9" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-      LinkedIn
-    </a>
-    <a
-      href="/CV-Jonathan_Gabor.pdf"
-      class="flex items-center gap-2 font-mono text-sm text-muted no-underline transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-    >
-      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
-        <path d="M14 2v4a2 2 0 0 0 2 2h4" />
-        <path d="M12 18v-6" />
-        <path d="m9 15 3 3 3-3" />
-      </svg>
-      Download CV
-    </a>
-    <span class="ml-auto font-mono text-xs text-muted/40">Swedish &middot; English</span>
+      <!-- Glow behind the rift -->
+      <defs>
+        <filter id="rift-glow" x="-20%" y="-50%" width="140%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+        </filter>
+      </defs>
+      <path
+        d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58 L1440,120 L0,120 Z"
+        fill="#000"
+      />
+      <!-- Accent glow along the rift line -->
+      <path
+        d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58"
+        fill="none"
+        stroke="hsl(187 72% 55%)"
+        stroke-width="2"
+        filter="url(#rift-glow)"
+        opacity="0.6"
+      />
+      <path
+        d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58"
+        fill="none"
+        stroke="hsl(187 72% 55%)"
+        stroke-width="0.5"
+        opacity="0.8"
+      />
+    </svg>
+  </div>
+
+  <!-- The cosmos -->
+  <div
+    id="solar-section"
+    class="relative overflow-hidden bg-black"
+    style="min-height: clamp(500px, 70vh, 900px);"
+  >
+    <!-- Canvas for the solar system -->
+    <canvas
+      id="solar-canvas"
+      class="absolute inset-0 h-full w-full"
+      aria-hidden="true"
+    ></canvas>
+
+    <!-- Content floating over the cosmos -->
+    <div class="relative z-10 flex h-full min-h-[inherit] flex-col items-center justify-end px-6 pb-12 md:pb-16">
+
+      <!-- Message near the bottom -->
+      <div class="footer-reveal text-center">
+        <p class="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-white/30">
+          A corner of the cosmos
+        </p>
+        <p class="text-2xl font-extrabold tracking-tight text-white md:text-3xl">
+          Let's build something together.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <nav class="footer-reveal mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3" aria-label="Footer links">
+        <a
+          href="#contact"
+          class="font-mono text-sm text-white/70 no-underline transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          Contact
+        </a>
+        <a
+          href="https://github.com/jgabor"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-sm text-white/40 no-underline transition-colors hover:text-white/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/jgabor"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-sm text-white/40 no-underline transition-colors hover:text-white/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="/CV-Jonathan_Gabor.pdf"
+          class="font-mono text-sm text-white/40 no-underline transition-colors hover:text-white/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        >
+          CV
+        </a>
+      </nav>
+    </div>
   </div>
 </footer>
+
+<style>
+  .footer-reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .footer-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // --- Solar system renderer ---
+  const canvas = document.getElementById("solar-canvas") as HTMLCanvasElement;
+  const section = document.getElementById("solar-section") as HTMLElement;
+  if (canvas && section) {
+    const ctx = canvas.getContext("2d")!;
+    let width = 0;
+    let height = 0;
+    let mouseX = 0;
+    let mouseY = 0;
+    let scrollOffset = 0;
+    let animationId: number;
+    let isVisible = false;
+
+    // Star colors — real spectral classes
+    const STAR_COLORS = [
+      [255, 245, 235],  // warm white (F)
+      [255, 230, 200],  // yellow-white (G)
+      [255, 200, 150],  // orange (K)
+      [255, 160, 120],  // red-orange (M)
+      [200, 220, 255],  // blue-white (A)
+      [170, 200, 255],  // blue (B)
+      [220, 240, 255],  // white-blue
+    ];
+
+    const STAR_COUNT = 400;
+    const stars: { x: number; y: number; z: number; brightness: number; color: number[]; twinkleSpeed: number }[] = [];
+
+    // Our solar system — orbit distances are relative, sizes exaggerated for visibility
+    // Real order: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
+    const PLANETS = [
+      { name: "Mercury", orbitMul: 1.6,  speed: 4.15,  radius: 2,    hue: 35,  sat: 30, lit: 55, hasRing: false, moons: 0 },
+      { name: "Venus",   orbitMul: 2.2,  speed: 1.62,  radius: 3.5,  hue: 40,  sat: 50, lit: 65, hasRing: false, moons: 0 },
+      { name: "Earth",   orbitMul: 3.0,  speed: 1.0,   radius: 3.8,  hue: 210, sat: 65, lit: 50, hasRing: false, moons: 1 },
+      { name: "Mars",    orbitMul: 3.8,  speed: 0.53,  radius: 2.8,  hue: 15,  sat: 70, lit: 45, hasRing: false, moons: 0 },
+      { name: "Jupiter", orbitMul: 5.5,  speed: 0.084, radius: 8,    hue: 30,  sat: 55, lit: 55, hasRing: false, moons: 2 },
+      { name: "Saturn",  orbitMul: 7.2,  speed: 0.034, radius: 7,    hue: 42,  sat: 60, lit: 62, hasRing: true,  moons: 1 },
+      { name: "Uranus",  orbitMul: 9.0,  speed: 0.012, radius: 5,    hue: 185, sat: 50, lit: 60, hasRing: false, moons: 0 },
+      { name: "Neptune", orbitMul: 11.0, speed: 0.006, radius: 4.8,  hue: 225, sat: 60, lit: 50, hasRing: false, moons: 0 },
+    ];
+
+    // Each planet gets a random starting angle
+    const planetAngles = PLANETS.map(() => Math.random() * Math.PI * 2);
+
+    function initStars() {
+      stars.length = 0;
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push({
+          x: Math.random() * 2 - 1,
+          y: Math.random() * 2 - 1,
+          z: Math.random() * 0.8 + 0.2,
+          brightness: Math.random() * 0.7 + 0.2,
+          color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
+          twinkleSpeed: 0.001 + Math.random() * 0.004,
+        });
+      }
+    }
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function updateMouse(e: MouseEvent) {
+      const rect = section.getBoundingClientRect();
+      mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    }
+
+    function updateScroll() {
+      const rect = section.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      scrollOffset = 1 - (rect.top + rect.height) / (viewH + rect.height);
+      scrollOffset = Math.max(0, Math.min(1, scrollOffset));
+    }
+
+    function drawPlanet(
+      x: number, y: number, r: number,
+      hue: number, sat: number, lit: number,
+      sunX: number, sunY: number,
+      hasRing: boolean, moons: number, time: number
+    ) {
+      // Lit side faces the sun
+      const angleToSun = Math.atan2(sunY - y, sunX - x);
+      const lightOffX = Math.cos(angleToSun) * r * 0.35;
+      const lightOffY = Math.sin(angleToSun) * r * 0.35;
+
+      // Planet body
+      const pGrad = ctx.createRadialGradient(x + lightOffX, y + lightOffY, 0, x, y, r);
+      pGrad.addColorStop(0, `hsla(${hue}, ${sat}%, ${lit + 18}%, 1)`);
+      pGrad.addColorStop(0.6, `hsla(${hue}, ${sat}%, ${lit}%, 1)`);
+      pGrad.addColorStop(1, `hsla(${hue}, ${sat - 10}%, ${lit - 20}%, 1)`);
+
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = pGrad;
+      ctx.fill();
+
+      // Atmospheric glow
+      const atmo = ctx.createRadialGradient(x, y, r * 0.9, x, y, r * 1.8);
+      atmo.addColorStop(0, `hsla(${hue}, ${sat}%, ${lit + 10}%, 0)`);
+      atmo.addColorStop(0.6, `hsla(${hue}, ${sat}%, ${lit + 10}%, 0.06)`);
+      atmo.addColorStop(1, `hsla(${hue}, ${sat}%, ${lit}%, 0)`);
+      ctx.beginPath();
+      ctx.arc(x, y, r * 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = atmo;
+      ctx.fill();
+
+      // Saturn's rings
+      if (hasRing) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(-0.4); // tilt
+        ctx.scale(1, 0.3);
+
+        // Ring band (gradient from inner to outer)
+        for (let ri = 0; ri < 3; ri++) {
+          const ringR = r * (1.6 + ri * 0.35);
+          const ringAlpha = 0.35 - ri * 0.08;
+          ctx.beginPath();
+          ctx.arc(0, 0, ringR, 0, Math.PI * 2);
+          ctx.strokeStyle = `hsla(${hue + 10}, ${sat - 15}%, ${lit + 10}%, ${ringAlpha})`;
+          ctx.lineWidth = r * 0.3 - ri * 0.5;
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      // Moons
+      for (let m = 0; m < moons; m++) {
+        const moonAngle = time * 0.002 * (m + 1) + m * 2.1;
+        const moonDist = r * (2.2 + m * 1.2);
+        const mx = x + Math.cos(moonAngle) * moonDist;
+        const my = y + Math.sin(moonAngle) * moonDist * 0.5;
+        const moonR = Math.max(1, r * 0.18);
+
+        ctx.beginPath();
+        ctx.arc(mx, my, moonR, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(0, 0%, 75%, 0.8)`;
+        ctx.fill();
+      }
+    }
+
+    function draw(time: number) {
+      if (!isVisible) return;
+
+      ctx.clearRect(0, 0, width, height);
+
+      const cx = width / 2 + mouseX * 40;
+      const cy = height * 0.42 + mouseY * 30 + (scrollOffset - 0.5) * 60;
+
+      const sunRadius = Math.min(width, height) * 0.06;
+      // Base orbit unit — scales so the system fits
+      const orbitUnit = Math.min(width, height) * 0.035;
+
+      // --- Sun glow (large warm radiance) ---
+      const outerGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, sunRadius * 12);
+      outerGlow.addColorStop(0, "hsla(40, 100%, 70%, 0.12)");
+      outerGlow.addColorStop(0.15, "hsla(35, 95%, 60%, 0.08)");
+      outerGlow.addColorStop(0.3, "hsla(25, 90%, 55%, 0.04)");
+      outerGlow.addColorStop(0.5, "hsla(15, 80%, 50%, 0.02)");
+      outerGlow.addColorStop(1, "hsla(15, 80%, 50%, 0)");
+      ctx.fillStyle = outerGlow;
+      ctx.fillRect(0, 0, width, height);
+
+      // --- Colorful twinkling stars ---
+      for (const star of stars) {
+        const parallaxStrength = star.z * 0.6;
+        const sx = (star.x * width * 0.6) + cx + mouseX * parallaxStrength * 80;
+        const sy = (star.y * height * 0.6) + cy + mouseY * parallaxStrength * 60 + (scrollOffset - 0.5) * parallaxStrength * 100;
+
+        const twinkle = 0.4 + 0.6 * Math.sin(time * star.twinkleSpeed + star.x * 100 + star.y * 100);
+        const alpha = star.brightness * twinkle;
+        const size = star.z * 1.8;
+        const [r, g, b] = star.color;
+
+        // Soft glow for bright stars
+        if (size > 1.2 && alpha > 0.45) {
+          ctx.beginPath();
+          ctx.arc(sx, sy, size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha * 0.1})`;
+          ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.arc(sx, sy, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        ctx.fill();
+      }
+
+      // --- Orbit paths (faint ellipses) ---
+      const TILT = 0.3; // orbital plane tilt (perspective)
+      for (const p of PLANETS) {
+        const orbitRadius = orbitUnit * p.orbitMul;
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.scale(1, TILT);
+        ctx.beginPath();
+        ctx.arc(0, 0, orbitRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = "hsla(0, 0%, 100%, 0.04)";
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // --- Planets behind the sun (draw those with y < cy first) ---
+      interface PlanetDraw { x: number; y: number; z: number; idx: number }
+      const planetPositions: PlanetDraw[] = [];
+
+      const t = time * 0.0001;
+      for (let i = 0; i < PLANETS.length; i++) {
+        const p = PLANETS[i];
+        const angle = planetAngles[i] + t * p.speed;
+        const orbitRadius = orbitUnit * p.orbitMul;
+        const px = cx + Math.cos(angle) * orbitRadius;
+        const py = cy + Math.sin(angle) * orbitRadius * TILT;
+
+        planetPositions.push({ x: px, y: py, z: Math.sin(angle), idx: i });
+      }
+
+      // Sort: planets "behind" (negative z / top of ellipse) drawn first
+      planetPositions.sort((a, b) => a.z - b.z);
+
+      // Draw back planets, then sun, then front planets
+      for (const pp of planetPositions) {
+        if (pp.z >= 0) continue; // in front of sun — draw later
+        const p = PLANETS[pp.idx];
+        drawPlanet(pp.x, pp.y, p.radius, p.hue, p.sat, p.lit, cx, cy, p.hasRing, p.moons, time);
+      }
+
+      // --- The Sun ---
+      // Corona
+      const corona = ctx.createRadialGradient(cx, cy, sunRadius * 0.5, cx, cy, sunRadius * 3.5);
+      corona.addColorStop(0, "hsla(45, 100%, 75%, 0.3)");
+      corona.addColorStop(0.3, "hsla(40, 100%, 65%, 0.12)");
+      corona.addColorStop(0.6, "hsla(30, 95%, 55%, 0.04)");
+      corona.addColorStop(1, "hsla(20, 90%, 50%, 0)");
+      ctx.beginPath();
+      ctx.arc(cx, cy, sunRadius * 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = corona;
+      ctx.fill();
+
+      // Sun body
+      const sunGrad = ctx.createRadialGradient(cx - sunRadius * 0.2, cy - sunRadius * 0.2, 0, cx, cy, sunRadius);
+      sunGrad.addColorStop(0, "hsla(50, 100%, 95%, 1)");
+      sunGrad.addColorStop(0.3, "hsla(45, 100%, 80%, 1)");
+      sunGrad.addColorStop(0.7, "hsla(38, 100%, 65%, 1)");
+      sunGrad.addColorStop(1, "hsla(25, 95%, 55%, 1)");
+      ctx.beginPath();
+      ctx.arc(cx, cy, sunRadius, 0, Math.PI * 2);
+      ctx.fillStyle = sunGrad;
+      ctx.fill();
+
+      // Sun surface shimmer
+      const shimmerAlpha = 0.15 + 0.05 * Math.sin(time * 0.005);
+      const shimmer = ctx.createRadialGradient(cx + sunRadius * 0.15, cy + sunRadius * 0.1, 0, cx, cy, sunRadius);
+      shimmer.addColorStop(0, `hsla(55, 100%, 90%, ${shimmerAlpha})`);
+      shimmer.addColorStop(1, `hsla(55, 100%, 90%, 0)`);
+      ctx.beginPath();
+      ctx.arc(cx, cy, sunRadius, 0, Math.PI * 2);
+      ctx.fillStyle = shimmer;
+      ctx.fill();
+
+      // Draw front planets (in front of sun)
+      for (const pp of planetPositions) {
+        if (pp.z < 0) continue;
+        const p = PLANETS[pp.idx];
+        drawPlanet(pp.x, pp.y, p.radius, p.hue, p.sat, p.lit, cx, cy, p.hasRing, p.moons, time);
+      }
+
+      animationId = requestAnimationFrame(draw);
+    }
+
+    // --- Visibility observer ---
+    const visObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          isVisible = true;
+          resize();
+          animationId = requestAnimationFrame(draw);
+        } else if (!entry.isIntersecting && isVisible) {
+          isVisible = false;
+          cancelAnimationFrame(animationId);
+        }
+      },
+      { threshold: 0.05 },
+    );
+
+    // --- Init ---
+    initStars();
+    resize();
+    visObserver.observe(section);
+
+    window.addEventListener("resize", () => {
+      resize();
+      initStars();
+    });
+    window.addEventListener("mousemove", updateMouse);
+    window.addEventListener("scroll", updateScroll, { passive: true });
+  }
+
+  // --- Footer text reveal ---
+  const footerObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          footerObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 },
+  );
+
+  document.querySelectorAll(".footer-reveal").forEach((el, i) => {
+    (el as HTMLElement).style.transitionDelay = `${i * 200}ms`;
+    footerObserver.observe(el);
+  });
+</script>
