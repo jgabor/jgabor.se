@@ -1,0 +1,6 @@
+{
+  "ignorePatterns": ["**/*.astro"],
+  "rules": {
+    "typescript/triple-slash-reference": "off"
+  }
+}

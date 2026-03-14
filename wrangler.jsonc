@@ -6,14 +6,14 @@
     {
       "pattern": "jgabor.se",
       "zone_name": "jgabor.se",
-      "custom_domain": true
-    }
+      "custom_domain": true,
+    },
   ],
   "kv_namespaces": [
     {
       "binding": "SITE",
       "id": "1a1a35272f0642c5b364ee7d0f377a03",
-      "preview_id": "8607e5db8e29459e9c2bd502e882f92f"
-    }
-  ]
+      "preview_id": "8607e5db8e29459e9c2bd502e882f92f",
+    },
+  ],
 }

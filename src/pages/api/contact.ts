@@ -40,9 +40,7 @@ async function getDraftsMailboxId(
     },
     body: JSON.stringify({
       using: ["urn:ietf:params:jmap:core", "urn:ietf:params:jmap:mail"],
-      methodCalls: [
-        ["Mailbox/query", { accountId, filter: { name: "Drafts" } }, "a"],
-      ],
+      methodCalls: [["Mailbox/query", { accountId, filter: { name: "Drafts" } }, "a"]],
     }),
   });
   const data = (await response.json()) as {
@@ -53,11 +51,7 @@ async function getDraftsMailboxId(
   return ids[0];
 }
 
-async function getIdentityId(
-  apiUrl: string,
-  accountId: string,
-  token: string,
-): Promise<string> {
+async function getIdentityId(apiUrl: string, accountId: string, token: string): Promise<string> {
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
@@ -74,9 +68,7 @@ async function getIdentityId(
     }),
   });
   const data = (await response.json()) as {
-    methodResponses: [
-      [string, { list: Array<{ id: string; email: string }> }, string],
-    ];
+    methodResponses: [[string, { list: Array<{ id: string; email: string }> }, string]];
   };
   const list = data.methodResponses?.[0]?.[1]?.list;
   if (!list) throw new Error("Identity list not found");
@@ -145,8 +137,7 @@ async function sendEmail(
 export async function POST(context: APIContext): Promise<Response> {
   const env = context.locals.runtime.env;
 
-  const clientIp =
-    context.request.headers.get("CF-Connecting-IP") ?? "unknown";
+  const clientIp = context.request.headers.get("CF-Connecting-IP") ?? "unknown";
   const rateLimitKey = `rate:${clientIp}`;
   const currentCount = await env.SITE.get(rateLimitKey);
   const count = currentCount ? parseInt(currentCount, 10) : 0;
@@ -185,15 +176,7 @@ export async function POST(context: APIContext): Promise<Response> {
       getIdentityId(apiUrl, accountId, env.FASTMAIL_TOKEN),
     ]);
 
-    await sendEmail(
-      apiUrl,
-      accountId,
-      draftsId,
-      identityId,
-      env.FASTMAIL_TOKEN,
-      from,
-      message,
-    );
+    await sendEmail(apiUrl, accountId, draftsId, identityId, env.FASTMAIL_TOKEN, from, message);
 
     return new Response("OK", { status: 200 });
   } catch (error) {
