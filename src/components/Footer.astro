@@ -53,75 +53,9 @@
       aria-hidden="true"
     ></canvas>
 
-    <!-- Content floating over the cosmos -->
-    <div class="relative z-10 flex h-full min-h-[inherit] flex-col items-center justify-end px-6 pb-12 md:pb-16">
-
-      <!-- Message near the bottom -->
-      <div class="footer-reveal text-center">
-        <p class="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-white/30">
-          A corner of the cosmos
-        </p>
-        <p class="text-2xl font-extrabold tracking-tight text-white md:text-3xl">
-          Let's build something together.
-        </p>
-      </div>
-
-      <!-- Links -->
-      <nav class="footer-reveal mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3" aria-label="Footer links">
-        <a
-          href="#contact"
-          class="font-mono text-sm text-white/70 no-underline transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          Contact
-        </a>
-        <a
-          href="https://github.com/jgabor"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-mono text-sm text-white/40 no-underline transition-colors hover:text-white/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          GitHub
-        </a>
-        <a
-          href="https://linkedin.com/in/jgabor"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="font-mono text-sm text-white/40 no-underline transition-colors hover:text-white/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          LinkedIn
-        </a>
-        <a
-          href="/CV-Jonathan_Gabor.pdf"
-          class="font-mono text-sm text-white/40 no-underline transition-colors hover:text-white/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-        >
-          CV
-        </a>
-      </nav>
-    </div>
   </div>
 </footer>
 
-<style>
-  .footer-reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .footer-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .footer-reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
-</style>
 
 <script>
   // --- Solar system renderer ---
@@ -429,21 +363,4 @@
     window.addEventListener("scroll", updateScroll, { passive: true });
   }
 
-  // --- Footer text reveal ---
-  const footerObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          footerObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 },
-  );
-
-  document.querySelectorAll(".footer-reveal").forEach((el, i) => {
-    (el as HTMLElement).style.transitionDelay = `${i * 200}ms`;
-    footerObserver.observe(el);
-  });
 </script>

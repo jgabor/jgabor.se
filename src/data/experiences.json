@@ -10,7 +10,7 @@
         "period": "Jan 2026 \u2014 Present",
         "location": "Malm\u00f6",
         "description": [
-          "After a ~1.5 year stint at Operational Intelligence, I am back at building the Ingka Data Platform, but now as a software engineer. A major internal reorganization split our previous domain into two: Platform Engineering (where I am now at), and Technology Services (where Operational Intelligence went to). My current focus lies in making data accessible, discoverable, and shareable across all of IKEA, by designing and developing solutions for data products."
+          "After a roughly 1.5-year stint in Operational Intelligence, I am back to building the Ingka Data Platform \u2014 now as a software engineer. A major internal reorganization split our previous domain into two: Platform Engineering (where I am now), and Technology Services (where Operational Intelligence went). My current focus is making data accessible, discoverable, and shareable across all of IKEA by designing and developing solutions for data products."
         ]
       },
       {
@@ -18,7 +18,7 @@
         "period": "May 2024 \u2014 Dec 2025",
         "location": "Malm\u00f6",
         "description": [
-          "Product Owner for two teams, responsible for synthetic monitoring and software observability capabilities that underpin critical customer flows across IKEA.com and in-store experiences. Collaborated closely with software engineers during IKEA's migration from Akamai to Cloudflare. Established ways of working aligned with Ingka's product management strategy. Defined OKRs and product taxonomy."
+          "Product Owner for two teams responsible for synthetic monitoring and software observability capabilities underpinning critical customer flows across IKEA.com and in-store experiences. Collaborated closely with software engineers during IKEA's migration from Akamai to Cloudflare. Established ways of working aligned with Ingka's product management strategy. Defined OKRs and product taxonomy."
         ],
         "cvDescription": [
           "Product Owner for two teams, responsible for synthetic monitoring and software observability capabilities that underpin critical customer flows across IKEA.com and in-store experiences. Active participant in all leadership meetings across the Operational Intelligence area.",
@@ -52,7 +52,7 @@
         "period": "Dec 2018 \u2014 Dec 2021",
         "location": "Finland",
         "description": [
-          "Built and led the Data team responsible for data warehousing, BI, and internal tooling. Created an in-house CRM and BI platform. Stack: PostgreSQL, TimescaleDB, Kafka, Python, Golang."
+          "Built and led a Data team responsible for data warehousing, BI, and internal tooling. Created an in-house CRM and BI platform. Stack: PostgreSQL, TimescaleDB, Kafka, Python, Go."
         ],
         "cvDescription": [
           "Built and led the Data team responsible for UpCloud's data warehousing, business intelligence, and internal tooling. Created an in-house CRM and BI platform that enabled data-informed decision making across teams regardless of technical background.",
@@ -64,7 +64,7 @@
         "period": "Jan 2016 \u2014 Dec 2018",
         "location": "Finland",
         "description": [
-          "Led a complete brand overhaul. Directed the redesign of UpCloud.com centering community tutorials and open-source contributions. Developed a data-informed advertising strategy executed entirely in-house. Achieved positive ROI with a small team."
+          "Led a complete brand overhaul. Directed the redesign of UpCloud.com, centering community tutorials and open-source contributions. Developed a data-informed advertising strategy executed entirely in-house. Achieved positive ROI with a small team."
         ],
         "cvDescription": [
           "Led a complete brand overhaul in collaboration with Kallan & Co, defining UpCloud's mission, vision, and visual identity from logo to tone of voice.",
@@ -83,7 +83,7 @@
         "title": "Founder & Product Manager",
         "period": "May 2012 \u2014 Dec 2015",
         "description": [
-          "Took Cloud Royale from idea to launched product with a small team. Owned brand strategy, led engineering projects, and drove sales and marketing."
+          "Took Cloud Royale from idea to launched product with a small team. Owned brand strategy, led engineering, and drove sales and marketing."
         ],
         "cvDescription": [
           "Took Cloud Royale from idea to launched product with a small team. Owned brand strategy, led engineering projects, and drove sales and marketing. Used A/B testing and customer feedback to iterate toward a simple, flexible cloud platform."
@@ -100,7 +100,7 @@
         "title": "Head of Shared Hosting",
         "period": "Oct 2011 \u2014 Apr 2013",
         "description": [
-          "Responsible for customer service, development, marketing, and reselling. Launched a reseller program that achieved sustained growth beyond my tenure."
+          "Responsible for customer service, development, marketing, and reselling. Launched a reseller program that sustained growth beyond my tenure."
         ]
       }
     ]
@@ -125,7 +125,7 @@
         "title": "Communications Advisor",
         "period": "May 2007 \u2014 Mar 2009",
         "description": [
-          "Marketing communications: copywriting, corporate blogging, digital advertising, press interviews, and customer service."
+          "Marketing communications: copywriting, corporate blogging, digital advertising, press interviews, and customer support."
         ],
         "cvDescription": [
           "Handled marketing communications: copywriting, corporate blogging, digital advertising, press interviews, and customer service."
