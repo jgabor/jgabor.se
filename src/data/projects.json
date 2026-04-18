@@ -1,82 +1,92 @@
 [
   {
-    "id": "leda",
+    "id": "agentera",
     "order": 1,
+    "title": "Agentera",
+    "type": "Skill Ecosystem",
+    "typeColor": "violet",
+    "description": "A skill ecosystem for autonomous software development. Provides structured, composable workflows \u2014 planning, execution, review, optimization \u2014 that turn LLM agents into reliable delivery systems with real guardrails.",
+    "tags": ["Python", "OpenCode", "LLM"],
+    "url": "https://github.com/jgabor/agentera"
+  },
+  {
+    "id": "leda",
+    "order": 2,
     "title": "Leda",
     "type": "CLI / MCP",
     "typeColor": "accent",
     "description": "A dependency-graph context isolator for LLM tools. Parses codebases with tree-sitter, builds a directed dependency graph, then traces only the files relevant to a given prompt \u2014 deterministic graph traversal instead of RAG, cutting token usage by 70%+.",
     "tags": ["Go", "tree-sitter"],
-    "url": "https://github.com/jgabor"
+    "url": "https://github.com/jgabor/leda"
   },
   {
     "id": "vrida",
-    "order": 2,
+    "order": 3,
     "title": "Vrida",
     "type": "Skill",
     "typeColor": "sky",
     "description": "An OpenCode skill that assembles single-file HTML rigs with controls, live preview, and copyable prompt output. Visually tweak design tokens, architecture diagrams, and document reviews.",
     "tags": ["OpenCode", "HTML5", "TypeScript"],
-    "url": "https://github.com/jgabor"
+    "url": "https://github.com/jgabor/opencode-vrida"
   },
   {
     "id": "lfg",
-    "order": 3,
-    "title": "LFG (Let's F*ing Go)",
+    "order": 4,
+    "title": "LFG",
     "type": "Plugin",
     "typeColor": "violet",
     "description": "A workflow engine plugin for OpenCode that turns high-level objectives into deterministic delivery loops across research, planning, coding, review, and docs. Say \"go build the feature\" and get autonomous momentum with real guardrails.",
     "tags": ["OpenCode", "TypeScript", "SQLite"],
-    "url": "https://github.com/jgabor"
+    "url": "https://github.com/jgabor/opencode-lfg"
   },
   {
     "id": "finsliparn",
-    "order": 4,
+    "order": 5,
     "title": "Finsliparn",
     "type": "MCP",
     "typeColor": "emerald",
     "description": "An MCP server that turns single-shot LLM coding into a multi-attempt refinement loop. Runs the test suite after each iteration, feeds failures back as structured directives, and picks the best passing solution using git worktrees.",
     "tags": ["TypeScript", "Git"],
-    "url": "https://github.com/jgabor"
+    "url": "https://github.com/jgabor/finsliparn"
   },
   {
     "id": "spela",
-    "order": 5,
+    "order": 6,
     "title": "Spela",
     "type": "Desktop / TUI / CLI",
     "typeColor": "accent",
     "description": "A Linux gaming optimization tool that manages DLSS/DLL versions and per-game profiles for Steam/Proton games. Handles GPU/CPU tuning, HDR setup, and launch configuration.",
     "tags": ["Go", "Svelte", "Wails"],
-    "url": "https://github.com/jgabor"
+    "url": "https://github.com/jgabor/spela"
   },
   {
     "id": "utforskarn",
-    "order": 6,
+    "order": 7,
     "title": "Utforskarn",
     "type": "Desktop / Web",
     "typeColor": "accent",
     "description": "A local-first research tool for organizing topics into projects, with AI-powered auto-tagging and related-topic discovery. Write markdown notes, and an LLM analyzes them to surface connections you missed.",
     "tags": ["Svelte 5", "Tailwind CSS"],
-    "url": "https://github.com/jgabor"
+    "url": "https://github.com/jgabor/utforskarn"
   },
   {
     "id": "signalspanarn",
-    "order": 7,
+    "order": 8,
     "title": "Signalspanarn",
     "type": "CLI / TUI",
     "typeColor": "accent",
     "description": "CLI and TUI that aggregates signals from Hacker News, GitHub, arXiv, Exa, and Kagi, then ranks and summarizes them so I can keep up with what's actually happening in AI without drowning in noise.",
     "tags": ["Python", "Textual", "SQLite"],
-    "url": "https://github.com/jgabor"
+    "url": "https://github.com/jgabor/signalspanarn"
   },
   {
     "id": "tuta",
-    "order": 8,
+    "order": 9,
     "title": "Tuta",
     "type": "CLI",
     "typeColor": "teal",
     "description": "A tiny CLI tool that plays synthesized notification tones for scripts and build pipelines. Each sound is designed around music theory principles \u2014 interval quality, pitch contour, waveform choice \u2014 so they're immediately recognizable without being annoying.",
     "tags": ["Go"],
-    "url": "https://github.com/jgabor"
+    "url": "https://github.com/jgabor/tuta"
   }
 ]
