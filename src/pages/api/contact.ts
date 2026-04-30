@@ -1,4 +1,5 @@
 import type { APIContext } from "astro";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -135,8 +136,6 @@ async function sendEmail(
 }
 
 export async function POST(context: APIContext): Promise<Response> {
-  const env = context.locals.runtime.env;
-
   const clientIp = context.request.headers.get("CF-Connecting-IP") ?? "unknown";
   const rateLimitKey = `rate:${clientIp}`;
   const currentCount = await env.SITE.get(rateLimitKey);

@@ -1,11 +1,24 @@
 import { defineConfig, fontProviders } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
-import tailwindcss from "@tailwindcss/vite";
+
+function omitAstroToolbarSourcemapPlugin() {
+  return {
+    name: "jgabor:omit-astro-toolbar-sourcemap",
+    configResolved(config) {
+      const plugins = config.optimizeDeps.esbuildOptions?.plugins;
+      if (plugins) {
+        config.optimizeDeps.esbuildOptions.plugins = plugins.filter(
+          (plugin) => plugin.name !== "astro:strip-toolbar-sourcemap",
+        );
+      }
+    },
+  };
+}
 
 export default defineConfig({
   adapter: cloudflare({ imageService: "compile" }),
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [omitAstroToolbarSourcemapPlugin()],
   },
   fonts: [
     {
