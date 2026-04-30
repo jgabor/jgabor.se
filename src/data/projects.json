@@ -10,18 +10,8 @@
     "url": "https://github.com/jgabor/agentera"
   },
   {
-    "id": "leda",
-    "order": 2,
-    "title": "Leda",
-    "type": "CLI / MCP",
-    "typeColor": "accent",
-    "description": "A dependency-graph context isolator for LLM tools. Parses codebases with tree-sitter, builds a directed dependency graph, then traces only the files relevant to a given prompt \u2014 deterministic graph traversal instead of RAG, cutting token usage by 70%+.",
-    "tags": ["Go", "tree-sitter"],
-    "url": "https://github.com/jgabor/leda"
-  },
-  {
     "id": "vrida",
-    "order": 3,
+    "order": 2,
     "title": "Vrida",
     "type": "Skill",
     "typeColor": "sky",
@@ -31,7 +21,7 @@
   },
   {
     "id": "lfg",
-    "order": 4,
+    "order": 3,
     "title": "LFG",
     "type": "Plugin",
     "typeColor": "violet",
@@ -41,7 +31,7 @@
   },
   {
     "id": "finsliparn",
-    "order": 5,
+    "order": 4,
     "title": "Finsliparn",
     "type": "MCP",
     "typeColor": "emerald",
@@ -51,7 +41,7 @@
   },
   {
     "id": "spela",
-    "order": 6,
+    "order": 5,
     "title": "Spela",
     "type": "Desktop / TUI / CLI",
     "typeColor": "accent",
@@ -61,7 +51,7 @@
   },
   {
     "id": "utforskarn",
-    "order": 7,
+    "order": 6,
     "title": "Utforskarn",
     "type": "Desktop / Web",
     "typeColor": "accent",
@@ -71,7 +61,7 @@
   },
   {
     "id": "signalspanarn",
-    "order": 8,
+    "order": 7,
     "title": "Signalspanarn",
     "type": "CLI / TUI",
     "typeColor": "accent",
@@ -81,7 +71,7 @@
   },
   {
     "id": "tuta",
-    "order": 9,
+    "order": 8,
     "title": "Tuta",
     "type": "CLI",
     "typeColor": "teal",
