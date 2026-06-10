@@ -12,7 +12,7 @@ interface Props {
 
 const { entries } = Astro.props;
 
-const fills = ["url(#chart-halftone)", "currentColor", "url(#chart-hatch-vert)", "currentColor", "url(#chart-hatch-diag)"];
+const fills = ["url(#halftone)", "currentColor", "url(#hatch-vert)", "currentColor", "url(#hatch-diag)"];
 const chartPadX = 16;
 const chartWidth = 488;
 const baseY = 248;
@@ -38,24 +38,11 @@ const headroom = 56;
 >
   <svg
     class="career-chart-svg"
-    viewBox={`0 -${headroom} 520 ${baseY + headroom + 24}`}
+    viewBox={`0 -${headroom} 520 ${baseY + headroom + 4}`}
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
   >
-    <defs>
-      <pattern id="chart-hatch-diag" patternUnits="userSpaceOnUse" width="6" height="6">
-        <path d="M-1,1 l2,-2 M0,6 l6,-6 M5,7 l2,-2" stroke="currentColor" stroke-width="0.6" fill="none" />
-      </pattern>
-      <pattern id="chart-hatch-vert" patternUnits="userSpaceOnUse" width="4" height="8">
-        <line x1="2" y1="0" x2="2" y2="8" stroke="currentColor" stroke-width="0.75" />
-      </pattern>
-      <pattern id="chart-halftone" patternUnits="userSpaceOnUse" width="6" height="6">
-        <circle cx="3" cy="3" r="0.75" fill="currentColor" />
-      </pattern>
-    </defs>
-
     <line x1={chartPadX} y1={baseY} x2={chartRight} y2={baseY} stroke="currentColor" stroke-width="1.5" />
-    <line x1={chartPadX} y1={baseY + 6} x2={chartRight} y2={baseY + 6} stroke="currentColor" stroke-width="0.5" stroke-dasharray="4 4" />
 
     {
       entries.map((entry, i) => {
@@ -71,15 +58,17 @@ const headroom = 56;
         const rank = ranks[i];
         const fill = fills[i % fills.length];
         return (
-          <g>
-            <rect x={x} y={top} width={barW} height={h} fill={fill} />
-            <polygon
-              points={`${x},${top} ${cx},${top - peakH} ${x + barW},${top}`}
-              fill={fill}
-            />
-            <line x1={x} y1={top} x2={x + barW} y2={top} stroke="var(--ef-white)" stroke-width="0.75" opacity="0.25" />
+          <g class="chart-col" style={`--col-i: ${i}`}>
+            <g class="chart-col-bar">
+              <rect x={x} y={top} width={barW} height={h} fill={fill} />
+              <polygon
+                points={`${x},${top} ${cx},${top - peakH} ${x + barW},${top}`}
+                fill={fill}
+              />
+              <line x1={x} y1={top} x2={x + barW} y2={top} stroke="var(--ef-gray)" stroke-width="0.75" />
+            </g>
 
-            <g transform={`translate(${cx}, ${top - peakH})`}>
+            <g class="chart-col-cap" transform={`translate(${cx}, ${top - peakH})`}>
               <line
                 x1={-capW / 2}
                 y1={capY}
@@ -137,7 +126,6 @@ const headroom = 56;
       })
     }
 
-    <rect x={chartPadX} y={baseY + 14} width={chartWidth} height="8" fill="currentColor" opacity="0.08" />
   </svg>
 
   <figcaption class="career-chart-labels">

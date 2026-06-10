@@ -10,14 +10,14 @@ interface Props {
 
 const { index, title, type, description, tags, url } = Astro.props;
 const number = String(index).padStart(2, "0");
+
+const Tag = url ? "a" : "div";
+const tagProps = url
+  ? { href: url, target: "_blank", rel: "noopener noreferrer" }
+  : {};
 ---
 
-<a
-  href={url}
-  target="_blank"
-  rel="noopener noreferrer"
-  class="code-row group"
->
+<Tag class="code-row group" {...tagProps}>
   <div class="code-marker">
     <div class="code-number">{number}</div>
     <svg width="12" height="16" class="text-foreground" aria-hidden="true">
@@ -40,4 +40,4 @@ const number = String(index).padStart(2, "0");
       ))}
     </div>
   </div>
-</a>
+</Tag>

@@ -3,7 +3,7 @@ import CodeCard from "./CodeCard.astro";
 import SectionShell from "./SectionShell.astro";
 
 interface Props {
-  projects: Array<{
+  entries: Array<{
     id: string;
     title: string;
     type: string;
@@ -13,7 +13,7 @@ interface Props {
   }>;
 }
 
-const { projects } = Astro.props;
+const { entries } = Astro.props;
 ---
 
 <SectionShell
@@ -23,15 +23,15 @@ const { projects } = Astro.props;
   subtitle="Currently deep in agentic engineering."
   showConnector
 >
-  <div class="code-list border-t border-black">
-    {projects.map((project, i) => (
+  <div class="code-list border-t border-foreground">
+    {entries.map((entry, i) => (
       <CodeCard
         index={i + 1}
-        title={project.title}
-        type={project.type}
-        description={project.description}
-        tags={project.tags}
-        url={project.url}
+        title={entry.title}
+        type={entry.type}
+        description={entry.description}
+        tags={entry.tags}
+        url={entry.url}
       />
     ))}
   </div>

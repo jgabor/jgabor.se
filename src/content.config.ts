@@ -2,8 +2,8 @@ import { defineCollection } from "astro:content";
 import { file } from "astro/loaders";
 import { z } from "astro/zod";
 
-const projects = defineCollection({
-  loader: file("src/data/projects.json"),
+const code = defineCollection({
+  loader: file("src/data/code.json"),
   schema: z.object({
     id: z.string(),
     order: z.number(),
@@ -16,8 +16,8 @@ const projects = defineCollection({
   }),
 });
 
-const experiences = defineCollection({
-  loader: file("src/data/experiences.json"),
+const career = defineCollection({
+  loader: file("src/data/career.json"),
   schema: z.object({
     id: z.string(),
     order: z.number(),
@@ -36,4 +36,4 @@ const experiences = defineCollection({
   }),
 });
 
-export const collections = { projects, experiences };
+export const collections = { code, career };

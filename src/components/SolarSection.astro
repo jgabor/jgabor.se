@@ -15,15 +15,18 @@
       </filter>
     </defs>
     <path
-      d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58 L1440,124 L0,124 Z"
+      id="rift-fill-path"
+      d="M0,68 C60,72 95,58 155,63 C218,68 268,52 338,61 C405,70 462,48 528,58 C598,69 655,44 722,56 C788,67 848,50 918,62 C985,73 1048,46 1118,59 C1185,71 1255,53 1320,64 C1385,74 1418,58 1440,62 L1440,124 L0,124 Z"
       class="solar-rift-fill"
     />
     <path
-      d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58"
+      id="rift-glow-path"
+      d="M0,68 C60,72 95,58 155,63 C218,68 268,52 338,61 C405,70 462,48 528,58 C598,69 655,44 722,56 C788,67 848,50 918,62 C985,73 1048,46 1118,59 C1185,71 1255,53 1320,64 C1385,74 1418,58 1440,62"
       class="solar-rift-edge-glow"
     />
     <path
-      d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58"
+      id="rift-edge-path"
+      d="M0,68 C60,72 95,58 155,63 C218,68 268,52 338,61 C405,70 462,48 528,58 C598,69 655,44 722,56 C788,67 848,50 918,62 C985,73 1048,46 1118,59 C1185,71 1255,53 1320,64 C1385,74 1418,58 1440,62"
       class="solar-rift-edge"
     />
   </svg>
@@ -41,7 +44,7 @@
 
   <div class="relative z-10 flex h-full min-h-[inherit] flex-col items-center justify-end px-6 pb-32 md:pb-48">
     <div class="footer-reveal text-center">
-      <p class="solar-headline font-mono text-3xl uppercase tracking-[0.12em] text-white md:text-5xl">
+      <p class="solar-headline font-mono uppercase tracking-[0.12em] text-white">
         <span class="whitespace-nowrap">Let's explore</span>
         <span class="whitespace-nowrap">something together</span>
       </p>
@@ -73,7 +76,7 @@
   }
 
   .solar-rift-fill {
-    fill: #000;
+    fill: var(--ef-cosmos);
   }
 
   .solar-rift-edge-glow {
@@ -97,7 +100,7 @@
     overflow: hidden;
     min-height: clamp(500px, 70vh, 900px);
     margin-top: -4px;
-    background: #000;
+    background: var(--ef-cosmos);
   }
 
   .solar-headline {
@@ -105,29 +108,10 @@
     flex-direction: column;
     align-items: center;
     gap: 0.15em;
+    font-size: clamp(1.25rem, 4.5vw, 3rem);
     line-height: 1.1;
   }
 
-  .footer-reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition:
-      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .footer-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .footer-reveal {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
 </style>
 
 <script>
@@ -449,11 +433,46 @@
     window.addEventListener("scroll", updateScroll, { passive: true });
   }
 
+  const DECODE_GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/<>[]#=";
+
+  function decodeHeadline(root: Element) {
+    const spans = root.querySelectorAll<HTMLElement>(".solar-headline span");
+    spans.forEach((span, lineIndex) => {
+      const original = span.textContent ?? "";
+      const duration = 2800;
+
+      window.setTimeout(() => {
+        const start = performance.now();
+        const tick = (now: number) => {
+          const progress = Math.min(1, (now - start) / duration);
+          const locked = Math.floor(progress * original.length);
+          let out = "";
+          for (let i = 0; i < original.length; i++) {
+            const ch = original[i];
+            out =
+              out +
+              (i < locked || ch === " " || ch === "'"
+                ? ch
+                : DECODE_GLYPHS[Math.floor(Math.random() * DECODE_GLYPHS.length)]);
+          }
+          span.textContent = out;
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            span.textContent = original;
+          }
+        };
+        requestAnimationFrame(tick);
+      }, lineIndex * 700);
+    });
+  }
+
   const footerObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
+          if (!prefersReducedMotion) decodeHeadline(entry.target);
           footerObserver.unobserve(entry.target);
         }
       });
@@ -465,4 +484,122 @@
     (el as HTMLElement).style.transitionDelay = `${i * 200}ms`;
     footerObserver.observe(el);
   });
+
+  const riftFill = document.getElementById("rift-fill-path");
+  const riftGlow = document.getElementById("rift-glow-path");
+  const riftEdge = document.getElementById("rift-edge-path");
+  const riftRoot = document.querySelector(".solar-rift");
+
+  if (riftFill && riftGlow && riftEdge && riftRoot && !prefersReducedMotion) {
+    const RIFT_W = 1440;
+    const RIFT_H = 124;
+    const RIFT_BASE = 64;
+    const STEPS = 56;
+    let riftAnimId = 0;
+    let riftVisible = false;
+
+    function riftSeeds(count: number, seed: number): number[] {
+      const out: number[] = [];
+      let s = seed;
+      for (let i = 0; i < count; i++) {
+        s = (s * 16807) % 2147483647;
+        out.push(s / 2147483647);
+      }
+      return out;
+    }
+
+    const riftCoarse = riftSeeds(24, 48271);
+    const riftFine = riftSeeds(48, 91357);
+
+    function riftLerp(seeds: number[], nx: number): number {
+      const idx = nx * (seeds.length - 1);
+      const i = Math.floor(idx);
+      const f = idx - i;
+      const a = seeds[i] ?? 0;
+      const b = seeds[i + 1] ?? a;
+      return a + (b - a) * f;
+    }
+
+    function riftWaveY(x: number, t: number): number {
+      const nx = x / RIFT_W;
+      const tt = t * 0.00048;
+      const pulse = 0.55 + 0.45 * Math.sin(tt * 1.7 + riftLerp(riftCoarse, nx) * 1.2);
+
+      const coarse = (riftLerp(riftCoarse, nx) - 0.5) * 2;
+      const fine = (riftLerp(riftFine, nx * 2.7 + 0.13) - 0.5) * 2;
+      const amp = 0.72 + 0.28 * riftLerp(riftCoarse, nx * 1.9 + 0.31);
+
+      let y = RIFT_BASE;
+      y += coarse * 9 * amp;
+      y += fine * 4.5;
+      y += Math.sin(nx * Math.PI * 3.71 + tt * 1.13) * 10 * pulse * amp;
+      y += Math.sin(nx * Math.PI * 8.37 + tt * 2.67) * 5.5 * (0.85 + 0.15 * fine);
+      y += Math.sin(nx * Math.PI * 17.93 + tt * 5.41) * 2.8;
+      y += Math.sin(nx * Math.PI * 23.17 + tt * 7.83) * 1.6;
+      y += Math.sin(nx * Math.PI * 11.29 + tt * 4.07) * 3.2 * pulse;
+
+      const spark =
+        Math.sin(nx * 37.7 + tt * 3.9) * Math.sin(nx * 53.3 - tt * 2.1 + riftLerp(riftFine, nx) * 2);
+      if (spark > 0.58) {
+        y -= (spark - 0.58) * (38 + 22 * riftLerp(riftFine, nx * 3.1));
+      }
+
+      return y;
+    }
+
+    function riftSmoothPath(points: Array<{ x: number; y: number }>): string {
+      if (points.length < 2) return "";
+      const tension = 6.25;
+      let d = `M${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
+
+      for (let i = 0; i < points.length - 1; i++) {
+        const p0 = points[i - 1] ?? points[i];
+        const p1 = points[i];
+        const p2 = points[i + 1];
+        const p3 = points[i + 2] ?? p2;
+
+        const cp1x = p1.x + (p2.x - p0.x) / tension;
+        const cp1y = p1.y + (p2.y - p0.y) / tension;
+        const cp2x = p2.x - (p3.x - p1.x) / tension;
+        const cp2y = p2.y - (p3.y - p1.y) / tension;
+
+        d += ` C${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+      }
+
+      return d;
+    }
+
+    function riftStrokePath(t: number): string {
+      const dx = RIFT_W / STEPS;
+      const points: Array<{ x: number; y: number }> = [];
+      for (let i = 0; i <= STEPS; i++) {
+        points.push({ x: i * dx, y: riftWaveY(i * dx, t) });
+      }
+      return riftSmoothPath(points);
+    }
+
+    function drawRift(t: number) {
+      if (!riftVisible) return;
+      const stroke = riftStrokePath(t);
+      riftGlow.setAttribute("d", stroke);
+      riftEdge.setAttribute("d", stroke);
+      riftFill.setAttribute("d", `${stroke} L${RIFT_W},${RIFT_H} L0,${RIFT_H} Z`);
+      riftAnimId = requestAnimationFrame(drawRift);
+    }
+
+    const riftObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !riftVisible) {
+          riftVisible = true;
+          riftAnimId = requestAnimationFrame(drawRift);
+        } else if (!entry.isIntersecting && riftVisible) {
+          riftVisible = false;
+          cancelAnimationFrame(riftAnimId);
+        }
+      },
+      { threshold: 0 },
+    );
+
+    riftObserver.observe(riftRoot);
+  }
 </script>

@@ -27,6 +27,7 @@ const {
     <Font cssVariable="--font-source" preload />
     <script is:inline>
       (function() {
+        document.documentElement.classList.add('js');
         const theme = localStorage.getItem('theme');
         if (theme === 'light') {
           document.documentElement.classList.remove('dark');

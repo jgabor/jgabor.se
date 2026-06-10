@@ -5,15 +5,29 @@ interface Props {
   title: string;
   subtitle?: string;
   showConnector?: boolean;
+  connectedTop?: boolean;
 }
 
-const { id, eyebrow, title, subtitle, showConnector = false } = Astro.props;
+const { id, eyebrow, title, subtitle, showConnector = false, connectedTop = false } = Astro.props;
 ---
 
-<section class="relative py-24 md:py-36" id={id}>
+<section
+  class:list={[
+    "relative",
+    connectedTop ? "pt-0" : "pt-24 md:pt-36",
+    showConnector ? "pb-0" : "pb-24 md:pb-36",
+  ]}
+  id={id}
+>
   <div class="relative mx-auto max-w-[1100px] px-6 md:px-8">
     <div class="relative mb-12 md:mb-16">
-      <span class="eyebrow">{eyebrow}</span>
+      <div class="eyebrow-row">
+        <span class="eyebrow-terminal" aria-hidden="true"></span>
+        <hr class="eyebrow-rule eyebrow-rule-lead" aria-hidden="true" />
+        <span class="eyebrow">{eyebrow}</span>
+        <hr class="eyebrow-rule eyebrow-rule-tail" aria-hidden="true" />
+        <span class="eyebrow-terminal" aria-hidden="true"></span>
+      </div>
       <h2 class="mt-4 font-display text-3xl uppercase tracking-wide text-foreground md:text-5xl">{title}</h2>
       {subtitle && (
         <p class="mt-3 max-w-lg text-lg text-muted">{subtitle}</p>
@@ -22,12 +36,16 @@ const { id, eyebrow, title, subtitle, showConnector = false } = Astro.props;
     <div class="relative">
       <slot />
     </div>
-    {showConnector && (
-      <div class="schematic-divider mt-16" aria-hidden="true">
-        <hr class="dotted-rule flex-1" />
-        <svg width="12" height="12" aria-hidden="true"><use href="#glyph-spine" /></svg>
-        <hr class="dotted-rule flex-1" />
-      </div>
-    )}
   </div>
 </section>
+{showConnector && (
+  <div class="section-connector" aria-hidden="true">
+    <div class="mx-auto max-w-[1100px] px-6 md:px-8">
+      <div class="schematic-divider">
+        <hr class="dotted-rule flex-1" />
+        <svg width="12" height="12" aria-hidden="true"><use href="#glyph-node" /></svg>
+        <hr class="dotted-rule flex-1" />
+      </div>
+    </div>
+  </div>
+)}

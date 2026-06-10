@@ -4,20 +4,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" style="position:absolute;overflow:hidden">
   <defs>
     <pattern id="hatch-diag" patternUnits="userSpaceOnUse" width="8" height="8">
-      <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="#000" stroke-width="0.75" fill="none" />
+      <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="var(--ef-black)" stroke-width="0.75" fill="none" />
     </pattern>
-    <pattern id="hatch-vert" patternUnits="userSpaceOnUse" width="4" height="8">
-      <line x1="2" y1="0" x2="2" y2="8" stroke="#000" stroke-width="0.75" />
+    <pattern id="hatch-vert" patternUnits="userSpaceOnUse" width="5" height="8">
+      <line x1="2.5" y1="0" x2="2.5" y2="8" stroke="var(--ef-black)" stroke-width="0.75" />
     </pattern>
-    <pattern id="halftone" patternUnits="userSpaceOnUse" width="6" height="6">
-      <circle cx="3" cy="3" r="0.75" fill="#000" />
+    <pattern id="hatch-horiz" patternUnits="userSpaceOnUse" width="8" height="6">
+      <line x1="0" y1="3" x2="8" y2="3" stroke="var(--ef-black)" stroke-width="0.75" />
+    </pattern>
+    <pattern id="halftone" patternUnits="userSpaceOnUse" width="5" height="5">
+      <circle cx="2.5" cy="2.5" r="0.6" fill="var(--ef-black)" />
+    </pattern>
+    <pattern id="schematic-grid" patternUnits="userSpaceOnUse" width="10" height="10">
+      <path d="M10 0 V10 H0" fill="none" stroke="var(--ef-black)" stroke-width="0.5" />
     </pattern>
     <symbol id="glyph-plus" viewBox="0 0 12 12">
       <rect x="5" y="0" width="2" height="12" fill="currentColor" />
       <rect x="0" y="5" width="12" height="2" fill="currentColor" />
-    </symbol>
-    <symbol id="glyph-triangle" viewBox="0 0 12 12">
-      <path d="M6 1 L11 11 L1 11 Z" fill="currentColor" />
     </symbol>
     <symbol id="glyph-pylon" viewBox="0 0 12 16">
       <rect x="2.5" y="7" width="7" height="8" fill="currentColor" />
@@ -28,6 +31,10 @@
       <polygon points="2,10 4,10 3,7" fill="currentColor" />
       <polygon points="5,10 7,10 6,5.5" fill="currentColor" />
       <polygon points="8,10 10,10 9,3" fill="currentColor" />
+    </symbol>
+    <symbol id="glyph-node" viewBox="0 0 12 12">
+      <rect x="1.5" y="1.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1" />
+      <rect x="4.5" y="4.5" width="3" height="3" fill="currentColor" />
     </symbol>
     <symbol id="glyph-fork" viewBox="0 0 12 12">
       <rect x="1" y="5.5" width="5" height="5" fill="none" stroke="currentColor" stroke-width="1" />

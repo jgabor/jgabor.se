@@ -14,6 +14,7 @@ const channels = [
   eyebrow="Contact"
   title="Get in touch"
   subtitle="Have a product challenge, role, or collaboration in mind?"
+  connectedTop
 >
   <div class="contact-layout">
     <div class="contact-main fade-in">
@@ -56,6 +57,13 @@ const channels = [
           SEND MESSAGE
         </button>
 
+        <div
+          id="contact-status"
+          class="sr-only"
+          aria-live="polite"
+          aria-atomic="true"
+        ></div>
+
         <p class="contact-form-note">
           <span class="status-dot" aria-hidden="true"></span>
           Usually replies within a few days
@@ -87,6 +95,11 @@ const channels = [
 <script>
   const contactForm = document.getElementById("contact-form") as HTMLFormElement | null;
   const submitBtn = document.getElementById("contact-submit") as HTMLButtonElement | null;
+  const statusEl = document.getElementById("contact-status");
+
+  function setStatus(message: string) {
+    if (statusEl) statusEl.textContent = message;
+  }
 
   contactForm?.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -94,6 +107,7 @@ const channels = [
 
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending...";
+    setStatus("Sending message…");
 
     const emailInput = document.getElementById("contact-email") as HTMLInputElement;
     const messageInput = document.getElementById("contact-message") as HTMLTextAreaElement;
@@ -109,17 +123,21 @@ const channels = [
       .then((res) => {
         if (!res.ok) throw new Error("Failed");
         submitBtn.textContent = "Sent!";
+        setStatus("Message sent.");
         contactForm.reset();
         setTimeout(() => {
           submitBtn.textContent = "SEND MESSAGE";
           submitBtn.disabled = false;
+          setStatus("");
         }, 3000);
       })
       .catch(() => {
         submitBtn.textContent = "Failed — try again";
+        setStatus("Message failed. Please try again.");
         setTimeout(() => {
           submitBtn.textContent = "SEND MESSAGE";
           submitBtn.disabled = false;
+          setStatus("");
         }, 3000);
       });
   });

@@ -3,8 +3,8 @@ import { Image } from 'astro:assets';
 import heroPhoto from '../assets/jgabor.jpg';
 import { getCollection } from "astro:content";
 
-const experienceEntries = await getCollection("experiences");
-const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
+const careerEntries = await getCollection("career");
+const career = careerEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
 ---
 
 <html lang="en">
@@ -736,7 +736,7 @@ const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order 
 				<section class="section">
 					<h2 class="section-title">Experience</h2>
 
-					{experiences.map((exp) => (
+					{career.map((exp) => (
 						<div class="company-block">
 							<div class="company-header">
 								<span class="company-name">{exp.company}</span>

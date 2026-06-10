@@ -8,11 +8,11 @@ import ContactSection from "../components/ContactSection.astro";
 import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 
-const projectEntries = await getCollection("projects");
-const experienceEntries = await getCollection("experiences");
+const codeEntries = await getCollection("code");
+const careerEntries = await getCollection("career");
 
-const projects = projectEntries.map((p) => p.data).sort((a, b) => a.order - b.order);
-const careerEntries = experienceEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
+const code = codeEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
+const career = careerEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
 ---
 
 <BaseLayout title="Jonathan Gabor">
@@ -20,9 +20,9 @@ const careerEntries = experienceEntries.map((e) => e.data).sort((a, b) => a.orde
   <main id="main-content">
     <Hero />
 
-    <CodeSection projects={projects} />
+    <CodeSection entries={code} />
 
-    <CareerSection entries={careerEntries} />
+    <CareerSection entries={career} />
 
     <ContactSection />
   </main>
