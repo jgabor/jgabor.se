@@ -7,7 +7,7 @@ import SectionShell from "./SectionShell.astro";
   eyebrow="Contact"
   title="Get in touch"
 >
-  <form class="fade-in flex max-w-lg flex-col gap-5" id="contact-form">
+  <form class="contact-form fade-in flex max-w-lg flex-col gap-5" id="contact-form">
     <div>
       <label
         for="contact-email"
@@ -21,7 +21,7 @@ import SectionShell from "./SectionShell.astro";
         name="from"
         required
         placeholder="you@company.com"
-        class="field-input"
+        class="contact-field"
       />
     </div>
     <div>
@@ -37,10 +37,10 @@ import SectionShell from "./SectionShell.astro";
         rows="5"
         required
         placeholder="What's on your mind?"
-        class="field-input min-h-[140px] resize-none"
+        class="contact-field min-h-[140px] resize-none"
       ></textarea>
     </div>
-    <button type="submit" id="submit-btn" class="btn-primary self-start">
+    <button type="submit" id="contact-submit" class="contact-submit self-start">
       SEND MESSAGE
     </button>
   </form>
@@ -48,7 +48,7 @@ import SectionShell from "./SectionShell.astro";
 
 <script>
   const contactForm = document.getElementById("contact-form") as HTMLFormElement | null;
-  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement | null;
+  const submitBtn = document.getElementById("contact-submit") as HTMLButtonElement | null;
 
   contactForm?.addEventListener("submit", (e) => {
     e.preventDefault();

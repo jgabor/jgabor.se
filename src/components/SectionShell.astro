@@ -23,9 +23,9 @@ const { id, eyebrow, title, subtitle, showConnector = false } = Astro.props;
       <slot />
     </div>
     {showConnector && (
-      <div class="chevron-divider mt-16" aria-hidden="true">
+      <div class="schematic-divider mt-16" aria-hidden="true">
         <hr class="dotted-rule flex-1" />
-        <svg width="12" height="12" aria-hidden="true"><use href="#glyph-chevron" /></svg>
+        <svg width="12" height="12" aria-hidden="true"><use href="#glyph-spine" /></svg>
         <hr class="dotted-rule flex-1" />
       </div>
     )}

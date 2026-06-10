@@ -209,13 +209,13 @@ const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order 
 				border: 1px solid var(--color-ink);
 			}
 
-			.strength-card {
+			.career-strength {
 				background: var(--color-paper);
 				padding: calc(var(--space-unit) * 2.5);
 				border-right: 1px solid var(--color-ink);
 			}
 
-			.strength-card:last-child {
+			.career-strength:last-child {
 				border-right: none;
 			}
 
@@ -469,13 +469,13 @@ const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order 
 					page-break-inside: avoid;
 				}
 
-				body .strength-card {
+				body .career-strength {
 					padding: 3mm;
 					border-right: 1px solid var(--color-ink);
 					border-bottom: none;
 				}
 
-				body .strength-card:last-child {
+				body .career-strength:last-child {
 					border-right: none;
 				}
 
@@ -616,12 +616,12 @@ const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order 
 					grid-template-columns: 1fr;
 				}
 
-				.strength-card {
+				.career-strength {
 					border-right: none;
 					border-bottom: 1px solid var(--color-ink);
 				}
 
-				.strength-card:last-child {
+				.career-strength:last-child {
 					border-bottom: none;
 				}
 
@@ -678,19 +678,19 @@ const experiences = experienceEntries.map((e) => e.data).sort((a, b) => a.order 
 				<section class="section strengths-section">
 					<h2 class="section-title">Strengths</h2>
 					<div class="strengths-grid">
-						<div class="strength-card">
+						<div class="career-strength">
 							<h3 class="strength-title">Systems Thinking</h3>
 							<p class="strength-desc">
 								Connects immediate decisions to long-term outcomes. Sees several steps ahead without losing sight of today.
 							</p>
 						</div>
-						<div class="strength-card">
+						<div class="career-strength">
 							<h3 class="strength-title">Team Enabler</h3>
 							<p class="strength-desc">
 								Leads by enabling others---aligning teams toward a shared north star without needing formal authority.
 							</p>
 						</div>
-						<div class="strength-card">
+						<div class="career-strength">
 							<h3 class="strength-title">Quick Study</h3>
 							<p class="strength-desc">Active listener with high-bandwidth information intake. New concepts stick quickly.</p>
 						</div>

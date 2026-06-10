@@ -29,7 +29,7 @@ A hybrid of Soviet Constructivism, Art Deco stepped geometry, and disciplined Me
 **Key Characteristics:**
 
 - **Monochrome only** — three values, no gradients, no shadows, no glow.
-- **Primitive geometry** — chevrons, plus signs, squares, circles, triangles, stepped bars.
+- **Primitive geometry** — pylons, spines, forks, plus signs, squares, triangles, stepped bars.
 - **Schematic notation** — dotted lines, section numerals, hatch fills as connective tissue.
 - **Type as architecture** — oversized condensed display caps paired with humanist body text.
 
@@ -52,12 +52,13 @@ Exactly three values. No exceptions.
 
 Six primitives only:
 
-1. **Chevron** — directional markers, dividers
-2. **Plus sign** — node joints, schematic notation
-3. **Square** — frames, number badges, inputs
-4. **Circle** — portrait frames, circle-plus markers
-5. **Triangle** — rating indicators, directional accents
-6. **Stepped bar** — experience timeline, rising-bar motif
+1. **Pylon** — miniature stepped-bar peak on code rows and footer
+2. **Spine** — ascending triangle rating row on section dividers
+3. **Fork** — offset reference square on outbound links
+4. **Plus sign** — node joints, schematic notation
+5. **Square** — frames, number badges, inputs
+6. **Triangle** — rating indicators, directional accents
+7. **Stepped bar** — career timeline, rising-bar motif
 
 All corners are sharp (`0px` radius). No rounded pills, blobs, or organic curves.
 
@@ -101,11 +102,11 @@ Two families plus mono labels:
 
 Single-page layout with scroll-anchored sections:
 
-| #   | ID            | Eyebrow    | Heading                     |
-| --- | ------------- | ---------- | --------------------------- |
-| 01  | `#projects`   | PROJECTS   | Things I've built           |
-| 02  | `#experience` | EXPERIENCE | 15+ years building products |
-| 03  | `#contact`    | CONTACT    | Get in touch                |
+| #   | ID         | Eyebrow | Heading                     |
+| --- | ---------- | ------- | --------------------------- |
+| 01  | `#code`    | CODE    | Things I've built           |
+| 02  | `#career`  | CAREER  | 15+ years building products |
+| 03  | `#contact` | CONTACT | Get in touch                |
 
 Section numbers render as huge geometric type on the left margin via `SectionShell.astro`.
 
@@ -115,7 +116,7 @@ Section numbers render as huge geometric type on the left margin via `SectionShe
 
 - Fixed top bar, `1px` black bottom border, white background.
 - Logo mark: `JG` in a square frame.
-- Links: Projects · Experience · Contact (mono caps).
+- Links: Code · Career · Contact (mono caps).
 - No theme toggle — monochrome is the only mode.
 
 ### Hero
@@ -123,15 +124,15 @@ Section numbers render as huge geometric type on the left margin via `SectionShe
 - Split layout: name dominates left, portrait right.
 - Portrait: `4:5` aspect, square frame, `grayscale(100%) contrast(1.35)`.
 - Location tag with status dot, mono caps.
-- Social links as underlined text with chevron primitive.
+- Social links as underlined text with fork reference primitive.
 
-### Projects
+### Code
 
-- Technical index rows with numbered square badge + circle-plus marker.
+- Technical index rows with numbered square badge + pylon marker.
 - Type tag: uniform gray bordered treatment (no per-category color).
 - Tech stack as mono uppercase chips.
 
-### Experience
+### Career
 
 - Stepped-bar timeline (desktop) with star-rating triangles.
 - Strengths in 3-column bordered grid.
@@ -145,7 +146,7 @@ Section numbers render as huge geometric type on the left margin via `SectionShe
 
 ### Footer
 
-- Minimal schematic divider with chevron + copyright.
+- Minimal schematic divider with spine marker + copyright.
 
 ## 8. Do's and Don'ts
 

@@ -1,5 +1,5 @@
 ---
-import ProjectCard from "./ProjectCard.astro";
+import CodeCard from "./CodeCard.astro";
 import SectionShell from "./SectionShell.astro";
 
 interface Props {
@@ -17,15 +17,15 @@ const { projects } = Astro.props;
 ---
 
 <SectionShell
-  id="projects"
-  eyebrow="Projects"
+  id="code"
+  eyebrow="Code"
   title="Things I've built"
   subtitle="Currently deep in agentic engineering."
   showConnector
 >
-  <div class="border-t border-black">
+  <div class="code-list border-t border-black">
     {projects.map((project, i) => (
-      <ProjectCard
+      <CodeCard
         index={i + 1}
         title={project.title}
         type={project.type}
