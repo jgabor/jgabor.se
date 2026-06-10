@@ -1,13 +1,13 @@
 ---
 ---
 
+<div class="solar-stage">
 <div class="solar-rift" aria-hidden="true">
   <svg
-    class="block w-full"
-    viewBox="0 0 1440 120"
+    class="solar-rift-svg"
+    viewBox="0 0 1440 124"
     preserveAspectRatio="none"
     xmlns="http://www.w3.org/2000/svg"
-    style="height: clamp(60px, 8vw, 120px);"
   >
     <defs>
       <filter id="rift-glow" x="-20%" y="-50%" width="140%" height="200%">
@@ -15,23 +15,16 @@
       </filter>
     </defs>
     <path
-      d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58 L1440,120 L0,120 Z"
+      d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58 L1440,124 L0,124 Z"
       class="solar-rift-fill"
     />
     <path
       d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58"
-      fill="none"
-      stroke="hsl(187 72% 55%)"
-      stroke-width="2"
-      filter="url(#rift-glow)"
-      opacity="0.6"
+      class="solar-rift-edge-glow"
     />
     <path
       d="M0,70 C80,65 120,80 200,60 C280,40 320,75 400,55 C480,35 520,70 600,50 C680,30 720,68 800,48 C880,28 920,65 1000,52 C1080,38 1120,72 1200,55 C1280,38 1360,65 1440,58"
-      fill="none"
-      stroke="hsl(187 72% 55%)"
-      stroke-width="0.5"
-      opacity="0.8"
+      class="solar-rift-edge"
     />
   </svg>
 </div>
@@ -55,23 +48,55 @@
     </div>
   </div>
 </div>
+</div>
 
 <style>
+  .solar-stage {
+    display: flex;
+    flex-direction: column;
+    line-height: 0;
+  }
+
   .solar-rift {
     position: relative;
-    z-index: 10;
-    margin-bottom: -1px;
-    background: #000;
+    z-index: 2;
+    overflow: hidden;
+    background: var(--ef-white);
+  }
+
+  .solar-rift-svg {
+    display: block;
+    width: 100%;
+    height: clamp(60px, 8vw, 120px);
+    margin-bottom: -4px;
+    color: var(--ef-gray);
   }
 
   .solar-rift-fill {
     fill: #000;
   }
 
+  .solar-rift-edge-glow {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    filter: url(#rift-glow);
+    opacity: 0.35;
+  }
+
+  .solar-rift-edge {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 0.75;
+    opacity: 0.85;
+  }
+
   .solar-section {
     position: relative;
+    z-index: 1;
     overflow: hidden;
     min-height: clamp(500px, 70vh, 900px);
+    margin-top: -4px;
     background: #000;
   }
 
