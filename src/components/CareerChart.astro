@@ -12,7 +12,9 @@ interface Props {
 
 const { entries } = Astro.props;
 
-const fills = ["url(#halftone)", "currentColor", "url(#hatch-vert)", "currentColor", "url(#hatch-diag)"];
+const fills = ["url(#halftone)", "__career-grid__", "url(#hatch-vert)", "url(#hatch-horiz)", "url(#hatch-diag)"];
+const gridCell = 10;
+const gridFillIndex = 1;
 const chartPadX = 16;
 const chartWidth = 488;
 const baseY = 248;
@@ -29,6 +31,14 @@ const colWidth = chartWidth / entries.length;
 const barW = Math.min(76, Math.floor(colWidth * 0.68));
 const chartRight = chartPadX + chartWidth;
 const headroom = 56;
+
+const gridBarIndex = gridFillIndex;
+const gridBarHeight = barHeights[gridBarIndex] ?? minBarH;
+const gridCx = chartPadX + colWidth * gridBarIndex + colWidth / 2;
+const gridX = gridCx - barW / 2;
+const gridTop = baseY - gridBarHeight;
+const gridInset = (barW % gridCell) / 2;
+const gridOriginY = gridTop - peakH;
 ---
 
 <figure
@@ -42,6 +52,18 @@ const headroom = 56;
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden="true"
   >
+    <defs>
+      <pattern
+        id="career-grid"
+        patternUnits="userSpaceOnUse"
+        width={gridCell}
+        height={gridCell}
+        patternTransform={`translate(${gridX + gridInset}, ${gridOriginY})`}
+      >
+        <line x1="0" y1="5" x2={gridCell} y2="5" stroke="var(--ef-black)" stroke-width="0.5" />
+        <line x1="5" y1="0" x2="5" y2={gridCell} stroke="var(--ef-black)" stroke-width="0.5" />
+      </pattern>
+    </defs>
     <line x1={chartPadX} y1={baseY} x2={chartRight} y2={baseY} stroke="currentColor" stroke-width="1.5" />
 
     {
@@ -56,16 +78,13 @@ const headroom = 56;
         const capY = -(badgeH + 10);
         const badgeY = -(badgeH + 2);
         const rank = ranks[i];
-        const fill = fills[i % fills.length];
+        const fillToken = fills[i % fills.length];
+        const barPath = `M${x},${top} L${cx},${top - peakH} L${x + barW},${top} L${x + barW},${baseY} L${x},${baseY} Z`;
+        const fill = fillToken === "__career-grid__" ? "url(#career-grid)" : fillToken;
         return (
           <g class="chart-col" style={`--col-i: ${i}`}>
             <g class="chart-col-bar">
-              <rect x={x} y={top} width={barW} height={h} fill={fill} />
-              <polygon
-                points={`${x},${top} ${cx},${top - peakH} ${x + barW},${top}`}
-                fill={fill}
-              />
-              <line x1={x} y1={top} x2={x + barW} y2={top} stroke="var(--ef-gray)" stroke-width="0.75" />
+              <path d={barPath} fill={fill} />
             </g>
 
             <g class="chart-col-cap" transform={`translate(${cx}, ${top - peakH})`}>
