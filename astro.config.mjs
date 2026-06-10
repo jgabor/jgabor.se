@@ -23,16 +23,17 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Inter",
-      cssVariable: "--font-inter",
-      weights: [400, 600, 700, 800, 900],
+      name: "Josefin Sans",
+      cssVariable: "--font-josefin",
+      weights: [400, 600, 700],
+      styles: ["normal"],
     },
     {
       provider: fontProviders.google(),
-      name: "Space Mono",
-      cssVariable: "--font-space-mono",
-      weights: [400, 700],
-      fallbacks: ["ui-monospace", "monospace"],
+      name: "Raleway",
+      cssVariable: "--font-raleway",
+      weights: [400, 500, 600],
+      styles: ["normal"],
     },
   ],
 });

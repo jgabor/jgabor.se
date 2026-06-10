@@ -17,17 +17,14 @@ const { projects } = Astro.props;
 ---
 
 <section class="relative py-24 md:py-36" id="projects">
-  <div aria-hidden="true" class="pointer-events-none absolute left-4 top-8 select-none font-mono text-[clamp(6rem,20vw,18rem)] font-bold leading-none opacity-[0.03] md:left-8">
-    01
-  </div>
   <div class="relative mx-auto mb-12 flex max-w-[1100px] flex-col px-6 md:mb-16 md:px-8">
     <div>
-      <p class="font-mono text-xs uppercase tracking-[0.2em] text-muted">Projects</p>
-      <h2 class="mt-3 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">Things I've built</h2>
+      <span class="eyebrow">Projects</span>
+      <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">Things I've built</h2>
       <p class="mt-3 max-w-md text-lg text-muted">Currently deep in agentic engineering.</p>
     </div>
   </div>
-  
+
   <div class="relative mx-auto max-w-[1100px] px-6 md:px-8">
     <div class="flex flex-col border-t border-overlay/12">
       {projects.map((project) => (
