@@ -1,24 +1,7 @@
 ---
-const year = new Date().getFullYear();
+import SolarSection from "./SolarSection.astro";
 ---
 
-<footer class="relative mt-24 border-t border-black md:mt-36" role="contentinfo">
-  <div class="mx-auto max-w-[1100px] px-6 py-12 md:px-8">
-    <div class="schematic-divider mb-8" aria-hidden="true">
-      <hr class="dotted-rule" />
-      <svg width="12" height="12"><use href="#glyph-spine" /></svg>
-      <hr class="dotted-rule" />
-    </div>
-
-    <div class="flex flex-col items-center gap-4 md:flex-row md:justify-between">
-      <div class="flex items-center gap-3" aria-hidden="true">
-        <svg width="12" height="16"><use href="#glyph-pylon" /></svg>
-        <svg width="8" height="8"><use href="#glyph-plus" /></svg>
-        <svg width="8" height="8"><use href="#glyph-triangle" /></svg>
-      </div>
-      <p class="font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted">
-        &copy; {year} Jonathan Gabor
-      </p>
-    </div>
-  </div>
+<footer class="relative mt-24 md:mt-36" role="contentinfo">
+  <SolarSection />
 </footer>
