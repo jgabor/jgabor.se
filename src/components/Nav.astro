@@ -12,11 +12,8 @@ const navLinks = [
 
     <div class="nav-links">
       <div class="nav-link-list">
-        {navLinks.map((link, i) => (
-          <a href={link.href} class="nav-link">
-            <span class="nav-link-index">{String(i + 1).padStart(2, "0")}</span>
-            {link.label}
-          </a>
+        {navLinks.map((link) => (
+          <a href={link.href} class="nav-link">{link.label}</a>
         ))}
       </div>
       <div class="nav-junction" aria-hidden="true">
@@ -28,6 +25,7 @@ const navLinks = [
         aria-label="Toggle theme"
         class="nav-theme-btn"
       >
+        <span class="nav-theme-marks" aria-hidden="true"></span>
         <svg id="theme-icon-sun" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square">
           <circle cx="12" cy="12" r="5" />
           <line x1="12" y1="1" x2="12" y2="3" />
@@ -52,6 +50,7 @@ const navLinks = [
         aria-label="Toggle theme"
         class="nav-theme-btn"
       >
+        <span class="nav-theme-marks" aria-hidden="true"></span>
         <svg id="theme-icon-sun-mobile" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square">
           <circle cx="12" cy="12" r="5" />
           <line x1="12" y1="1" x2="12" y2="3" />
@@ -84,11 +83,8 @@ const navLinks = [
 
   <div id="nav-mobile-panel" class="nav-mobile-panel" aria-hidden="true">
     <div class="nav-mobile-links">
-      {navLinks.map((link, i) => (
-        <a href={link.href} class="nav-mobile-link">
-          <span class="nav-mobile-index">{String(i + 1).padStart(2, "0")}</span>
-          {link.label}
-        </a>
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-mobile-link">{link.label}</a>
       ))}
     </div>
   </div>

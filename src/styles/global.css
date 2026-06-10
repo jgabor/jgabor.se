@@ -143,6 +143,7 @@ body {
 }
 
 .nav-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -160,18 +161,26 @@ body {
   border-left: 1px dotted var(--ef-gray);
 }
 
-.nav-link-index {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 1px solid var(--ef-black);
-  font-family: var(--font-display);
-  font-size: 0.625rem;
-  letter-spacing: 0.04em;
-  color: var(--ef-black);
-  background: var(--ef-white);
+.nav-link::before,
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ef-black);
+  z-index: 1;
+}
+
+.nav-link::before {
+  top: -1px;
+  width: 0.625rem;
+  height: 2px;
+}
+
+.nav-link::after {
+  bottom: -1px;
+  width: 1rem;
+  height: 2px;
 }
 
 .nav-link:hover,
@@ -194,6 +203,7 @@ body {
 }
 
 .nav-theme-btn {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,6 +215,29 @@ body {
   color: var(--ef-gray);
   cursor: pointer;
   transition: background-color 0.3s var(--motion-ease), background-image 0.3s var(--motion-ease), color 0.3s var(--motion-ease);
+}
+
+.nav-theme-marks {
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    linear-gradient(var(--ef-black), var(--ef-black)),
+    linear-gradient(var(--ef-black), var(--ef-black)),
+    linear-gradient(var(--ef-black), var(--ef-black)),
+    linear-gradient(var(--ef-black), var(--ef-black));
+  background-size:
+    0.625rem 2px,
+    1rem 2px,
+    2px 0.625rem,
+    2px 1rem;
+  background-position:
+    center 0,
+    center 100%,
+    0 center,
+    100% center;
+  background-repeat: no-repeat;
 }
 
 .nav-theme-btn:hover,
@@ -307,19 +340,6 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ef-black);
-}
-
-.nav-mobile-index {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  flex-shrink: 0;
-  border: 1px solid var(--ef-black);
-  font-family: var(--font-display);
-  font-size: 0.875rem;
-  letter-spacing: 0.04em;
 }
 
 /* ── Typography utilities ── */
