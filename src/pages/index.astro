@@ -3,9 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Hero from "../components/Hero.astro";
 import ProjectGrid from "../components/ProjectGrid.astro";
-import ExperienceItem from "../components/ExperienceItem.astro";
+import ExperienceTimeline from "../components/ExperienceTimeline.astro";
 import ContactForm from "../components/ContactForm.astro";
 import Footer from "../components/Footer.astro";
+import SectionShell from "../components/SectionShell.astro";
 import { getCollection } from "astro:content";
 
 const projectEntries = await getCollection("projects");
@@ -54,48 +55,33 @@ const strengths = [
 
     <ProjectGrid projects={projects} />
 
-    <section class="experience relative py-24 md:py-36" id="experience">
-      <div class="relative mx-auto max-w-[1100px] px-6 md:px-8">
-        <div class="mb-16">
-          <span class="eyebrow">Experience</span>
-          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">15+ years building products</h2>
-          <p class="mt-3 max-w-lg text-lg text-muted">
-            I am relentless about creating intuitive and simple products in complex technical
-            environments, with users' needs at the forefront.
-          </p>
-        </div>
-
-        <div class="mb-20 flex flex-col gap-4">
-          {strengths.map((s) => (
-            <div class="fade-in bezel-shell">
-              <div class="bezel-core p-6 md:p-8">
-                <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-muted">{s.title}</h3>
-                <p class="mt-3 text-base leading-relaxed text-muted">{s.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div class="mb-20 fade-in">
-          <p class="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-muted">Skills</p>
-          <div class="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <span class="border border-overlay/12 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.05em] text-muted">{skill}</span>
-            ))}
+    <SectionShell
+      id="experience"
+      eyebrow="Experience"
+      title="15+ years building products"
+      subtitle="I am relentless about creating intuitive and simple products in complex technical environments, with users' needs at the forefront."
+      showConnector
+    >
+      <div class="mb-16 grid gap-4 md:grid-cols-3">
+        {strengths.map((s) => (
+          <div class="strength-card fade-in">
+            <h3 class="font-mono text-xs uppercase tracking-[0.15em] text-muted">{s.title}</h3>
+            <p class="mt-3 text-base leading-relaxed">{s.description}</p>
           </div>
-        </div>
+        ))}
+      </div>
 
-        <div class="flex flex-col gap-16">
-          {experiences.map((exp) => (
-            <ExperienceItem
-              company={exp.company}
-              tenure={exp.tenure}
-              roles={exp.roles}
-            />
+      <div class="mb-16 fade-in">
+        <p class="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-muted">Skills</p>
+        <div class="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <span class="chip">{skill}</span>
           ))}
         </div>
       </div>
-    </section>
+
+      <ExperienceTimeline experiences={experiences} />
+    </SectionShell>
 
     <ContactForm />
   </main>

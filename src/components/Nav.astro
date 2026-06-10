@@ -7,112 +7,86 @@ const navLinks = [
 ---
 
 <header class="nav-header">
-  <div
-    id="nav-overlay"
-    class="nav-overlay"
-    aria-hidden="true"
-    inert
-  >
-    <div class="nav-overlay-backdrop"></div>
-    <div class="nav-overlay-panel">
-      <nav class="nav-overlay-nav" aria-label="Mobile">
-        {navLinks.map((link, index) => (
-          <a
-            href={link.href}
-            class="nav-overlay-link font-display text-4xl font-semibold tracking-tight text-foreground no-underline transition-[transform,opacity] duration-700 ease-[var(--motion-ease)] hover:text-fg-soft focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:text-5xl"
-            style={`--nav-stagger: ${index}`}
-          >
-            {link.label}
-          </a>
-        ))}
-      </nav>
-    </div>
-  </div>
+  <nav class="nav-inner" aria-label="Primary">
+    <a href="#" class="nav-logo">JG</a>
 
-  <nav class="nav-island" aria-label="Primary">
-    <div class="nav-island-inner">
-      <a
-        href="#"
-        class="nav-logo font-mono text-xs uppercase tracking-[0.2em] text-foreground no-underline transition-opacity duration-700 ease-[var(--motion-ease)] hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+    <div class="nav-links">
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-link">{link.label}</a>
+      ))}
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Toggle theme"
+        class="nav-theme-btn"
       >
-        JG
-      </a>
+        <svg id="theme-icon-sun" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+        <svg id="theme-icon-moon" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+    </div>
 
-      <div class="nav-desktop hidden items-center gap-6 md:flex">
-        {navLinks.map((link) => (
-          <a
-            href={link.href}
-            class="nav-link font-mono text-xs uppercase tracking-[0.15em] text-muted no-underline transition-colors duration-700 ease-[var(--motion-ease)] hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-          >
-            {link.label}
-          </a>
-        ))}
-        <button
-          id="theme-toggle"
-          type="button"
-          aria-label="Toggle theme"
-          class="nav-theme-btn"
-        >
-          <svg id="theme-icon-sun" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-          <svg id="theme-icon-moon" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </button>
-      </div>
-
-      <div class="flex items-center gap-1 md:hidden">
-        <button
-          id="theme-toggle-mobile"
-          type="button"
-          aria-label="Toggle theme"
-          class="nav-theme-btn"
-        >
-          <svg id="theme-icon-sun-mobile" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.79" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-          <svg id="theme-icon-moon-mobile" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </button>
-        <button
-          id="nav-menu-toggle"
-          type="button"
-          class="nav-hamburger"
-          aria-label="Open menu"
-          aria-expanded="false"
-          aria-controls="nav-overlay"
-        >
-          <span class="nav-hamburger-line nav-hamburger-line-top"></span>
-          <span class="nav-hamburger-line nav-hamburger-line-mid"></span>
-          <span class="nav-hamburger-line nav-hamburger-line-bot"></span>
-        </button>
-      </div>
+    <div class="nav-mobile-actions">
+      <button
+        id="theme-toggle-mobile"
+        type="button"
+        aria-label="Toggle theme"
+        class="nav-theme-btn"
+      >
+        <svg id="theme-icon-sun-mobile" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square">
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.79" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+        <svg id="theme-icon-moon-mobile" aria-hidden="true" class="hidden" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+      <button
+        id="nav-menu-toggle"
+        type="button"
+        class="nav-hamburger"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="nav-mobile-panel"
+      >
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+        <span class="nav-hamburger-line"></span>
+      </button>
     </div>
   </nav>
+
+  <div id="nav-mobile-panel" class="nav-mobile-panel" aria-hidden="true">
+    <div class="nav-mobile-links">
+      {navLinks.map((link) => (
+        <a href={link.href} class="nav-mobile-link">{link.label}</a>
+      ))}
+    </div>
+  </div>
 </header>
 
 <script>
   const menuToggle = document.getElementById("nav-menu-toggle");
-  const navOverlay = document.getElementById("nav-overlay");
-  const overlayLinks = navOverlay?.querySelectorAll(".nav-overlay-link");
+  const mobilePanel = document.getElementById("nav-mobile-panel");
+  const mobileLinks = mobilePanel?.querySelectorAll(".nav-mobile-link");
   const themeToggles = [
     document.getElementById("theme-toggle"),
     document.getElementById("theme-toggle-mobile"),
@@ -133,21 +107,14 @@ const navLinks = [
   }
 
   function setMenuOpen(open: boolean) {
-    if (!menuToggle || !navOverlay) return;
+    if (!menuToggle || !mobilePanel) return;
 
     menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
     menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     menuToggle.classList.toggle("is-open", open);
-    navOverlay.classList.toggle("is-open", open);
-    navOverlay.setAttribute("aria-hidden", open ? "false" : "true");
-
-    if (open) {
-      navOverlay.removeAttribute("inert");
-      document.body.classList.add("nav-menu-open");
-    } else {
-      navOverlay.setAttribute("inert", "");
-      document.body.classList.remove("nav-menu-open");
-    }
+    mobilePanel.classList.toggle("is-open", open);
+    mobilePanel.setAttribute("aria-hidden", open ? "false" : "true");
+    document.body.style.overflow = open ? "hidden" : "";
   }
 
   updateThemeIcons();
@@ -165,12 +132,8 @@ const navLinks = [
     setMenuOpen(!isOpen);
   });
 
-  overlayLinks?.forEach((link) => {
+  mobileLinks?.forEach((link) => {
     link.addEventListener("click", () => setMenuOpen(false));
-  });
-
-  navOverlay?.querySelector(".nav-overlay-backdrop")?.addEventListener("click", () => {
-    setMenuOpen(false);
   });
 
   document.addEventListener("keydown", (event) => {

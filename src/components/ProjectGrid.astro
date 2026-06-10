@@ -1,12 +1,12 @@
 ---
 import ProjectCard from "./ProjectCard.astro";
+import SectionShell from "./SectionShell.astro";
 
 interface Props {
   projects: Array<{
     id: string;
     title: string;
     type: string;
-    typeColor: string;
     description: string;
     tags: string[];
     url?: string;
@@ -16,27 +16,23 @@ interface Props {
 const { projects } = Astro.props;
 ---
 
-<section class="relative py-24 md:py-36" id="projects">
-  <div class="relative mx-auto mb-12 flex max-w-[1100px] flex-col px-6 md:mb-16 md:px-8">
-    <div>
-      <span class="eyebrow">Projects</span>
-      <h2 class="mt-4 font-display text-3xl font-bold tracking-tight text-foreground md:text-4xl">Things I've built</h2>
-      <p class="mt-3 max-w-md text-lg text-muted">Currently deep in agentic engineering.</p>
-    </div>
+<SectionShell
+  id="projects"
+  eyebrow="Projects"
+  title="Things I've built"
+  subtitle="Currently deep in agentic engineering."
+  showConnector
+>
+  <div class="border-t border-black">
+    {projects.map((project, i) => (
+      <ProjectCard
+        index={i + 1}
+        title={project.title}
+        type={project.type}
+        description={project.description}
+        tags={project.tags}
+        url={project.url}
+      />
+    ))}
   </div>
-
-  <div class="relative mx-auto max-w-[1100px] px-6 md:px-8">
-    <div class="flex flex-col border-t border-overlay/12">
-      {projects.map((project) => (
-        <ProjectCard
-          title={project.title}
-          type={project.type}
-          typeColor={project.typeColor}
-          description={project.description}
-          tags={project.tags}
-          url={project.url}
-        />
-      ))}
-    </div>
-  </div>
-</section>
+</SectionShell>

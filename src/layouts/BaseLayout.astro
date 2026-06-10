@@ -1,5 +1,6 @@
 ---
 import { Font } from "astro:assets";
+import SchematicDefs from "../components/SchematicDefs.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -22,8 +23,8 @@ const {
     <title>{title}</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="preload" href="/fonts/DepartureMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
-    <Font cssVariable="--font-josefin" preload />
-    <Font cssVariable="--font-raleway" preload />
+    <Font cssVariable="--font-bebas" preload />
+    <Font cssVariable="--font-source" preload />
     <script is:inline>
       (function() {
         const theme = localStorage.getItem('theme');
@@ -38,6 +39,7 @@ const {
     </script>
   </head>
   <body class="bg-surface text-foreground font-sans transition-colors duration-300">
+    <SchematicDefs />
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:bg-foreground focus:text-surface focus:px-4 focus:py-2 focus:font-mono focus:text-sm">
       Skip to main content
     </a>

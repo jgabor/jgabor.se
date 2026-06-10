@@ -4,11 +4,12 @@
     "order": 1,
     "company": "IKEA",
     "tenure": "3 years 11 months",
+    "location": "Malm\u00f6, Sweden",
     "roles": [
       {
         "title": "Senior Software Engineer, Data Sharing & Discovery",
         "period": "Jan 2026 \u2014 Present",
-        "location": "Malm\u00f6",
+        "location": "Malm\u00f6, Sweden",
         "description": [
           "After a roughly 1.5-year stint in Operational Intelligence, I am back to building the Ingka Data Platform \u2014 now as a software engineer. A major internal reorganization split our previous domain into two: Platform Engineering (where I am now), and Technology Services (where Operational Intelligence went). My current focus is making data accessible, discoverable, and shareable across all of IKEA by designing and developing solutions for data products."
         ]
@@ -16,7 +17,7 @@
       {
         "title": "Product Owner, Operational Intelligence",
         "period": "May 2024 \u2014 Dec 2025",
-        "location": "Malm\u00f6",
+        "location": "Malm\u00f6, Sweden",
         "description": [
           "Product Owner for two teams responsible for synthetic monitoring and software observability capabilities underpinning critical customer flows across IKEA.com and in-store experiences. Collaborated closely with software engineers during IKEA's migration from Akamai to Cloudflare. Established ways of working aligned with Ingka's product management strategy. Defined OKRs and product taxonomy."
         ],
@@ -29,7 +30,7 @@
       {
         "title": "Product Owner, Data Enablement Technology",
         "period": "Feb 2022 \u2014 Apr 2024",
-        "location": "Malm\u00f6",
+        "location": "Malm\u00f6, Sweden",
         "description": [
           "Defined the product vision and initiated a centralized data platform from the ground up, recruiting the founding engineering team. What started as one team has since grown into multiple teams covering data governance, quality, and product development \u2014 forming the foundation of IKEA's modernized data infrastructure."
         ],
@@ -46,11 +47,12 @@
     "order": 2,
     "company": "UpCloud",
     "tenure": "6 years",
+    "location": "Helsinki, Finland",
     "roles": [
       {
         "title": "Head of Data & Product Owner, Internal Tools",
         "period": "Dec 2018 \u2014 Dec 2021",
-        "location": "Finland",
+        "location": "Helsinki, Finland",
         "description": [
           "Built and led a Data team responsible for data warehousing, BI, and internal tooling. Created an in-house CRM and BI platform. Stack: PostgreSQL, TimescaleDB, Kafka, Python, Go."
         ],
@@ -62,7 +64,7 @@
       {
         "title": "Head of Marketing",
         "period": "Jan 2016 \u2014 Dec 2018",
-        "location": "Finland",
+        "location": "Helsinki, Finland",
         "description": [
           "Led a complete brand overhaul. Directed the redesign of UpCloud.com, centering community tutorials and open-source contributions. Developed a data-informed advertising strategy executed entirely in-house. Achieved positive ROI with a small team."
         ],
@@ -78,10 +80,13 @@
     "id": "cloud-royale",
     "order": 3,
     "company": "Cloud Royale",
+    "tenure": "3 years 7 months",
+    "location": "Helsingborg, Sweden",
     "roles": [
       {
         "title": "Founder & Product Manager",
         "period": "May 2012 \u2014 Dec 2015",
+        "location": "Helsingborg, Sweden",
         "description": [
           "Took Cloud Royale from idea to launched product with a small team. Owned brand strategy, led engineering, and drove sales and marketing."
         ],
@@ -95,10 +100,13 @@
     "id": "fs-data",
     "order": 4,
     "company": "FS Data",
+    "tenure": "1 year 6 months",
+    "location": "Helsingborg, Sweden",
     "roles": [
       {
         "title": "Head of Shared Hosting",
         "period": "Oct 2011 \u2014 Apr 2013",
+        "location": "Helsingborg, Sweden",
         "description": [
           "Responsible for customer service, development, marketing, and reselling. Launched a reseller program that sustained growth beyond my tenure."
         ]
@@ -110,10 +118,12 @@
     "order": 5,
     "company": "Surftown A/S",
     "tenure": "4 years 7 months",
+    "location": "Copenhagen, Denmark",
     "roles": [
       {
         "title": "Product Coordinator",
         "period": "Apr 2009 \u2014 Sep 2011",
+        "location": "Copenhagen, Denmark",
         "description": [
           "Managed product development \u2014 packaging, pricing, research \u2014 and marketing execution against roadmap."
         ],
@@ -124,6 +134,7 @@
       {
         "title": "Communications Advisor",
         "period": "May 2007 \u2014 Mar 2009",
+        "location": "Copenhagen, Denmark",
         "description": [
           "Marketing communications: copywriting, corporate blogging, digital advertising, press interviews, and customer support."
         ],
@@ -134,6 +145,7 @@
       {
         "title": "Support Coordinator",
         "period": "Mar 2007 \u2014 May 2007",
+        "location": "Copenhagen, Denmark",
         "description": ["First and second line customer support."]
       }
     ]

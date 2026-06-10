@@ -1,5 +1,6 @@
 import { defineConfig, fontProviders } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
+import { contentDataHmrPlugin } from "./vite-plugins/content-data-hmr.mjs";
 
 function omitAstroToolbarSourcemapPlugin() {
   return {
@@ -18,21 +19,21 @@ function omitAstroToolbarSourcemapPlugin() {
 export default defineConfig({
   adapter: cloudflare({ imageService: "compile" }),
   vite: {
-    plugins: [omitAstroToolbarSourcemapPlugin()],
+    plugins: [omitAstroToolbarSourcemapPlugin(), contentDataHmrPlugin()],
   },
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Josefin Sans",
-      cssVariable: "--font-josefin",
-      weights: [400, 600, 700],
+      name: "Bebas Neue",
+      cssVariable: "--font-bebas",
+      weights: [400],
       styles: ["normal"],
     },
     {
       provider: fontProviders.google(),
-      name: "Raleway",
-      cssVariable: "--font-raleway",
-      weights: [400, 500, 600],
+      name: "Source Sans 3",
+      cssVariable: "--font-source",
+      weights: [400, 600],
       styles: ["normal"],
     },
   ],
