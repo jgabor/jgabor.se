@@ -11,9 +11,17 @@ const navLinks = [
     <a href="#" class="nav-logo">JG</a>
 
     <div class="nav-links">
-      {navLinks.map((link) => (
-        <a href={link.href} class="nav-link">{link.label}</a>
-      ))}
+      <div class="nav-link-list">
+        {navLinks.map((link, i) => (
+          <a href={link.href} class="nav-link">
+            <span class="nav-link-index">{String(i + 1).padStart(2, "0")}</span>
+            {link.label}
+          </a>
+        ))}
+      </div>
+      <div class="nav-junction" aria-hidden="true">
+        <svg width="10" height="10"><use href="#glyph-plus" /></svg>
+      </div>
       <button
         id="theme-toggle"
         type="button"
@@ -76,8 +84,11 @@ const navLinks = [
 
   <div id="nav-mobile-panel" class="nav-mobile-panel" aria-hidden="true">
     <div class="nav-mobile-links">
-      {navLinks.map((link) => (
-        <a href={link.href} class="nav-mobile-link">{link.label}</a>
+      {navLinks.map((link, i) => (
+        <a href={link.href} class="nav-mobile-link">
+          <span class="nav-mobile-index">{String(i + 1).padStart(2, "0")}</span>
+          {link.label}
+        </a>
       ))}
     </div>
   </div>
