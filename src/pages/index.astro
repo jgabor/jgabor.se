@@ -7,11 +7,16 @@ import CareerSection from "../components/CareerSection.astro";
 import ContactSection from "../components/ContactSection.astro";
 import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
+import { buildCodeEntries } from "../lib/github/code-feed";
+import codeOverrides from "../data/code-overrides.json";
 
-const codeEntries = await getCollection("code");
 const careerEntries = await getCollection("career");
 
-const code = codeEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
+const code = await buildCodeEntries({
+  username: "jgabor",
+  overrides: codeOverrides,
+  minEntries: 8,
+});
 const career = careerEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
 ---
 

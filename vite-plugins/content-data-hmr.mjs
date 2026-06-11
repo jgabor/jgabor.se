@@ -2,7 +2,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
 
-const DATA_FILES = ["src/data/code.json", "src/data/career.json"];
+const DATA_FILES = ["src/data/code-overrides.json", "src/data/career.json"];
 const CONTENT_CONFIG = "src/content.config.ts";
 const DATA_STORE_VIRTUAL_ID = "\0astro:data-layer-content";
 const CONTENT_VIRTUAL_ID = "\0astro:content";

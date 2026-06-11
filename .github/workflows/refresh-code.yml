@@ -1,8 +1,8 @@
-name: Deploy
+name: Refresh Code Section
 
 on:
-  push:
-    branches: [main]
+  schedule:
+    - cron: "0 8,20 * * *"
   workflow_dispatch:
 
 jobs:

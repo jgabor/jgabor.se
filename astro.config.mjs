@@ -18,6 +18,9 @@ function omitAstroToolbarSourcemapPlugin() {
 
 export default defineConfig({
   adapter: cloudflare({ imageService: "compile" }),
+  server: {
+    host: true,
+  },
   vite: {
     plugins: [omitAstroToolbarSourcemapPlugin(), contentDataHmrPlugin()],
   },

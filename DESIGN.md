@@ -154,11 +154,11 @@ Symmetric dividers sit **between** sections (not inside section padding):
 
 Section labels, data files, and Astro collections share one vocabulary:
 
-| Section | Data file              | Collection |
-| ------- | ---------------------- | ---------- |
-| Code    | `src/data/code.json`   | `code`     |
-| Career  | `src/data/career.json` | `career`   |
-| Contact | (form only)            | —          |
+| Section | Data source                                                    | Notes                                                                                                         |
+| ------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Code    | `src/lib/github/code-feed.ts` + `src/data/code-overrides.json` | Built at compile time from GitHub pins and recent pushes; falls back to `src/data/code.snapshot.json` offline |
+| Career  | `src/data/career.json`                                         | `career` collection                                                                                           |
+| Contact | (form only)                                                    | —                                                                                                             |
 
 The CV page (`/cv`) also loads the `career` collection.
 
@@ -189,7 +189,7 @@ The CV page (`/cv`) also loads the `career` collection.
 - Hover: pylon nudge, number badge inverts (black ↔ white).
 - Type tag: uniform gray bordered treatment (no per-category color).
 - Tech stack as mono uppercase chips.
-- Rows link externally when a `url` is present in `code.json`.
+- Rows link externally when a GitHub repo URL is present in the feed.
 
 ### Career
 
@@ -238,7 +238,7 @@ Every animated effect checks `prefers-reduced-motion: reduce` and falls back to 
 - **Do** use the seven glyph primitives for all iconography.
 - **Do** enforce the three-color palette on the main schematic surface.
 - **Do** use hatch fills and dotted lines as schematic connective tissue.
-- **Do** keep copy verbatim from source data files (`code.json`, `career.json`).
+- **Do** keep Code copy verbatim from `code-overrides.json` and Career copy verbatim from `career.json`.
 - **Do** default content to visible; opt into fade-in animation via `.js` on `<html>`.
 - **Do** gate motion on `prefers-reduced-motion`.
 

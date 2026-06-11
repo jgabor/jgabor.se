@@ -18,11 +18,7 @@ export function formatTenureCompact(tenure: string): string {
   return "";
 }
 
-export function scaleBarHeights(
-  tenures: string[],
-  minPx: number,
-  maxPx: number,
-): number[] {
+export function scaleBarHeights(tenures: string[], minPx: number, maxPx: number): number[] {
   const months = tenures.map((tenure) => tenureToMonths(tenure));
   const maxMonths = Math.max(...months, 1);
   return months.map((m) => minPx + (m / maxMonths) * (maxPx - minPx));

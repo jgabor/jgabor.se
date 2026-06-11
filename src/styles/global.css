@@ -86,7 +86,10 @@ body {
   letter-spacing: 0.05em;
   text-decoration: none;
   color: var(--ef-black);
-  transition: background-color 0.3s var(--motion-ease), background-image 0.3s var(--motion-ease), color 0.3s var(--motion-ease);
+  transition:
+    background-color 0.3s var(--motion-ease),
+    background-image 0.3s var(--motion-ease),
+    color 0.3s var(--motion-ease);
 }
 
 .nav-logo::before,
@@ -155,7 +158,10 @@ body {
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ef-gray);
-  transition: background-color 0.3s var(--motion-ease), background-image 0.3s var(--motion-ease), color 0.3s var(--motion-ease);
+  transition:
+    background-color 0.3s var(--motion-ease),
+    background-image 0.3s var(--motion-ease),
+    color 0.3s var(--motion-ease);
 }
 
 .nav-link + .nav-link {
@@ -220,7 +226,10 @@ body {
   background: var(--ef-white);
   color: var(--ef-gray);
   cursor: pointer;
-  transition: background-color 0.3s var(--motion-ease), background-image 0.3s var(--motion-ease), color 0.3s var(--motion-ease);
+  transition:
+    background-color 0.3s var(--motion-ease),
+    background-image 0.3s var(--motion-ease),
+    color 0.3s var(--motion-ease);
 }
 
 .nav-theme-marks {
@@ -301,7 +310,9 @@ body {
   width: 1rem;
   height: 1.5px;
   background: var(--ef-black);
-  transition: transform 0.4s var(--motion-ease), opacity 0.4s var(--motion-ease);
+  transition:
+    transform 0.4s var(--motion-ease),
+    opacity 0.4s var(--motion-ease);
 }
 
 .nav-hamburger.is-open .nav-hamburger-line:nth-child(1) {
@@ -516,7 +527,9 @@ body {
   position: relative;
   border: 1px solid var(--ef-black);
   padding: 1.5rem;
-  transition: background-color 0.3s var(--motion-ease), background-image 0.3s var(--motion-ease);
+  transition:
+    background-color 0.3s var(--motion-ease),
+    background-image 0.3s var(--motion-ease);
 }
 
 .career-strength::before,
@@ -578,7 +591,9 @@ body {
 }
 
 .career-skills .chip {
-  transition: background-color 0.3s var(--motion-ease), background-image 0.3s var(--motion-ease);
+  transition:
+    background-color 0.3s var(--motion-ease),
+    background-image 0.3s var(--motion-ease);
 }
 
 .type-tag {
@@ -705,7 +720,9 @@ body {
   text-transform: uppercase;
   color: var(--ef-white);
   cursor: pointer;
-  transition: background-color 0.3s var(--motion-ease), color 0.3s var(--motion-ease);
+  transition:
+    background-color 0.3s var(--motion-ease),
+    color 0.3s var(--motion-ease);
 }
 
 .contact-submit:hover:not(:disabled) {
@@ -891,7 +908,9 @@ body {
   color: var(--ef-black);
   border-bottom: 1px solid var(--ef-black);
   padding-bottom: 2px;
-  transition: color 0.3s var(--motion-ease), border-color 0.3s var(--motion-ease);
+  transition:
+    color 0.3s var(--motion-ease),
+    border-color 0.3s var(--motion-ease);
 }
 
 .social-link:hover {
@@ -908,7 +927,9 @@ body {
   padding: 1.5rem 0;
   text-decoration: none;
   color: inherit;
-  transition: background-color 0.3s var(--motion-ease), background-image 0.3s var(--motion-ease);
+  transition:
+    background-color 0.3s var(--motion-ease),
+    background-image 0.3s var(--motion-ease);
 }
 
 @media (min-width: 768px) {
@@ -960,7 +981,9 @@ body {
   font-family: var(--font-display);
   font-size: 0.875rem;
   letter-spacing: 0.05em;
-  transition: background-color 0.3s var(--motion-ease), color 0.3s var(--motion-ease);
+  transition:
+    background-color 0.3s var(--motion-ease),
+    color 0.3s var(--motion-ease);
 }
 
 .code-row:hover .code-number,
@@ -979,7 +1002,9 @@ body {
 .js .fade-in {
   opacity: 0;
   transform: translateY(1rem);
-  transition: opacity 0.7s var(--motion-ease), transform 0.7s var(--motion-ease);
+  transition:
+    opacity 0.7s var(--motion-ease),
+    transform 0.7s var(--motion-ease);
 }
 
 .js .fade-in.visible {
