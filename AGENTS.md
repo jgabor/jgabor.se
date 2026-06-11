@@ -67,3 +67,14 @@ npx lighthouse --chrome-flags="--headless --no-sandbox" --only-categories=perfor
 * **DTC (Document, Test, Code)**: Document intent, enforce with tests, write code.
 * **DRY & SOLID**: Keep code modular, reuse functions where appropriate, and avoid duplicate logic.
 * **YAGNI**: Implement only what is requested/needed now, avoiding unnecessary speculative complexity.
+
+---
+
+## Cursor Cloud specific instructions
+
+* **`vp` source**: `vp` is **not** a global system tool here — it is the bin from the local `vite-plus` devDependency (`node_modules/.bin/vp`). The startup update script runs `pnpm install`, which restores it. `node_modules/.bin` is added to `PATH` via the agent's `~/.bashrc`, so `vp ...` works directly in interactive shells. If `vp` is ever not found, run `pnpm exec vp ...` (or `node_modules/.bin/vp ...`).
+* **Dev server**: `vp run dev` → http://localhost:4321 (see Development Server section above). Use `vp run dev`, never `vp dev`.
+* **Tests**: There is no automated test suite (no Vitest config, no `*.test.*` files). "Testing" means lint + build + manual browser verification.
+* **`vp run type-check` has pre-existing errors** that are unrelated to environment setup and do not block dev/build: `cloudflare:workers` has no type declarations, and a few `possibly null` errors in `SolarSection.astro`. CI (`.github/workflows/deploy.yml`) only runs `astro build` + `wrangler deploy`, not type-check.
+* **Contact API (`POST /api/contact`)**: Runs in `vp run dev` via the Cloudflare adapter's local platform proxy, so the KV `SITE` binding works locally (rate limiting functions). Actually sending mail needs the `FASTMAIL_TOKEN` secret; without it the endpoint returns HTTP 500 / the form shows "FAILED" — this is expected locally and not a setup bug.
+* **pnpm build-script warning**: `pnpm install` reports ignored build scripts (`sharp`, `workerd`, `esbuild`). The build still succeeds (sharp uses prebuilt binaries and image optimization works), so approval is not required for local development.
