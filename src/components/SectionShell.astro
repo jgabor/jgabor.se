@@ -6,9 +6,10 @@ interface Props {
   subtitle?: string;
   showConnector?: boolean;
   connectedTop?: boolean;
+  cvAuto?: boolean;
 }
 
-const { id, eyebrow, title, subtitle, showConnector = false, connectedTop = false } = Astro.props;
+const { id, eyebrow, title, subtitle, showConnector = false, connectedTop = false, cvAuto = true } = Astro.props;
 ---
 
 <section
@@ -16,6 +17,7 @@ const { id, eyebrow, title, subtitle, showConnector = false, connectedTop = fals
     "relative",
     connectedTop ? "pt-0" : "pt-24 md:pt-36",
     showConnector ? "pb-0" : "pb-24 md:pb-36",
+    cvAuto ? "cv-auto" : "",
   ]}
   id={id}
 >

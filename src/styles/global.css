@@ -38,6 +38,11 @@ html {
   scroll-padding-top: 5rem;
 }
 
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

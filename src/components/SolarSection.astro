@@ -1,7 +1,7 @@
 ---
 ---
 
-<div class="solar-stage">
+<div class="solar-stage cv-auto">
 <div class="solar-rift" aria-hidden="true">
   <svg
     class="solar-rift-svg"
@@ -433,46 +433,11 @@
     window.addEventListener("scroll", updateScroll, { passive: true });
   }
 
-  const DECODE_GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/<>[]#=";
-
-  function decodeHeadline(root: Element) {
-    const spans = root.querySelectorAll<HTMLElement>(".solar-headline span");
-    spans.forEach((span, lineIndex) => {
-      const original = span.textContent ?? "";
-      const duration = 2800;
-
-      window.setTimeout(() => {
-        const start = performance.now();
-        const tick = (now: number) => {
-          const progress = Math.min(1, (now - start) / duration);
-          const locked = Math.floor(progress * original.length);
-          let out = "";
-          for (let i = 0; i < original.length; i++) {
-            const ch = original[i];
-            out =
-              out +
-              (i < locked || ch === " " || ch === "'"
-                ? ch
-                : DECODE_GLYPHS[Math.floor(Math.random() * DECODE_GLYPHS.length)]);
-          }
-          span.textContent = out;
-          if (progress < 1) {
-            requestAnimationFrame(tick);
-          } else {
-            span.textContent = original;
-          }
-        };
-        requestAnimationFrame(tick);
-      }, lineIndex * 700);
-    });
-  }
-
   const footerObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("visible");
-          if (!prefersReducedMotion) decodeHeadline(entry.target);
           footerObserver.unobserve(entry.target);
         }
       });
