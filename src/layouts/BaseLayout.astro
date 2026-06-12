@@ -22,7 +22,7 @@ const {
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="icon" href="/favicon.ico" />
-    <link rel="preload" href="/fonts/DepartureMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/DepartureMono-Regular.subset.woff2" as="font" type="font/woff2" crossorigin />
     <Font cssVariable="--font-bebas" preload />
     <Font cssVariable="--font-source" preload />
     <script is:inline>
@@ -37,6 +37,13 @@ const {
           document.documentElement.classList.remove('dark');
         }
       })();
+    </script>
+    <script type="speculationrules">
+      {
+        "prerender": [
+          { "urls": ["/cv/"], "eagerness": "moderate" }
+        ]
+      }
     </script>
   </head>
   <body class="bg-surface text-foreground font-sans transition-colors duration-300">

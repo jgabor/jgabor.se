@@ -16,6 +16,13 @@ const career = careerEntries.map((e) => e.data).sort((a, b) => a.order - b.order
 			content="Jonathan Gabor — Product Owner bridging engineering and product to ship intuitive solutions. Passionate about AI, open source, and making things 1% better every day."
 		/>
 		<title>Jonathan Gabor — Product Owner</title>
+		<script type="speculationrules">
+			{
+				"prerender": [
+					{ "urls": ["/"], "eagerness": "moderate" }
+				]
+			}
+		</script>
 		<style>
 			:root {
 				--color-ink: #0a0a0a;
