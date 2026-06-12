@@ -1,5 +1,6 @@
 import { defineConfig, fontProviders } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
+import { visualizer } from "rollup-plugin-visualizer";
 import { contentDataHmrPlugin } from "./vite-plugins/content-data-hmr.mjs";
 
 function omitAstroToolbarSourcemapPlugin() {
@@ -16,13 +17,26 @@ function omitAstroToolbarSourcemapPlugin() {
   };
 }
 
+const analyzePlugin = process.env.ANALYZE
+  ? visualizer({
+      filename: "tmp/bundle-treemap.html",
+      gzipSize: true,
+      brotliSize: true,
+      template: "treemap",
+    })
+  : null;
+
 export default defineConfig({
   adapter: cloudflare({ imageService: "compile" }),
   server: {
     host: true,
   },
   vite: {
-    plugins: [omitAstroToolbarSourcemapPlugin(), contentDataHmrPlugin()],
+    plugins: [
+      omitAstroToolbarSourcemapPlugin(),
+      contentDataHmrPlugin(),
+      ...(analyzePlugin ? [analyzePlugin] : []),
+    ],
   },
   fonts: [
     {

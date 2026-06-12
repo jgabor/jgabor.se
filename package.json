@@ -4,15 +4,21 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node tools/subset-fonts.mjs",
     "dev": "astro dev",
+    "prebuild": "node tools/subset-fonts.mjs",
     "build": "astro build",
+    "postbuild": "node tools/perf-budget.mjs",
     "preview": "astro preview",
     "deploy": "astro build && wrangler deploy",
+    "analyze": "astro build && rollup-plugin-visualizer --open",
     "type-check": "astro check",
     "lint": "vp lint src/",
     "fmt": "vp fmt src/",
     "check": "vp check",
-    "test": "node --experimental-strip-types --test src/lib/github/code-feed.test.ts"
+    "test": "node --experimental-strip-types --test src/lib/github/code-feed.test.ts",
+    "subset:fonts": "node tools/subset-fonts.mjs",
+    "perf:budget": "node tools/perf-budget.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.7.0",
@@ -25,6 +31,8 @@
     "@tailwindcss/postcss": "^4.3.0",
     "@voidzero-dev/vite-plus-core": "^0.1.24",
     "lightningcss": "^1.32.0",
+    "rollup-plugin-visualizer": "^7.0.1",
+    "subset-font": "^2.5.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "vite": "npm:@voidzero-dev/vite-plus-core@^0.1.24",

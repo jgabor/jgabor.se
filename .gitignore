@@ -9,3 +9,6 @@ dist/
 *.tsbuildinfo
 docs/
 tmp/
+
+# Generated at build time by tools/subset-fonts.mjs
+public/fonts/*.subset.woff2
