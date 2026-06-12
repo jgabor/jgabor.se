@@ -429,7 +429,7 @@
         draw(frozenTime);
       }
     });
-    window.addEventListener("mousemove", updateMouse);
+    window.addEventListener("mousemove", updateMouse, { passive: true });
     window.addEventListener("scroll", updateScroll, { passive: true });
   }
 
