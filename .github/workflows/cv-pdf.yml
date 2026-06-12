@@ -1,0 +1,54 @@
+name: Regenerate CV PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/data/career.json"
+      - "src/pages/cv.astro"
+      - "tools/render-cv-pdf.mjs"
+      - "src/lib/cv-pdf.test.ts"
+      - ".github/workflows/cv-pdf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cv-pdf
+  cancel-in-progress: false
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: voidzero-dev/setup-vp@v1
+        with:
+          node-version: 22
+          cache: true
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build Astro (renders /cv/ from the career collection)
+        run: vp exec astro build
+
+      - name: Render CV PDF
+        run: node tools/render-cv-pdf.mjs
+
+      - name: Run CV PDF content assertions
+        run: vp run test
+
+      - name: Commit and push regenerated PDF
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/CV-Jonathan_Gabor.pdf
+          if git diff --cached --quiet; then
+            echo "No PDF changes; nothing to commit."
+          else
+            git commit -m "chore: regenerate CV PDF from career collection"
+            git push
+          fi
