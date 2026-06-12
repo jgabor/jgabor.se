@@ -7,18 +7,18 @@ educational tools that make the build transparent, reproducible, and measurable.
 
 ### `tools/subset-fonts.mjs`
 
-Reads `tools/font-glyphs.txt` and the full original woff2 in
-`public/fonts/DepartureMono-Regular.original.woff2`, writes a subset to
-`public/fonts/DepartureMono-Regular.subset.woff2`.
+Reads `tools/font-glyphs.txt` and the full woff2 at
+`public/fonts/DepartureMono-Regular.woff2` (source of truth, never modified),
+writes a subset to `public/fonts/DepartureMono-Regular.subset.woff2`.
 
 - **Runs:** `predev` and `prebuild` (automatic via `package.json` hooks).
-- **Output:** `public/fonts/*.subset.woff2` (gitignored).
+- **Output:** `public/fonts/*.subset.woff2` (gitignored, regenerated on every build).
+- **Source of truth:** `public/fonts/DepartureMono-Regular.woff2` (22.0KB, full glyph set).
+  This file is never overwritten by the build; only read.
 - **How to add a glyph:** append the new char to `tools/font-glyphs.txt`, or
-  re-run `node -e "..."` with the list of all `src/` source files to regenerate.
-- **How to revert:** delete the prebuild hook + git restore
-  `public/fonts/DepartureMono-Regular.subset.woff2` and the @font-face line.
-- **Source of truth:** the full original is at
-  `public/fonts/DepartureMono-Regular.original.woff2` and is never served.
+  re-run the inline node script that scans `src/` and regenerates the file.
+- **How to revert:** delete the prebuild hook + restore the @font-face line
+  in `src/styles/global.css` to point at `DepartureMono-Regular.woff2`.
 
 ### `tools/perf-budget.mjs`
 
