@@ -40,8 +40,13 @@ if (process.env.NODE_ENV === "production") {
           /^text-/,
           /^border-/,
         ],
+        // Astro scopes component <style> blocks by appending [data-astro-cid-XXXX]
+        // to every selector. The hashed attribute name never appears in any
+        // content file, so PurgeCSS can't match it and would otherwise drop the
+        // entire rule. A greedy match on the attribute name keeps the whole
+        // selector any time the scoped data attribute is present.
+        greedy: [/^data-astro-cid-[a-z0-9]+$/],
         deep: [],
-        greedy: [],
       },
       defaultExtractor: (content) => content.match(/[A-Za-z0-9_-]+/g) ?? [],
     }),

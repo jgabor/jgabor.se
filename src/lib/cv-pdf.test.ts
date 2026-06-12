@@ -24,14 +24,18 @@ describe("CV PDF (public/CV-Jonathan_Gabor.pdf)", () => {
 
   it("renders the full name and headline", async () => {
     const text = await extractText();
-    assert.match(text, /Jonathan Gabor/);
-    assert.match(text, /Speaks Code, Ships Product/);
+    // The print stylesheet applies text-transform: uppercase to .name and
+    // .title, so the extracted text is uppercased.
+    assert.match(text, /JONATHAN GABOR/);
+    assert.match(text, /SPEAKS CODE, SHIPS PRODUCT/);
   });
 
   it("lists every company in the career collection", async () => {
     const text = await extractText();
+    // Company headers are rendered with text-transform: uppercase; check the
+    // source spelling case-insensitively to stay robust to style changes.
     for (const company of ["IKEA", "UpCloud", "Cloud Royale", "FS Data", "Surftown"]) {
-      assert.match(text, new RegExp(company), `missing company: ${company}`);
+      assert.match(text, new RegExp(company, "i"), `missing company: ${company}`);
     }
   });
 
