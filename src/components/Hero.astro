@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Picture } from "astro:assets";
 import heroPhoto from "../assets/jgabor.jpg";
 import HeroSchematic from "./HeroSchematic.astro";
 import HeroBackdrop from "./HeroBackdrop.astro";
@@ -58,10 +58,16 @@ import HeroBackdrop from "./HeroBackdrop.astro";
         <div class="hero-visual">
           <HeroSchematic />
           <div class="portrait-frame">
-            <Image
+            <Picture
               src={heroPhoto}
               alt="Portrait photo of Jonathan Gabor"
+              formats={["avif", "webp"]}
+              fallbackFormat="webp"
+              widths={[480, 960]}
+              sizes="(min-width: 480px) 480px, 68vw"
               loading="eager"
+              fetchpriority="high"
+              decoding="async"
               class="portrait-img"
             />
           </div>
