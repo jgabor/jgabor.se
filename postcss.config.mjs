@@ -48,7 +48,11 @@ if (process.env.NODE_ENV === "production") {
         greedy: [/^data-astro-cid-[a-z0-9]+$/],
         deep: [],
       },
-      defaultExtractor: (content) => content.match(/[A-Za-z0-9_-]+/g) ?? [],
+      // Tailwind class names include `:`, `[]`, commas, etc. The old
+      // `[A-Za-z0-9_-]+` extractor split them into unrelated tokens, so
+      // PurgeCSS stripped every `md:`/`lg:` utility (mobile layout everywhere).
+      defaultExtractor: (content) =>
+        content.match(/[^`<>"'`\s]*[^`<>"'`\s:]/g) ?? [],
     }),
   );
 }
