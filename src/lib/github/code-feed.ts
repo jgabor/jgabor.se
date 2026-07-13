@@ -403,7 +403,8 @@ export async function enrichRepos(
 }
 
 function resolveToken(explicit?: string): string | undefined {
-  return explicit ?? process.env.GH_PROFILE_TOKEN ?? import.meta.env.GH_PROFILE_TOKEN;
+  const token = explicit ?? process.env.GH_PROFILE_TOKEN ?? import.meta.env?.GH_PROFILE_TOKEN;
+  return token?.trim();
 }
 
 function loadSnapshotFallback(): CodeEntry[] {

@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import {
   applyOverride,
   buildEntriesFromRepos,
+  buildCodeEntries,
   mergeAndBuildEntries,
   mergeRepoRefs,
   sortAndLimitRepos,
@@ -182,5 +183,72 @@ describe("buildEntriesFromRepos", () => {
     assert.equal(entries[0]?.type, "tooling");
     assert.equal(entries[0]?.description, "new-repo description");
     assert.deepEqual(entries[0]?.tags, ["TypeScript", "tooling"]);
+  });
+});
+
+describe("buildCodeEntries", () => {
+  it("trims whitespace from token before using it in fetch headers", async () => {
+    const calls: { authHeader: string | null }[] = [];
+    const mockFetch = async (url: string | URL, init?: RequestInit) => {
+      const auth = init?.headers instanceof Headers
+        ? init.headers.get("Authorization")
+        : (init?.headers as Record<string, string>)?.Authorization ?? null;
+      calls.push({ authHeader: auth });
+
+      const urlStr = url.toString();
+      if (urlStr.includes("/graphql")) {
+        return new Response(
+          JSON.stringify({
+            data: {
+              user: {
+                pinnedItems: { nodes: [] },
+              },
+            },
+          }),
+          { status: 200, headers: { "Content-Type": "application/json" } },
+        );
+      }
+      if (urlStr.includes("/users/")) {
+        return new Response(JSON.stringify([]), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+      return new Response("{}", { status: 200 });
+    };
+
+    await buildCodeEntries({
+      username,
+      overrides: {},
+      token: "  ghp_test_token_123  \n",
+      fetchImpl: mockFetch as typeof fetch,
+    });
+
+    assert.ok(calls.length > 0, "should have made at least one fetch call");
+    for (const call of calls) {
+      assert.equal(
+        call.authHeader,
+        "Bearer ghp_test_token_123",
+        `token should be trimmed, got: ${call.authHeader}`,
+      );
+    }
+  });
+
+  it("falls back to snapshot when token is missing", async () => {
+    let fetched = false;
+    const mockFetch = async () => {
+      fetched = true;
+      return new Response("{}", { status: 200 });
+    };
+
+    const entries = await buildCodeEntries({
+      username,
+      overrides: {},
+      token: undefined,
+      fetchImpl: mockFetch as typeof fetch,
+    });
+
+    assert.equal(fetched, false, "should not have called fetch without a token");
+    assert.ok(entries.length > 0, "should return snapshot entries");
   });
 });
