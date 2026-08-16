@@ -19,6 +19,8 @@ jobs:
           node-version: 22
           cache: true
 
+      - run: vp run subset:fonts
+
       - run: vp exec astro build
         env:
           GH_PROFILE_TOKEN: ${{ secrets.GH_PROFILE_TOKEN }}
