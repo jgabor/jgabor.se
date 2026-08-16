@@ -1,7 +1,7 @@
 ---
 ---
 
-<div class="solar-stage cv-auto">
+<div class="solar-stage">
 <div class="solar-rift" aria-hidden="true">
   <svg
     class="solar-rift-svg"
@@ -190,8 +190,8 @@
     function updateMouse(e: MouseEvent) {
       if (prefersReducedMotion) return;
       const rect = section.getBoundingClientRect();
-      mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+      mouseX = Math.max(-1, Math.min(1, ((e.clientX - rect.left) / rect.width) * 2 - 1));
+      mouseY = Math.max(-1, Math.min(1, ((e.clientY - rect.top) / rect.height) * 2 - 1));
     }
 
     function updateScroll() {
@@ -405,6 +405,7 @@
         if (entry.isIntersecting && !isVisible) {
           isVisible = true;
           resize();
+          updateScroll();
           if (prefersReducedMotion) {
             draw(frozenTime);
           } else {
@@ -429,16 +430,25 @@
         draw(frozenTime);
       }
     });
-    window.addEventListener("mousemove", updateMouse, { passive: true });
+    section.addEventListener("mousemove", updateMouse, { passive: true });
     window.addEventListener("scroll", updateScroll, { passive: true });
   }
 
+  const revealTimers = new WeakMap<Element, number>();
   const footerObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        window.clearTimeout(revealTimers.get(entry.target));
         if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          footerObserver.unobserve(entry.target);
+          const timer = window.setTimeout(() => {
+            const rect = entry.target.getBoundingClientRect();
+            const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+            if (visibleHeight < rect.height * 0.2) return;
+
+            entry.target.classList.add("visible");
+            footerObserver.unobserve(entry.target);
+          }, 150);
+          revealTimers.set(entry.target, timer);
         }
       });
     },
