@@ -2,9 +2,12 @@
 import { Image } from 'astro:assets';
 import heroPhoto from '../assets/jgabor.jpg';
 import { getCollection } from "astro:content";
+import { calculateTenure } from "../utils/career-tenure";
 
 const careerEntries = await getCollection("career");
-const career = careerEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
+const career = careerEntries
+	.map((e) => ({ ...e.data, tenure: calculateTenure(e.data.roles) }))
+	.sort((a, b) => a.order - b.order);
 ---
 
 <html lang="en">

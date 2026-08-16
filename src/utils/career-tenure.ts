@@ -1,3 +1,49 @@
+const monthIndexes = new Map(
+  ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].map(
+    (month, index) => [month, index],
+  ),
+);
+
+function periodMonth(value: string, referenceDate: Date): number {
+  if (value === "Present") {
+    return referenceDate.getUTCFullYear() * 12 + referenceDate.getUTCMonth();
+  }
+
+  const match = value.match(/^([A-Z][a-z]{2}) (\d{4})$/);
+  const month = match ? monthIndexes.get(match[1]) : undefined;
+  if (!match || month === undefined) throw new Error(`Invalid career period date: "${value}"`);
+
+  return Number(match[2]) * 12 + month;
+}
+
+export function calculateTenure(
+  roles: Array<{ period: string }>,
+  referenceDate = new Date(),
+): string {
+  if (!roles.length) throw new Error("Cannot calculate tenure without roles");
+
+  const boundaries = roles.map(({ period }) => {
+    const parts = period.split(/\s+[—–-]\s+/);
+    if (parts.length !== 2) throw new Error(`Invalid career period: "${period}"`);
+    return parts.map((part) => periodMonth(part, referenceDate));
+  });
+  const start = Math.min(...boundaries.map(([roleStart]) => roleStart));
+  const end = Math.max(...boundaries.map(([, roleEnd]) => roleEnd));
+  const months = end - start;
+  if (months < 0) throw new Error("Career period ends before it starts");
+
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+  return (
+    [
+      years ? `${years} ${years === 1 ? "year" : "years"}` : "",
+      remainingMonths ? `${remainingMonths} ${remainingMonths === 1 ? "month" : "months"}` : "",
+    ]
+      .filter(Boolean)
+      .join(" ") || "0 months"
+  );
+}
+
 export function tenureToMonths(tenure: string): number {
   const yearsMatch = tenure.match(/(\d+)\s*years?/i);
   const monthsMatch = tenure.match(/(\d+)\s*months?/i);

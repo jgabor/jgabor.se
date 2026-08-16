@@ -157,7 +157,7 @@ Section labels, data files, and Astro collections share one vocabulary:
 | Section | Data source                                                    | Notes                                                                                                         |
 | ------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | Code    | `src/lib/github/code-feed.ts` + `src/data/code-overrides.json` | Built at compile time from GitHub pins and recent pushes; falls back to `src/data/code.snapshot.json` offline |
-| Career  | `src/data/career.json`                                         | `career` collection                                                                                           |
+| Career  | `src/data/career.json`                                         | `career` collection; company tenure is calculated from role periods at build time                             |
 | Contact | (form only)                                                    | —                                                                                                             |
 
 The CV page (`/cv`) also loads the `career` collection.

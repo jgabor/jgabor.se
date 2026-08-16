@@ -8,7 +8,6 @@ const career = defineCollection({
     id: z.string(),
     order: z.number(),
     company: z.string(),
-    tenure: z.string().optional(),
     location: z.string().optional(),
     roles: z.array(
       z.object({

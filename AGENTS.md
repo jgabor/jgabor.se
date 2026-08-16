@@ -80,7 +80,7 @@ GH_PROFILE_TOKEN=ghp_...
 The downloadable CV at `/CV-Jonathan_Gabor.pdf` is generated from the same `career` collection (`src/data/career.json`) and `cv.astro` template the live site uses — there is no separate CV data source.
 
 - **Renderer**: `tools/render-cv-pdf.mjs` (Playwright/Chromium). Runs as a `postbuild` step on `vp run build` and inside `.github/workflows/cv-pdf.yml`.
-- **Regeneration**: `.github/workflows/cv-pdf.yml` triggers on path-filtered pushes to `main` (career.json, cv.astro, the tool, the test, the workflow itself) and on `workflow_dispatch`. It rebuilds the PDF, runs the content assertions, and commits the result back to `main` so the next deploy ships the fresh copy. `public/CV-Jonathan_Gabor.pdf` is intentionally kept in git as a fallback.
+- **Regeneration**: `.github/workflows/cv-pdf.yml` runs monthly, on path-filtered pushes to `main` (career data, CV template, tenure calculation, renderer, tests, or workflow), and on `workflow_dispatch`. It rebuilds the PDF, runs the content assertions, and commits the result back to `main` so the next deploy ships the fresh copy. `public/CV-Jonathan_Gabor.pdf` is intentionally kept in git as a fallback.
 - **Test**: `src/lib/cv-pdf.test.ts` is part of `vp run test` and asserts the PDF contains the name, headline, every company, a role per company, and stable `cvDescription` sentinels.
 - **Manual regeneration**: `node tools/render-cv-pdf.mjs` (or `vp run cv:pdf`) after `vp run build` has produced `dist/client/cv/index.html`.
 

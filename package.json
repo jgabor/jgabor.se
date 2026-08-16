@@ -16,7 +16,7 @@
     "lint": "vp lint src/",
     "fmt": "vp fmt src/",
     "check": "vp check",
-    "test": "node --experimental-strip-types --test src/lib/github/code-feed.test.ts src/lib/cv-pdf.test.ts",
+    "test": "node --experimental-strip-types --test src/lib/github/code-feed.test.ts src/lib/cv-pdf.test.ts src/utils/career-tenure.test.ts",
     "subset:fonts": "node tools/subset-fonts.mjs",
     "perf:budget": "node tools/perf-budget.mjs",
     "cv:pdf": "node tools/render-cv-pdf.mjs"

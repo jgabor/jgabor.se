@@ -3,7 +3,6 @@
     "id": "ikea",
     "order": 1,
     "company": "IKEA",
-    "tenure": "3 years 11 months",
     "location": "Malm\u00f6, Sweden",
     "roles": [
       {
@@ -46,7 +45,6 @@
     "id": "upcloud",
     "order": 2,
     "company": "UpCloud",
-    "tenure": "6 years",
     "location": "Helsinki, Finland",
     "roles": [
       {
@@ -80,7 +78,6 @@
     "id": "cloud-royale",
     "order": 3,
     "company": "Cloud Royale",
-    "tenure": "3 years 7 months",
     "location": "Helsingborg, Sweden",
     "roles": [
       {
@@ -100,7 +97,6 @@
     "id": "fs-data",
     "order": 4,
     "company": "FS Data",
-    "tenure": "1 year 6 months",
     "location": "Helsingborg, Sweden",
     "roles": [
       {
@@ -117,7 +113,6 @@
     "id": "surftown",
     "order": 5,
     "company": "Surftown A/S",
-    "tenure": "4 years 7 months",
     "location": "Copenhagen, Denmark",
     "roles": [
       {

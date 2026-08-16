@@ -9,6 +9,7 @@ import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 import { buildCodeEntries } from "../lib/github/code-feed";
 import codeOverrides from "../data/code-overrides.json";
+import { calculateTenure } from "../utils/career-tenure";
 
 const careerEntries = await getCollection("career");
 
@@ -17,7 +18,9 @@ const code = await buildCodeEntries({
   overrides: codeOverrides,
   minEntries: 8,
 });
-const career = careerEntries.map((e) => e.data).sort((a, b) => a.order - b.order);
+const career = careerEntries
+  .map((e) => ({ ...e.data, tenure: calculateTenure(e.data.roles) }))
+  .sort((a, b) => a.order - b.order);
 ---
 
 <BaseLayout title="Jonathan Gabor">
