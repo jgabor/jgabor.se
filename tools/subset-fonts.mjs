@@ -5,7 +5,7 @@
 //
 // Usage:  node tools/subset-fonts.mjs
 
-import { readFile, writeFile, stat } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import subsetFont from "subset-font";
 
 const ORIGINAL = "public/fonts/DepartureMono-Regular.woff2";

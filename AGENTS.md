@@ -91,6 +91,15 @@ The downloadable CV at `/CV-Jonathan_Gabor.pdf` is generated from the same `care
 ## Tests
 
 ```bash
+vp run type-check
+```
+
+Generates `worker-configuration.d.ts` from `wrangler.jsonc`, then runs Astro's
+strict type checker. The generated Worker declarations are gitignored.
+`src/env.d.ts` adds secret types that are not in the Worker configuration.
+`@types/node` supplies types for the build scripts and Node test runner.
+
+```bash
 vp run test
 ```
 

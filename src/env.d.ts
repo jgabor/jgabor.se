@@ -1,11 +1,7 @@
-/// <reference path="../.astro/types.d.ts" />
-/// <reference types="@cloudflare/workers-types" />
-
 type Runtime = import("@astrojs/cloudflare").Runtime;
 
 declare namespace Cloudflare {
   interface Env {
-    SITE: KVNamespace;
     FASTMAIL_TOKEN: string;
   }
 }

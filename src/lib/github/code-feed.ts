@@ -28,7 +28,7 @@ export interface RepoRef {
   pushedAt: string;
 }
 
-interface RepoDetails {
+export interface RepoDetails {
   owner: string;
   name: string;
   fullName: string;

@@ -554,7 +554,7 @@
     }
 
     function drawRift(t: number) {
-      if (!riftVisible) return;
+      if (!riftVisible || !riftGlow || !riftEdge || !riftFill) return;
       const stroke = riftStrokePath(t);
       riftGlow.setAttribute("d", stroke);
       riftEdge.setAttribute("d", stroke);
