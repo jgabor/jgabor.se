@@ -22,30 +22,31 @@
     "cv:pdf": "node tools/render-cv-pdf.mjs"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^14.2.1",
-    "astro": "^7.2.8",
-    "sharp": "^0.35.4"
+    "@astrojs/cloudflare": "^14.3.3",
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@fullhuman/postcss-purgecss": "^8.0.0",
     "@tailwindcss/postcss": "^4.3.3",
-    "@voidzero-dev/vite-plus-core": "^0.2.9",
+    "@voidzero-dev/vite-plus-core": "^1.0.0",
     "lightningcss": "^1.33.0",
     "pdf-parse": "^2.4.5",
-    "playwright": "^1.62.1",
+    "playwright": "^1.63.0",
     "rollup-plugin-visualizer": "^7.1.1",
-    "subset-font": "^2.5.0",
+    "subset-font": "^2.9.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "vite": "npm:@voidzero-dev/vite-plus-core@^0.2.9",
-    "vite-plus": "^0.2.9",
-    "wrangler": "^4.123.0"
+    "vite": "npm:@voidzero-dev/vite-plus-core@^1.0.0",
+    "vite-plus": "^1.0.0",
+    "wrangler": "^4.144.0"
   },
   "packageManager": "pnpm@10.30.3",
   "pnpm": {
     "overrides": {
-      "vite": "npm:@voidzero-dev/vite-plus-core@^0.2.9",
+      "vite": "npm:@voidzero-dev/vite-plus-core@^1.0.0",
+      "vitest": "5.0.1",
       "postcss": ">=8.5.23",
       "undici": ">=8.5.0",
       "ws": ">=8.21.0",
