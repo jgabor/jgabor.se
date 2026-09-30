@@ -47,6 +47,7 @@ interface BuildCodeEntriesOptions {
   sinceDays?: number;
   minEntries?: number;
   token?: string;
+  requireLive?: boolean;
   fetchImpl?: typeof fetch;
 }
 
@@ -418,6 +419,16 @@ function loadSnapshotFallback(): CodeEntry[] {
   return snapshot as CodeEntry[];
 }
 
+function handleFeedFailure(error: unknown, requireLive: boolean): CodeEntry[] {
+  console.warn(`[code-feed] status=${requireLive ? "failed" : "snapshot"}`);
+  if (requireLive) {
+    const message = error instanceof Error ? error.message : "Unknown GitHub fetch error";
+    throw new Error(`Live GitHub code feed required: ${message}`, { cause: error });
+  }
+  console.warn("[code-feed] GitHub feed unavailable, using snapshot fallback:", error);
+  return loadSnapshotFallback();
+}
+
 export async function buildCodeEntries(options: BuildCodeEntriesOptions): Promise<CodeEntry[]> {
   const {
     username,
@@ -425,12 +436,13 @@ export async function buildCodeEntries(options: BuildCodeEntriesOptions): Promis
     maxEntries = DEFAULT_MAX_ENTRIES,
     sinceDays = DEFAULT_SINCE_DAYS,
     minEntries = 0,
+    requireLive = false,
     fetchImpl = fetch,
   } = options;
   const token = resolveToken(options.token);
 
   if (!token) {
-    return loadSnapshotFallback();
+    return handleFeedFailure(new Error("GH_PROFILE_TOKEN is missing"), requireLive);
   }
 
   try {
@@ -443,9 +455,9 @@ export async function buildCodeEntries(options: BuildCodeEntriesOptions): Promis
     const limited = sortAndLimitRepos(merged, maxEntries);
     const details = await enrichRepos(limited, token, fetchImpl);
 
+    console.info("[code-feed] status=live");
     return buildEntriesFromRepos(details, overrides);
   } catch (error) {
-    console.warn("[code-feed] GitHub fetch failed, using snapshot fallback:", error);
-    return loadSnapshotFallback();
+    return handleFeedFailure(error, requireLive);
   }
 }

@@ -17,6 +17,7 @@ const code = await buildCodeEntries({
   username: "jgabor",
   overrides: codeOverrides,
   minEntries: 8,
+  requireLive: import.meta.env.CODE_FEED_REQUIRE_LIVE === "true",
 });
 const career = careerEntries
   .map((e) => ({ ...e.data, tenure: calculateTenure(e.data.roles) }))

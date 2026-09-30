@@ -64,6 +64,8 @@ The homepage Code section is built at compile time from GitHub activity, not a s
 - **Overrides**: `src/data/code-overrides.json` supplies curated title, type, description, and tags per repo slug.
 - **Offline fallback**: `src/data/code.snapshot.json` is used when `GH_PROFILE_TOKEN` is missing or the GitHub API fails.
 - **Refresh cadence**: `.github/workflows/refresh-code.yml` rebuilds twice daily so pushes to other repos update the site without a commit here.
+- **Failure policy**: Normal deployments and local builds allow the snapshot fallback for missing tokens or GitHub fetch failures. The refresh workflow sets `CODE_FEED_REQUIRE_LIVE=true`, which makes those failures stop the build and skip deployment.
+- **CI reporting**: Both workflows capture build logs and run `tools/report-code-feed.mjs` even after a failed build or deployment. The report adds a warning annotation for snapshot fallback, an error annotation for a failed refresh, and a summary of feed, build, and deployment status. Build and deployment errors remain blocking.
 
 ### Local live data
 
@@ -92,7 +94,7 @@ The downloadable CV at `/CV-Jonathan_Gabor.pdf` is generated from the same `care
 vp run test
 ```
 
-Covers the GitHub code-feed builder (`src/lib/github/code-feed.test.ts`) and CV PDF content assertions (`src/lib/cv-pdf.test.ts`).
+Covers the GitHub code-feed builder and its fallback/strict modes (`src/lib/github/code-feed.test.ts`), CI feed reporting (`tools/report-code-feed.test.mjs`), CV PDF content assertions (`src/lib/cv-pdf.test.ts`), and career tenure calculation (`src/utils/career-tenure.test.ts`).
 
 ---
 

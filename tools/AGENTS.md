@@ -5,6 +5,14 @@ educational tools that make the build transparent, reproducible, and measurable.
 
 ## Scripts
 
+### `tools/report-code-feed.mjs`
+
+Reads the captured Astro build log passed as its first argument. Emits GitHub
+Actions annotations and appends feed, build, and deployment status to
+`GITHUB_STEP_SUMMARY`. The deployment and refresh workflows run it with
+`always()` so failures remain visible. `BUILD_OUTCOME` and `DEPLOY_OUTCOME`
+come from the actual step outcomes. It does not alter those outcomes.
+
 ### `tools/subset-fonts.mjs`
 
 Reads `tools/font-glyphs.txt` and the full woff2 at

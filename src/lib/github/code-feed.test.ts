@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { describe, it } from "node:test";
+import { describe, it, type TestContext } from "node:test";
 import {
   applyOverride,
   buildEntriesFromRepos,
@@ -13,6 +13,10 @@ import {
 } from "./code-feed.ts";
 
 const username = "jgabor";
+
+function pushedDaysAgo(days: number): string {
+  return new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+}
 
 function repoRef(name: string, pushedAt: string, isPinned = false): RepoRef {
   return {
@@ -50,7 +54,7 @@ describe("mergeRepoRefs", () => {
 
   it("includes recent non-pinned repos within the activity window", () => {
     const pinned: RepoRef[] = [];
-    const recent = [repoRef("spela", "2026-06-01T00:00:00Z")];
+    const recent = [repoRef("spela", pushedDaysAgo(1))];
 
     const merged = mergeRepoRefs(pinned, recent, {}, username, 90);
     assert.equal(merged.length, 1);
@@ -79,8 +83,8 @@ describe("mergeRepoRefs", () => {
   it("backfills stale repos to meet minEntries", () => {
     const pinned: RepoRef[] = [];
     const recent = [
-      repoRef("fresh-1", "2026-06-10T00:00:00Z"),
-      repoRef("fresh-2", "2026-06-09T00:00:00Z"),
+      repoRef("fresh-1", pushedDaysAgo(1)),
+      repoRef("fresh-2", pushedDaysAgo(2)),
       repoRef("stale-1", "2024-01-01T00:00:00Z"),
       repoRef("stale-2", "2023-01-01T00:00:00Z"),
     ];
@@ -99,7 +103,7 @@ describe("mergeRepoRefs", () => {
     };
     const pinned: RepoRef[] = [];
     const recent = [
-      repoRef("fresh", "2026-06-10T00:00:00Z"),
+      repoRef("fresh", pushedDaysAgo(1)),
       repoRef("stale-good", "2024-01-01T00:00:00Z"),
       repoRef("stale-bad", "2023-01-01T00:00:00Z"),
     ];
@@ -151,12 +155,11 @@ describe("applyOverride", () => {
 
 describe("mergeAndBuildEntries", () => {
   it("builds display entries from merged repo activity", () => {
-    const pinned = [repoRef("agentera", "2026-06-08T00:00:00Z", true)];
-    const recent = [repoRef("spela", "2026-06-10T00:00:00Z")];
-    const details = [
-      repoDetails("agentera", "2026-06-08T00:00:00Z", true),
-      repoDetails("spela", "2026-06-10T00:00:00Z"),
-    ];
+    const pinnedAt = pushedDaysAgo(3);
+    const recentAt = pushedDaysAgo(1);
+    const pinned = [repoRef("agentera", pinnedAt, true)];
+    const recent = [repoRef("spela", recentAt)];
+    const details = [repoDetails("agentera", pinnedAt, true), repoDetails("spela", recentAt)];
     const overrides: CodeOverrides = {
       agentera: { title: "Agentera", type: "Skill Ecosystem", tags: ["Python"] },
     };
@@ -190,9 +193,10 @@ describe("buildCodeEntries", () => {
   it("trims whitespace from token before using it in fetch headers", async () => {
     const calls: { authHeader: string | null }[] = [];
     const mockFetch = async (url: string | URL, init?: RequestInit) => {
-      const auth = init?.headers instanceof Headers
-        ? init.headers.get("Authorization")
-        : (init?.headers as Record<string, string>)?.Authorization ?? null;
+      const auth =
+        init?.headers instanceof Headers
+          ? init.headers.get("Authorization")
+          : ((init?.headers as Record<string, string>)?.Authorization ?? null);
       calls.push({ authHeader: auth });
 
       const urlStr = url.toString();
@@ -234,7 +238,8 @@ describe("buildCodeEntries", () => {
     }
   });
 
-  it("falls back to snapshot when token is missing", async () => {
+  it("reports snapshot fallback without fetching when token is missing", async (t: TestContext) => {
+    const warnings = t.mock.method(console, "warn", () => {});
     let fetched = false;
     const mockFetch = async () => {
       fetched = true;
@@ -244,11 +249,111 @@ describe("buildCodeEntries", () => {
     const entries = await buildCodeEntries({
       username,
       overrides: {},
-      token: undefined,
+      token: "",
       fetchImpl: mockFetch as typeof fetch,
     });
 
     assert.equal(fetched, false, "should not have called fetch without a token");
     assert.ok(entries.length > 0, "should return snapshot entries");
+    assert.equal(warnings.mock.calls[0].arguments[0], "[code-feed] status=snapshot");
+  });
+
+  it("rejects a missing token when a live feed is required", async (t: TestContext) => {
+    const warnings = t.mock.method(console, "warn", () => {});
+    let fetched = false;
+    await assert.rejects(
+      buildCodeEntries({
+        username,
+        overrides: {},
+        token: "",
+        requireLive: true,
+        fetchImpl: async () => {
+          fetched = true;
+          throw new Error("Fetch must not run");
+        },
+      }),
+      /Live GitHub code feed required: GH_PROFILE_TOKEN is missing/,
+    );
+    assert.equal(fetched, false);
+    assert.equal(warnings.mock.calls[0].arguments[0], "[code-feed] status=failed");
+  });
+
+  for (const status of [401, 503]) {
+    for (const requireLive of [false, true]) {
+      it(`${requireLive ? "rejects" : "falls back on"} GitHub HTTP ${status}`, async (t: TestContext) => {
+        const warnings = t.mock.method(console, "warn", () => {});
+        const result = buildCodeEntries({
+          username,
+          overrides: {},
+          token: "test-token",
+          requireLive,
+          fetchImpl: async () => new Response("", { status }),
+        });
+        if (requireLive) {
+          await assert.rejects(result, new RegExp(`Live GitHub code feed required: .* ${status}`));
+        } else {
+          assert.ok((await result).length > 0);
+        }
+        assert.equal(
+          warnings.mock.calls[0].arguments[0],
+          `[code-feed] status=${requireLive ? "failed" : "snapshot"}`,
+        );
+      });
+    }
+  }
+
+  for (const requireLive of [false, true]) {
+    it(`${requireLive ? "rejects" : "falls back on"} a network failure`, async (t: TestContext) => {
+      t.mock.method(console, "warn", () => {});
+      const result = buildCodeEntries({
+        username,
+        overrides: {},
+        token: "test-token",
+        requireLive,
+        fetchImpl: async () => {
+          throw new Error("Network unavailable");
+        },
+      });
+      if (requireLive) {
+        await assert.rejects(result, /Live GitHub code feed required: Network unavailable/);
+      } else {
+        assert.ok((await result).length > 0);
+      }
+    });
+  }
+
+  it("returns and reports live data in strict mode", async (t: TestContext) => {
+    const messages = t.mock.method(console, "info", () => {});
+    const warnings = t.mock.method(console, "warn", () => {});
+    const pushedAt = pushedDaysAgo(1);
+    const entries = await buildCodeEntries({
+      username,
+      overrides: {},
+      token: "test-token",
+      requireLive: true,
+      fetchImpl: async (url) => {
+        if (String(url).includes("/graphql")) {
+          return Response.json({ data: { user: { pinnedItems: { nodes: [] } } } });
+        }
+        if (String(url).includes("/users/")) {
+          return Response.json([
+            { name: "new-project", full_name: "jgabor/new-project", pushed_at: pushedAt },
+          ]);
+        }
+        return Response.json({
+          html_url: "https://github.com/jgabor/new-project",
+          description: "Live project",
+          pushed_at: pushedAt,
+          language: "Go",
+        });
+      },
+    });
+    assert.deepEqual(
+      entries.map((entry) => entry.id),
+      ["new-project"],
+    );
+    assert.equal(entries[0].description, "Live project");
+    assert.equal(messages.mock.calls[0].arguments[0], "[code-feed] status=live");
+    assert.equal(warnings.mock.callCount(), 0);
   });
 });
