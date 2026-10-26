@@ -6,10 +6,7 @@ const plugins = [tailwindcss()];
 if (process.env.NODE_ENV === "production") {
   plugins.push(
     purgecss({
-      content: [
-        "./src/**/*.{astro,ts,tsx,js,html}",
-        "./public/**/*.html",
-      ],
+      content: ["./src/**/*.{astro,ts,tsx,js,html}", "./public/**/*.html"],
       safelist: {
         standard: [
           /^is-/,
@@ -51,8 +48,7 @@ if (process.env.NODE_ENV === "production") {
       // Tailwind class names include `:`, `[]`, commas, etc. The old
       // `[A-Za-z0-9_-]+` extractor split them into unrelated tokens, so
       // PurgeCSS stripped every `md:`/`lg:` utility (mobile layout everywhere).
-      defaultExtractor: (content) =>
-        content.match(/[^`<>"'`\s]*[^`<>"'`\s:]/g) ?? [],
+      defaultExtractor: (content) => content.match(/[^`<>"'`\s]*[^`<>"'`\s:]/g) ?? [],
     }),
   );
 }
