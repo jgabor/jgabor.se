@@ -61,7 +61,8 @@ async function main() {
   const indexHtml = files.find((f) => f.path === "index.html");
   const indexReferenced = indexHtml ? files.filter((f) => f.path.startsWith("_astro/")) : [];
   const criticalBytes = (indexHtml?.bytes ?? 0) + indexReferenced.reduce((s, f) => s + f.bytes, 0);
-  const criticalBrotli = (indexHtml?.brotli ?? 0) + indexReferenced.reduce((s, f) => s + f.brotli, 0);
+  const criticalBrotli =
+    (indexHtml?.brotli ?? 0) + indexReferenced.reduce((s, f) => s + f.brotli, 0);
   const criticalKB = (criticalBytes / 1024).toFixed(1);
   const criticalBrotliKB = (criticalBrotli / 1024).toFixed(1);
 
@@ -75,12 +76,14 @@ async function main() {
     criticalBytes -
     (indexReferenced
       .filter((f) => /\.(avif|webp|png|jpg|jpeg)$/i.test(f.path))
-      .reduce((s, f) => s + f.bytes, 0) - (smallestAstroImage?.bytes ?? 0));
+      .reduce((s, f) => s + f.bytes, 0) -
+      (smallestAstroImage?.bytes ?? 0));
   const wireBrotli =
     criticalBrotli -
     (indexReferenced
       .filter((f) => /\.(avif|webp|png|jpg|jpeg)$/i.test(f.path))
-      .reduce((s, f) => s + f.brotli, 0) - (smallestAstroImage?.brotli ?? 0));
+      .reduce((s, f) => s + f.brotli, 0) -
+      (smallestAstroImage?.brotli ?? 0));
 
   const report = {
     generatedAt: new Date().toISOString(),
@@ -110,14 +113,25 @@ async function main() {
   await writeFile(REPORT_PATH, JSON.stringify(report, null, 2));
 
   console.log(`\n📊 Performance Budget Report`);
-  console.log(`  Wire (smallest variants): ${(wireBytes / 1024).toFixed(1)}KB raw / ${(wireBrotli / 1024).toFixed(1)}KB brotli`);
+  console.log(
+    `  Wire (smallest variants): ${(wireBytes / 1024).toFixed(1)}KB raw / ${(wireBrotli / 1024).toFixed(1)}KB brotli`,
+  );
   console.log(`  Critical (all variants):  ${criticalKB}KB raw / ${criticalBrotliKB}KB brotli`);
-  console.log(`  Total dist:               ${(report.total.bytes / 1024).toFixed(1)}KB raw / ${(report.total.brotli / 1024).toFixed(1)}KB brotli`);
-  console.log(`  Largest: ${report.largest.slice(0, 3).map((f) => `${f.path} (${(f.bytes / 1024).toFixed(1)}KB)`).join(", ")}`);
+  console.log(
+    `  Total dist:               ${(report.total.bytes / 1024).toFixed(1)}KB raw / ${(report.total.brotli / 1024).toFixed(1)}KB brotli`,
+  );
+  console.log(
+    `  Largest: ${report.largest
+      .slice(0, 3)
+      .map((f) => `${f.path} (${(f.bytes / 1024).toFixed(1)}KB)`)
+      .join(", ")}`,
+  );
   console.log(`  Full report: ${REPORT_PATH}\n`);
 
   if (wireBytes / 1024 > THRESHOLD_KB) {
-    console.error(`✗ Wire bundle ${(wireBytes / 1024).toFixed(1)}KB exceeds threshold of ${THRESHOLD_KB}KB`);
+    console.error(
+      `✗ Wire bundle ${(wireBytes / 1024).toFixed(1)}KB exceeds threshold of ${THRESHOLD_KB}KB`,
+    );
     process.exit(1);
   }
 }

@@ -408,10 +408,12 @@ function resolveToken(explicit?: string): string | undefined {
   if (!raw) return undefined;
   // GitHub tokens are ASCII alphanumerics + underscore + hyphen.
   // Strip any control chars (0x00-0x1F, 0x7F) that cause "Invalid header value" errors.
-  const sanitized = [...raw].filter((c) => {
-    const code = c.charCodeAt(0);
-    return code >= 0x20 && code <= 0x7e;
-  }).join("");
+  const sanitized = [...raw]
+    .filter((c) => {
+      const code = c.charCodeAt(0);
+      return code >= 0x20 && code <= 0x7e;
+    })
+    .join("");
   return sanitized.trim() || undefined;
 }
 

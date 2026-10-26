@@ -57,7 +57,7 @@ PDF are visually identical.
   `.github/workflows/cv-pdf.yml` workflow.
 - **Output:** `public/CV-Jonathan_Gabor.pdf`. The existing
   `public/_headers` rule keeps it `Cache-Control: max-age=0,
-must-revalidate` so a deploy always picks up the freshest version.
+  must-revalidate` so a deploy always picks up the freshest version.
 - **Inputs:** `dist/client/cv/index.html` (must exist; the script errors
   with a hint to run `vp run build` first if it's missing).
 - **Chromium resolution order:** `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`
