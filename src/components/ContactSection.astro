@@ -1,19 +1,16 @@
 ---
 import ContactSchematic from "./ContactSchematic.astro";
 import SectionShell from "./SectionShell.astro";
+import { homeCopy } from "../data/home-copy";
 
-const channels = [
-  { label: "GitHub", href: "https://github.com/jgabor", external: true },
-  { label: "LinkedIn", href: "https://linkedin.com/in/jgabor", external: true },
-  { label: "Download CV", href: "/CV-Jonathan_Gabor.pdf", external: false },
-];
+const { contact, links } = homeCopy;
 ---
 
 <SectionShell
   id="contact"
-  eyebrow="Contact"
-  title="Get in touch"
-  subtitle="Have a product challenge, role, or collaboration in mind?"
+  eyebrow={contact.eyebrow}
+  title={contact.title}
+  subtitle={contact.subtitle}
   connectedTop
 >
   <div class="contact-layout">
@@ -66,19 +63,19 @@ const channels = [
 
         <p class="contact-form-note">
           <span class="status-dot" aria-hidden="true"></span>
-          Usually replies within a few days
+          {contact.replyNote}
         </p>
       </form>
 
       <div class="contact-meta">
         <div class="contact-links">
-          {channels.map((channel) => (
+          {links.map((link) => (
             <a
-              href={channel.href}
+              href={link.href}
               class="social-link"
-              {...(channel.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
-              {channel.label}
+              {link.label}
               <svg width="10" height="10" aria-hidden="true"><use href="#glyph-fork" /></svg>
             </a>
           ))}

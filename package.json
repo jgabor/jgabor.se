@@ -17,7 +17,7 @@
     "lint": "vp lint src/",
     "fmt": "vp fmt src/",
     "check": "vp check",
-    "test": "node --experimental-strip-types --test src/lib/github/code-feed.test.ts src/lib/cv-pdf.test.ts src/utils/career-tenure.test.ts tools/report-code-feed.test.mjs",
+    "test": "node --experimental-strip-types --test src/lib/github/code-feed.test.ts src/lib/cv-pdf.test.ts src/utils/career-tenure.test.ts src/lib/sitemap.test.ts src/lib/robots.test.ts src/lib/markdown/negotiation.test.ts src/lib/markdown/home.test.ts src/lib/markdown/cv.test.ts tools/report-code-feed.test.mjs",
     "subset:fonts": "node tools/subset-fonts.mjs",
     "perf:budget": "node tools/perf-budget.mjs",
     "cv:pdf": "node tools/render-cv-pdf.mjs"

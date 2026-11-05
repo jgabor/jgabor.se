@@ -2,6 +2,7 @@ import { defineConfig, fontProviders } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import { visualizer } from "rollup-plugin-visualizer";
 import { contentDataHmrPlugin } from "./vite-plugins/content-data-hmr.mjs";
+import { sitemap } from "./src/lib/sitemap.ts";
 
 function omitAstroToolbarSourcemapPlugin() {
   return {
@@ -27,7 +28,9 @@ const analyzePlugin = process.env.ANALYZE
   : null;
 
 export default defineConfig({
+  site: "https://jgabor.se",
   adapter: cloudflare({ imageService: "compile" }),
+  integrations: [sitemap()],
   server: {
     host: true,
   },

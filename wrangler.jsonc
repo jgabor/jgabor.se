@@ -2,6 +2,13 @@
   "name": "jgaborse",
   "compatibility_date": "2026-03-01",
   "compatibility_flags": ["nodejs_compat"],
+  // Custom entry that adds Accept negotiation for pages with a markdown version.
+  "main": "./src/worker.ts",
+  "assets": {
+    "binding": "ASSETS",
+    // Must match the keys of MARKDOWN_ALTERNATES in src/lib/markdown/negotiation.ts.
+    "run_worker_first": ["/", "/cv/"],
+  },
   "routes": [
     {
       "pattern": "jgabor.se",

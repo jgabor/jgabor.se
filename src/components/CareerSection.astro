@@ -1,6 +1,7 @@
 ---
 import CareerTimeline from "./CareerTimeline.astro";
 import SectionShell from "./SectionShell.astro";
+import { homeCopy } from "../data/home-copy";
 
 interface Props {
   entries: Array<{
@@ -18,44 +19,14 @@ interface Props {
 
 const { entries } = Astro.props;
 
-const skills = [
-  "Product Strategy",
-  "Product Vision",
-  "Product Roadmap",
-  "Platform Engineering",
-  "Artificial Intelligence",
-  "Developer Experience",
-  "Software Development Lifecycle",
-  "Infrastructure-as-Code",
-  "Backlog Management",
-  "User Research",
-  "Agile Methodologies",
-];
-
-const strengths = [
-  {
-    title: "Systems thinking",
-    description:
-      "Connects immediate decisions to long-term outcomes. Sees several steps ahead without losing sight of today.",
-  },
-  {
-    title: "Team enabler",
-    description:
-      "Leads by enabling others \u2014 aligning teams toward a shared north star without needing formal authority.",
-  },
-  {
-    title: "Quick study",
-    description:
-      "Active listener with high-bandwidth information intake. New concepts stick quickly.",
-  },
-];
+const { eyebrow, title, subtitle, strengths, skills } = homeCopy.career;
 ---
 
 <SectionShell
   id="career"
-  eyebrow="Career"
-  title="15+ years building products"
-  subtitle="I am relentless about creating intuitive and simple products in complex technical environments, with users' needs at the forefront."
+  eyebrow={eyebrow}
+  title={title}
+  subtitle={subtitle}
   showConnector
   connectedTop
 >

@@ -12,3 +12,9 @@
 
 /favicon.ico
   Cache-Control: public, max-age=31536000, immutable
+
+/index.md
+  Link: <https://jgabor.se/>; rel="canonical"
+
+/cv/index.md
+  Link: <https://jgabor.se/cv/>; rel="canonical"
