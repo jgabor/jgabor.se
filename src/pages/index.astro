@@ -6,25 +6,14 @@ import CodeSection from "../components/CodeSection.astro";
 import CareerSection from "../components/CareerSection.astro";
 import ContactSection from "../components/ContactSection.astro";
 import Footer from "../components/Footer.astro";
-import { getCollection } from "astro:content";
-import { buildCodeEntries } from "../lib/github/code-feed";
-import codeOverrides from "../data/code-overrides.json";
-import { calculateTenure } from "../utils/career-tenure";
+import { homeCopy } from "../data/home-copy";
+import { getCareer } from "../lib/career";
+import { getHomeCodeEntries } from "../lib/github/home-code-entries";
 
-const careerEntries = await getCollection("career");
-
-const code = await buildCodeEntries({
-  username: "jgabor",
-  overrides: codeOverrides,
-  minEntries: 8,
-  requireLive: import.meta.env.CODE_FEED_REQUIRE_LIVE === "true",
-});
-const career = careerEntries
-  .map((e) => ({ ...e.data, tenure: calculateTenure(e.data.roles) }))
-  .sort((a, b) => a.order - b.order);
+const [code, career] = await Promise.all([getHomeCodeEntries(), getCareer()]);
 ---
 
-<BaseLayout title="Jonathan Gabor">
+<BaseLayout title={homeCopy.name}>
   <Nav />
   <main id="main-content">
     <Hero />

@@ -1,13 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 import heroPhoto from '../assets/jgabor.jpg';
-import { getCollection } from "astro:content";
-import { calculateTenure } from "../utils/career-tenure";
+import { cvCopy } from "../data/cv-copy";
+import { getCareer } from "../lib/career";
 
-const careerEntries = await getCollection("career");
-const career = careerEntries
-	.map((e) => ({ ...e.data, tenure: calculateTenure(e.data.roles) }))
-	.sort((a, b) => a.order - b.order);
+const career = await getCareer();
 ---
 
 <html lang="en">
@@ -652,58 +649,37 @@ const career = careerEntries
 			<header class="header">
 				<div class="header-content">
 					<div class="name-block">
-						<h1 class="name">Jonathan Gabor</h1>
-						<p class="title">Speaks Code, Ships Product</p>
-						<p class="location">Malm&ouml;, Sweden</p>
+						<h1 class="name">{cvCopy.name}</h1>
+						<p class="title">{cvCopy.title}</p>
+						<p class="location">{cvCopy.location}</p>
 					</div>
-					<Image src={heroPhoto} alt="Jonathan Gabor" class="profile-photo" loading="lazy" decoding="async" />
+					<Image src={heroPhoto} alt={cvCopy.name} class="profile-photo" loading="lazy" decoding="async" />
 					<div class="contact-block">
-						<a href="mailto:jonathan@jgabor.se">jonathan@jgabor.se</a>
-						<a href="https://linkedin.com/in/jgabor">linkedin.com/in/jgabor</a>
-						<a href="https://jgabor.se">jgabor.se</a>
-						<a href="/CV-Jonathan_Gabor.pdf" download class="download-button">Download PDF</a>
+						{cvCopy.contacts.map((contact) => (
+							<a href={contact.href}>{contact.label}</a>
+						))}
+						<a href={cvCopy.download.href} download class="download-button">{cvCopy.download.label}</a>
 					</div>
 				</div>
 			</header>
 
 			<main class="main">
 				<section class="summary">
-					<p>I am relentless about creating intuitive and simple products in a complex and technological environment.</p>
-					<p>
-						With equal parts engineering and product, I use my experiences from both worlds to create solutions that are delightful for
-						customers to use, with incremental improvements driven by their feedback. My goal is to make everyone and everything 1% better
-						every day.
-					</p>
-					<p>
-						A long-standing passion for open source has shaped how I think about platforms: transparency, community collaboration, and
-						reducing friction for developer contributions.
-					</p>
-					<p>
-						The last couple of years, I have been deep down the AI rabbit hole, exploring AI-assisted software development, agentic
-						workflows, and the interfaces and touch points between humans and artificial intelligence.
-					</p>
-					<p><strong>My opinion changes with new information.</strong></p>
+					{cvCopy.summary.map((paragraph) => (
+						<p>{paragraph}</p>
+					))}
+					<p><strong>{cvCopy.summaryClosing}</strong></p>
 				</section>
 
 				<section class="section strengths-section">
 					<h2 class="section-title">Strengths</h2>
 					<div class="strengths-grid">
-						<div class="career-strength">
-							<h3 class="strength-title">Systems Thinking</h3>
-							<p class="strength-desc">
-								Connects immediate decisions to long-term outcomes. Sees several steps ahead without losing sight of today.
-							</p>
-						</div>
-						<div class="career-strength">
-							<h3 class="strength-title">Team Enabler</h3>
-							<p class="strength-desc">
-								Leads by enabling others---aligning teams toward a shared north star without needing formal authority.
-							</p>
-						</div>
-						<div class="career-strength">
-							<h3 class="strength-title">Quick Study</h3>
-							<p class="strength-desc">Active listener with high-bandwidth information intake. New concepts stick quickly.</p>
-						</div>
+						{cvCopy.strengths.map((strength) => (
+							<div class="career-strength">
+								<h3 class="strength-title">{strength.title}</h3>
+								<p class="strength-desc">{strength.description}</p>
+							</div>
+						))}
 					</div>
 				</section>
 
@@ -712,19 +688,9 @@ const career = careerEntries
 						<div class="meta-section">
 							<h3>Skills</h3>
 							<div class="tag-list">
-								<span class="tag">Product Strategy</span>
-								<span class="tag">Product Vision</span>
-								<span class="tag">Product Roadmap</span>
-								<span class="tag">Platform Engineering</span>
-								<span class="tag">Artificial Intelligence</span>
-								<span class="tag">Developer Experience</span>
-								<span class="tag">Software Development Lifecycle</span>
-								<span class="tag">Infrastructure-as-Code</span>
-								<span class="tag">OKRs</span>
-								<span class="tag">Backlog Management</span>
-								<span class="tag">User Research</span>
-								<span class="tag">Cross-functional Leadership</span>
-								<span class="tag">Agile Methodologies</span>
+								{cvCopy.skills.map((skill) => (
+									<span class="tag">{skill}</span>
+								))}
 							</div>
 						</div>
 					</div>
@@ -734,8 +700,9 @@ const career = careerEntries
 						<div class="meta-section">
 							<h3>Languages</h3>
 							<div class="tag-list">
-								<span class="tag">Swedish</span>
-								<span class="tag">English</span>
+								{cvCopy.languages.map((language) => (
+									<span class="tag">{language}</span>
+								))}
 							</div>
 						</div>
 					</div>

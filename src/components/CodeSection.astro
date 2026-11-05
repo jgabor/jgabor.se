@@ -1,6 +1,7 @@
 ---
 import CodeCard from "./CodeCard.astro";
 import SectionShell from "./SectionShell.astro";
+import { homeCopy } from "../data/home-copy";
 
 interface Props {
   entries: Array<{
@@ -18,9 +19,9 @@ const { entries } = Astro.props;
 
 <SectionShell
   id="code"
-  eyebrow="Code"
-  title="Things I've built"
-  subtitle="Currently deep in agentic engineering."
+  eyebrow={homeCopy.code.eyebrow}
+  title={homeCopy.code.title}
+  subtitle={homeCopy.code.subtitle}
   showConnector
 >
   <div class="code-list border-t border-foreground">

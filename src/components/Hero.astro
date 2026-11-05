@@ -3,6 +3,9 @@ import { Picture } from "astro:assets";
 import heroPhoto from "../assets/jgabor.jpg";
 import HeroSchematic from "./HeroSchematic.astro";
 import HeroBackdrop from "./HeroBackdrop.astro";
+import { homeCopy } from "../data/home-copy";
+
+const [firstName, ...otherNames] = homeCopy.name.split(" ");
 ---
 
 <section class="hero-section relative flex min-h-[100dvh] items-center overflow-hidden pt-20 pb-24 md:py-32">
@@ -13,44 +16,32 @@ import HeroBackdrop from "./HeroBackdrop.astro";
       <div class="order-2 flex flex-col lg:order-1">
         <p class="mb-6 font-mono text-[0.625rem] uppercase tracking-[0.2em] text-muted">
           <span class="status-dot" aria-hidden="true"></span>
-          Malmö, Sweden
+          {homeCopy.hero.location}
         </p>
 
         <h1 class="font-display text-[clamp(3.5rem,12vw,8rem)] uppercase leading-[0.88] tracking-wide text-foreground">
-          Jonathan<br />Gabor
+          {firstName}<br />{otherNames.join(" ")}
         </h1>
 
         <h2 class="mt-6 font-mono text-sm uppercase tracking-[0.2em] text-foreground md:text-base">
-          Speaks code, ships product.
+          {homeCopy.hero.tagline}
         </h2>
 
         <p class="mt-5 max-w-md text-base leading-relaxed text-foreground md:text-lg">
-          I bridge the gap between product vision and engineering execution. My opinion changes with new information.
+          {homeCopy.hero.intro}
         </p>
 
         <div class="mt-10 flex flex-wrap items-center gap-6">
-          <a
-            href="https://github.com/jgabor"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-          >
-            GitHub
-            <svg width="10" height="10" aria-hidden="true"><use href="#glyph-fork" /></svg>
-          </a>
-          <a
-            href="https://linkedin.com/in/jgabor"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="social-link"
-          >
-            LinkedIn
-            <svg width="10" height="10" aria-hidden="true"><use href="#glyph-fork" /></svg>
-          </a>
-          <a href="/CV-Jonathan_Gabor.pdf" class="social-link">
-            Download CV
-            <svg width="10" height="10" aria-hidden="true"><use href="#glyph-fork" /></svg>
-          </a>
+          {homeCopy.links.map((link) => (
+            <a
+              href={link.href}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              class="social-link"
+            >
+              {link.label}
+              <svg width="10" height="10" aria-hidden="true"><use href="#glyph-fork" /></svg>
+            </a>
+          ))}
         </div>
       </div>
 

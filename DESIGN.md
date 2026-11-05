@@ -160,7 +160,7 @@ Section labels, data files, and Astro collections share one vocabulary:
 | Career  | `src/data/career.json`                                         | `career` collection; company tenure is calculated from role periods at build time                             |
 | Contact | (form only)                                                    | —                                                                                                             |
 
-The CV page (`/cv`) also loads the `career` collection.
+Hero copy, section eyebrows, headings, and subtitles, Career strengths and skills, and the contact links and note live in `src/data/home-copy.ts`. The CV page (`/cv`) also loads the `career` collection; its own copy lives in `src/data/cv-copy.ts`. The markdown versions at `/index.md` and `/cv/index.md` render from the same modules.
 
 ## 7. Components
 
