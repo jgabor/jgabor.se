@@ -138,7 +138,7 @@ describe("renderHomeMarkdown", async () => {
     assert.ok(tricky.includes("### \\[x\\]\n"), "unlinked title is escaped");
     assert.ok(tricky.includes("- Type: \\`t\\`"));
     assert.ok(tricky.includes("\\<script\\>alert(1)\\</script\\>"));
-    assert.doesNotMatch(tricky, /<script>/);
+    assert.doesNotMatch(tricky, /(?<!\\)</, "every < is escaped");
     assert.ok(tricky.includes("### # Co\n"), "heading text keeps a literal #");
     assert.ok(tricky.includes("\n\\- not a list\n"), "paragraph cannot become a list");
   });
